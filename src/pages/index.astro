@@ -3,13 +3,12 @@ import Layout from "../layouts/Layout.astro";
 
 const email = "studio@nold.studio"; // DADO: confirmar e-mail oficial
 
-// Galeria de trabalhos (hero). Caixas vazias — assets entram depois.
-// cols = colunas (de 12) · rows = linhas (unidade do grid)
+// cols = colunas (de 12) · rows = linhas (unidade do grid) · video = path em /videos/
 const work = [
-  { tag: "Vídeo", name: "Max Focus", meta: "Lançamento · ~R$ 40k", cols: 8, rows: 5 },
-  { tag: "Vídeo", name: "Clínica LK", meta: "Fechamento · ~R$ 40k", cols: 4, rows: 5 },
-  { tag: "Marca", name: "Billy Art", meta: "Direção de arte", cols: 4, rows: 4 },
-  { tag: "Marca", name: "Dela Bella", meta: "Campanha", cols: 4, rows: 4 },
+  { tag: "Vídeo", name: "Max Focus", meta: "Lançamento · ~R$ 40k", cols: 8, rows: 5, video: "/videos/nold-pilares.mp4" },
+  { tag: "Vídeo", name: "Clínica LK", meta: "Fechamento · ~R$ 40k", cols: 4, rows: 5, video: "/videos/hf-01.mp4" },
+  { tag: "Marca", name: "Billy Art", meta: "Direção de arte", cols: 4, rows: 4, video: "/videos/hf-02.mp4" },
+  { tag: "Marca", name: "Dela Bella", meta: "Campanha", cols: 4, rows: 4, video: "/videos/hf-03.mp4" },
   { tag: "Marca", name: "Kaju", meta: "Marca própria", cols: 4, rows: 4 },
   { tag: "Marca", name: "Vortz", meta: "Arquitetura", cols: 7, rows: 4 },
   { tag: "Vídeo", name: "Marcelo Tavares", meta: "Autoridade", cols: 5, rows: 4 },
@@ -117,11 +116,19 @@ const cases = [
         {
           work.map((w) => (
             <div class="bento-item" style={`grid-column: span ${w.cols}; grid-row: span ${w.rows};`}>
-              <div class="ph">
-                <span class="ph__tag">{w.tag}</span>
-                <span class="ph__name">{w.name}</span>
-                <span class="ph__meta">{w.meta}</span>
-              </div>
+              {w.video ? (
+                <div class="bento-media">
+                  <video src={w.video} autoplay loop muted playsinline />
+                  <span class="bento-media__tag">{w.tag}</span>
+                  <span class="bento-media__name">{w.name}</span>
+                </div>
+              ) : (
+                <div class="ph">
+                  <span class="ph__tag">{w.tag}</span>
+                  <span class="ph__name">{w.name}</span>
+                  <span class="ph__meta">{w.meta}</span>
+                </div>
+              )}
             </div>
           ))
         }

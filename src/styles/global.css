@@ -287,10 +287,40 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 }
 .bento-item { border-radius: var(--r-lg); overflow: hidden; }
 .bento-item .ph { width: 100%; height: 100%; border-radius: var(--r-lg); min-height: 0; }
+
+.bento-media {
+  position: relative;
+  width: 100%; height: 100%;
+  background: var(--ink);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.bento-media video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bento-media__tag,
+.bento-media__name {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(246,246,246,0.75);
+  background: rgba(5,50,37,0.55);
+  backdrop-filter: blur(6px);
+  padding: 3px 8px;
+  border-radius: var(--r-sm);
+}
+.bento-media__tag { top: 12px; left: 12px; }
+.bento-media__name { bottom: 12px; left: 12px; font-size: 0.75rem; font-family: var(--font-ui); font-weight: 500; text-transform: none; letter-spacing: 0; }
+
 @media (max-width: 760px) {
   .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: auto; }
   .bento-item { grid-column: span 2 !important; grid-row: auto !important; }
   .bento-item .ph { aspect-ratio: 16 / 10; }
+  .bento-media { aspect-ratio: 16 / 10; }
 }
 
 /* =================================================================
