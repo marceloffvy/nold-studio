@@ -1,0 +1,359 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const email = "studio@nold.studio"; // DADO: confirmar e-mail oficial
+
+// Galeria de trabalhos (hero). Caixas vazias — assets entram depois.
+// cols = colunas (de 12) · rows = linhas (unidade do grid)
+const work = [
+  { tag: "Vídeo", name: "Max Focus", meta: "Lançamento · ~R$ 40k", cols: 8, rows: 5 },
+  { tag: "Vídeo", name: "Clínica LK", meta: "Fechamento · ~R$ 40k", cols: 4, rows: 5 },
+  { tag: "Marca", name: "Billy Art", meta: "Direção de arte", cols: 4, rows: 4 },
+  { tag: "Marca", name: "Dela Bella", meta: "Campanha", cols: 4, rows: 4 },
+  { tag: "Marca", name: "Kaju", meta: "Marca própria", cols: 4, rows: 4 },
+  { tag: "Marca", name: "Vortz", meta: "Arquitetura", cols: 7, rows: 4 },
+  { tag: "Vídeo", name: "Marcelo Tavares", meta: "Autoridade", cols: 5, rows: 4 },
+];
+
+const clients = ["Max Focus", "Clínica LK", "Billy Art", "Dela Bella", "Kaju", "Vortz", "Biva"];
+
+const services = [
+  {
+    ghost: "branding",
+    name: "Branding",
+    text: "Posicionamento do zero ao DNA criativo. A diferença entre ser único no seu segmento e ser só mais um.",
+    tags: "Estratégia / Posicionamento / DNA verbal / Sistema de identidade",
+  },
+  {
+    ghost: "conteúdo",
+    name: "Conteúdo",
+    text: "Produção estratégica que posiciona e converte. Estética a serviço da percepção de valor — não de vaidade.",
+    tags: "Direção de arte / Vídeo / Linha editorial / Social / Retainer",
+  },
+  {
+    ghost: "performance",
+    name: "Performance",
+    text: "Captação ativa de clientes para a marca. Beleza estratégica que vira pipeline, não só portfólio.",
+    tags: "Aquisição / Mídia paga / Funis / Leitura de dados",
+  },
+];
+
+// Projetos autorais (caixas vazias)
+const autoral = [
+  { tag: "Software", name: "Brand Brain", meta: "Produto próprio · L.03", cols: 7, rows: 5 },
+  { tag: "Colagem", name: "Sleep Mode", meta: "Anacrônico · retrofuturismo", cols: 5, rows: 5 },
+  { tag: "Marca", name: "Kaju", meta: "Marca própria do estúdio", cols: 4, rows: 4 },
+  { tag: "Colagem", name: "Renascença", meta: "Pintura clássica × máquina", cols: 4, rows: 4 },
+  { tag: "Motion", name: "Afresco", meta: "Barroco em movimento", cols: 4, rows: 4 },
+];
+
+// Cases — cliente + trabalho (perto do final)
+const cases = [
+  { name: "Max Focus", client: "Suplementos / Performance", result: "~R$ 40k num lançamento" },
+  { name: "Clínica LK", client: "Saúde / Odontologia", result: "~R$ 40k num fechamento" },
+  { name: "Billy Art", client: "Arte / Autoral", result: null },
+  { name: "Dela Bella", client: "Beleza", result: null },
+  { name: "Kaju", client: "Marca própria do estúdio", result: null },
+  { name: "Vortz", client: "Arquitetura", result: null },
+  { name: "Biva", client: "Arquitetura", result: null },
+  { name: "Marcelo Tavares", client: "Pessoal / Autoridade", result: null },
+];
+---
+
+<Layout>
+  <!-- ============================ TOPBAR ============================ -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a href="/" class="logo-card" aria-label="Nold — início">
+        <span style="font-family:var(--font-title); font-size:1.9rem; line-height:1; color:var(--green)">n</span>
+      </a>
+
+      <div class="meta">
+        <span class="meta__pair">São Paulo <b data-clock>--:--</b></span>
+        <button class="copy-btn" type="button" data-copy={email} aria-label="Copiar e-mail">
+          <span data-copy-label>{email}</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" />
+          </svg>
+        </button>
+      </div>
+
+      <nav class="nav-pill" aria-label="Navegação principal">
+        <a href="#trabalho">Projetos</a>
+        <a href="#estudio">Estúdio</a>
+        <a href={`mailto:${email}`} class="hi">Olá! <span aria-hidden="true">💬</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================ HERO ============================ -->
+    <section class="hero container">
+      <h1 class="hero__display">
+        Seu negócio merece<br />
+        ser <em>inevitável</em>.
+      </h1>
+
+      <p class="hero__sub">
+        Construímos e escalamos marcas que não aceitam o genérico. Branding,
+        conteúdo e performance numa esteira só — entregue com tecnologia, bom
+        gosto e velocidade premium.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#estudio" class="text-link">
+          Conheça o estúdio <span class="arw" aria-hidden="true">→</span>
+        </a>
+        <a href="#trabalho" class="text-link">
+          Veja o trabalho <span class="arw" aria-hidden="true">→</span>
+        </a>
+        <span class="ball" data-ball aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <!-- ====================== TRABALHO (bento) ====================== -->
+    <section class="container" id="trabalho">
+      <div class="bento">
+        {
+          work.map((w) => (
+            <div class="bento-item" style={`grid-column: span ${w.cols}; grid-row: span ${w.rows};`}>
+              <div class="ph">
+                <span class="ph__tag">{w.tag}</span>
+                <span class="ph__name">{w.name}</span>
+                <span class="ph__meta">{w.meta}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ========================= CLIENTES ========================= -->
+    <section class="section container clients">
+      <p class="eyebrow clients__label">Confiam na curadoria</p>
+      <div class="clients__row">
+        {/* ASSET: trocar por logos SVG reais dos clientes */}
+        {clients.map((c) => <div class="client-ph">{c}</div>)}
+      </div>
+    </section>
+
+    <!-- ================= ESTÚDIO (seção escura) ================= -->
+    <section id="estudio">
+      <div class="studio">
+        <p class="studio__statement">
+          Operamos numa esteira única — estratégia, <em>estética</em> e tecnologia
+          juntas para construir marcas que despertam <em>desejo</em> e escalam de verdade.
+        </p>
+
+        {
+          services.map((s) => (
+            <div class="service">
+              <span class="service__ghost" aria-hidden="true">{s.ghost}</span>
+              <div class="service__body">
+                <p class="service__text">
+                  <em class="service__name">{s.name}</em><span class="reveal"> — {s.text}</span>
+                </p>
+                <p class="service__tags">{s.tags}</p>
+                <div class="service__previews">
+                  {/* ASSET: 3 prévias do serviço (vídeo, peça, render) */}
+                  <div class="ph ph--dark"><span class="ph__tag">Prévia</span><span class="ph__name">{s.name} 01</span></div>
+                  <div class="ph ph--dark"><span class="ph__tag">Prévia</span><span class="ph__name">{s.name} 02</span></div>
+                  <div class="ph ph--dark"><span class="ph__tag">Prévia</span><span class="ph__name">{s.name} 03</span></div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ===================== AUTORAIS (bento) ===================== -->
+    <section class="section container" id="autorais">
+      <h2 class="autoral__head">
+        Trabalho de cliente é só parte. Veja o que criamos por <em>conta própria</em>.
+      </h2>
+      <div class="bento">
+        {
+          autoral.map((a) => (
+            <div class="bento-item" style={`grid-column: span ${a.cols}; grid-row: span ${a.rows};`}>
+              <div class="ph">
+                <span class="ph__tag">{a.tag}</span>
+                <span class="ph__name">{a.name}</span>
+                <span class="ph__meta">{a.meta}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ========================== CASES ========================== -->
+    <section class="section container" id="cases">
+      <p class="eyebrow" style="margin-bottom: clamp(2rem,5vw,3.5rem)">Cases · cliente + resultado</p>
+      <div class="cases">
+        {
+          cases.map((c, i) => (
+            <a class="case" href={`#case-${i + 1}`}>
+              <span class="case__idx">{String(i + 1).padStart(2, "0")}</span>
+              <span class="case__title">{c.name}</span>
+              <span class="case__client">{c.client}</span>
+              <span class="case__right">
+                {c.result && <span class="case__result">{c.result}</span>}
+                <span class="case__go" aria-hidden="true">↗</span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- =========================== CTA =========================== -->
+    <section class="section container cta">
+      <h2 class="cta__title">Sua marca merece<br />ser <em>inevitável</em>.</h2>
+      <p class="cta__sub">
+        Para empresas a partir de R$ 150k/mês prontas para reposicionar e escalar.
+        Se você não aceita genérico, a gente se entende.
+      </p>
+      <a href={`mailto:${email}`} class="cta__email">
+        {email} <span aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <!-- ======================= NEWSLETTER ======================= -->
+    <section class="section container newsletter">
+      <div class="newsletter__inner">
+        <div>
+          <h3>Fique no radar.</h3>
+          <p>Bastidores do estúdio, estética aplicada a negócio e o que estamos construindo. Sem ruído.</p>
+        </div>
+        {/* INTEGRAÇÃO: conectar a um provedor (Resend / Mailchimp) */}
+        <form action="#" method="post">
+          <input type="email" name="email" placeholder="seu@email.com" aria-label="Seu e-mail" required />
+          <button type="submit">Assinar →</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <span class="wm">nold</span>
+          <span class="sub">Studio Criativo</span>
+        </div>
+        <div class="footer__col">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#trabalho">Trabalho</a></li>
+            <li><a href="#estudio">Estúdio</a></li>
+            <li><a href="#cases">Cases</a></li>
+            <li><a href={`mailto:${email}`}>Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Social</h4>
+          <ul>
+            {/* DADO: confirmar @ e URLs reais */}
+            <li><a href="#">Instagram ↗</a></li>
+            <li><a href="#">Behance ↗</a></li>
+            <li><a href="#">LinkedIn ↗</a></li>
+            <li><a href={`mailto:${email}`}>{email}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Nold Studio</span>
+        <span>Beleza estratégica · Movido a IA</span>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<script>
+  // Relógio de São Paulo
+  const fmt = new Intl.DateTimeFormat("pt-BR", {
+    hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo",
+  });
+  function tick() {
+    document.querySelectorAll("[data-clock]").forEach((el) => {
+      el.textContent = fmt.format(new Date());
+    });
+  }
+  tick();
+  setInterval(tick, 15000);
+
+  // Copiar e-mail
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(btn.getAttribute("data-copy"));
+        const label = btn.querySelector("[data-copy-label]") || btn;
+        const old = label.textContent;
+        label.textContent = "copiado ✓";
+        setTimeout(() => (label.textContent = old), 1400);
+      } catch (e) {}
+    });
+  });
+
+  // Reveal palavra-a-palavra. .reveal contém só texto puro -> split limpo.
+  const reveals = Array.from(document.querySelectorAll(".reveal"));
+  reveals.forEach((el) => {
+    if (el.dataset.r) return; // idempotente (evita corromper em HMR)
+    const text = el.textContent;
+    el.textContent = "";
+    text.split(/(\s+)/).forEach((tok) => {
+      if (tok.trim() === "") el.appendChild(document.createTextNode(tok));
+      else {
+        const s = document.createElement("span");
+        s.className = "w";
+        s.textContent = tok;
+        el.appendChild(s);
+      }
+    });
+    el.dataset.r = "1";
+    el.classList.add("is-ready");
+  });
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const vh = window.innerHeight;
+      reveals.forEach((el) => {
+        const ws = el.querySelectorAll(".w");
+        const r = el.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, (vh * 0.72 - r.top) / (r.height || 1)));
+        const n = Math.round(p * ws.length);
+        ws.forEach((w, i) => w.classList.toggle("on", i < n));
+      });
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  // Bolinha “física” arrastável (detalhe lúdico)
+  document.querySelectorAll("[data-ball]").forEach((ball) => {
+    let dragging = false, sx = 0, sy = 0, x = 0, y = 0;
+    ball.addEventListener("pointerdown", (e) => {
+      dragging = true; sx = e.clientX - x; sy = e.clientY - y;
+      ball.setPointerCapture(e.pointerId);
+    });
+    ball.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      x = e.clientX - sx; y = e.clientY - sy;
+      ball.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    ball.addEventListener("pointerup", () => {
+      dragging = false;
+      ball.style.transition = "transform .6s cubic-bezier(.22,1,.36,1)";
+      ball.style.transform = "translate(0,0)";
+      x = 0; y = 0;
+      setTimeout(() => (ball.style.transition = ""), 600);
+    });
+  });
+</script>
