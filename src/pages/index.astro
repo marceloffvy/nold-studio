@@ -8,7 +8,11 @@ const email = "studio@nold.studio"; // DADO: confirmar e-mail oficial
 // nasce deslocada; trio final alinhado à esquerda com respiro à direita.
 // A estrutura é intencional demais para data-map — markup direto na seção.
 
-const clients = ["MaxFocos", "Clínica LK", "Biliart", "Dela Bella", "Kaju", "Biva", "Marcelo Tavares"];
+// DADO: confirmar grafias — "Hospitalar", "Odontogon", "Roberto Simonetti"
+const clients = [
+  "MaxFocos", "Clínica LK", "Biliart", "Dela Bella", "Kaju",
+  "Biva", "Marcelo Tavares", "Roberto Simonetti", "Hospitalar", "Odontogon",
+];
 
 // Manifesto — os 3 pilares (seção escura, scroll-reveal)
 const services = [
@@ -63,16 +67,6 @@ const perf = [
   { name: "MaxFocos", meta: "Lançamento", video: "/videos/campanhas/maxfocos.mp4" },
   { name: "Clínica LK", meta: "Campanha", video: "/videos/campanhas/lk.mp4" },
   { name: "Biva", meta: "Projeto", video: "/videos/campanhas/biva.mp4" },
-];
-
-const cases = [
-  { name: "MaxFocos", client: "Suplementos / Performance", result: "~R$ 40k num lançamento" },
-  { name: "Clínica LK", client: "Saúde / Odontologia", result: "~R$ 40k num fechamento" },
-  { name: "Biva", client: "Arquitetura", result: null },
-  { name: "Biliart", client: "Odontologia estética", result: null },
-  { name: "Dela Bella", client: "Beleza", result: null },
-  { name: "Kaju", client: "Marca própria do estúdio", result: null },
-  { name: "Marcelo Tavares", client: "Pessoal / Autoridade", result: null },
 ];
 
 // Projetos autorais: colagem escalonada hardcoded na seção (placeholders).
@@ -132,76 +126,55 @@ const cases = [
     <!-- ============ O APANHADO (colagem masonry, full-bleed) ============ -->
     <section class="collage-wrap" id="trabalho">
       <div class="collage">
-        <!-- Macro-coluna esquerda: feature grande + par de quadrados -->
+        <!-- Macro-coluna esquerda: feature grande + par de identidades -->
         <div class="mcol">
           <article class="tile tile--sq">
             <video src="/videos/nold-entregas.mp4" autoplay loop muted playsinline preload="metadata"></video>
-            <div class="tile__label">
-              <span class="tile__name">As 4 frentes do estúdio</span>
-              <span class="tile__meta">Nold · Entregas</span>
-            </div>
+            <span class="tile__tag">Nold · Entregas</span>
           </article>
           <div class="pair">
             <article class="tile tile--sq">
               <video src="/videos/branding/kaju.mp4" autoplay loop muted playsinline preload="metadata"></video>
-              <div class="tile__label">
-                <span class="tile__name">Kaju</span>
-                <span class="tile__meta">Branding · Identidade</span>
-              </div>
+              <span class="tile__tag">Branding</span>
             </article>
             <article class="tile tile--sq">
               <video src="/videos/branding/biva.mp4" autoplay loop muted playsinline preload="metadata"></video>
-              <div class="tile__label">
-                <span class="tile__name">Biva</span>
-                <span class="tile__meta">Branding · Identidade</span>
-              </div>
+              <span class="tile__tag">Branding</span>
             </article>
           </div>
         </div>
 
-        <!-- Macro-coluna direita: nasce deslocada; par + quadrado grande -->
+        <!-- Macro-coluna direita: identidade + performance MaxFocos lado a
+             lado; verticais de conteúdo quase na primeira dobra -->
         <div class="mcol mcol--late">
           <div class="pair">
             <article class="tile tile--sq">
               <video src="/videos/branding/maxfocos.mp4" autoplay loop muted playsinline preload="metadata"></video>
-              <div class="tile__label">
-                <span class="tile__name">MaxFocos</span>
-                <span class="tile__meta">Branding · Identidade</span>
-              </div>
+              <span class="tile__tag">Branding</span>
             </article>
             <article class="tile tile--sq">
-              <video src="/videos/campanhas/lk.mp4" autoplay loop muted playsinline preload="metadata"></video>
-              <div class="tile__label">
-                <span class="tile__name">Clínica LK</span>
-                <span class="tile__meta">Performance · Resultado</span>
-              </div>
+              <video src="/videos/campanhas/maxfocos.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <span class="tile__tag">Performance</span>
             </article>
           </div>
-          <article class="tile tile--sq">
-            <video src="/videos/campanhas/maxfocos.mp4" autoplay loop muted playsinline preload="metadata"></video>
-            <div class="tile__label">
-              <span class="tile__name">MaxFocos — ROI da campanha</span>
-              <span class="tile__meta">Performance · Resultado</span>
-            </div>
-          </article>
+          <div class="pair">
+            <article class="tile tile--v">
+              <video src="/videos/reels/b50.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <span class="tile__tag">Conteúdo</span>
+            </article>
+            <article class="tile tile--v">
+              <video src="/videos/reels/m55.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <span class="tile__tag">Conteúdo</span>
+            </article>
+          </div>
         </div>
       </div>
 
-      <!-- Trio final: verticais + marca, respiro à direita -->
+      <!-- Fecho: LK no cantinho esquerdo (abaixo de Kaju/Biva) + marca -->
       <div class="trio">
-        <article class="tile tile--v">
-          <video src="/videos/reels/b50.mp4" autoplay loop muted playsinline preload="metadata"></video>
-          <div class="tile__label">
-            <span class="tile__name">Relato · Ortognática</span>
-            <span class="tile__meta">Conteúdo · Vídeo</span>
-          </div>
-        </article>
-        <article class="tile tile--v">
-          <video src="/videos/reels/m55.mp4" autoplay loop muted playsinline preload="metadata"></video>
-          <div class="tile__label">
-            <span class="tile__name">Se o siso pode matar</span>
-            <span class="tile__meta">Conteúdo · Vídeo</span>
-          </div>
+        <article class="tile tile--sq">
+          <video src="/videos/campanhas/lk.mp4" autoplay loop muted playsinline preload="metadata"></video>
+          <span class="tile__tag">Performance</span>
         </article>
         <a class="brand-tile stag" href="#conteudo">
           <span class="brand-tile__wm">nold</span>
@@ -210,12 +183,19 @@ const cases = [
       </div>
     </section>
 
-    <!-- ========================= CLIENTES ========================= -->
+    <!-- ================= CLIENTES (marquee automático) ================= -->
     <section class="section container clients">
       <p class="eyebrow clients__label">Confiam na curadoria</p>
-      <div class="clients__row">
-        {/* ASSET: trocar por logos SVG reais dos clientes */}
-        {clients.map((c) => <div class="client-ph">{c}</div>)}
+      <div class="marquee" aria-label="Clientes">
+        {/* ASSET: trocar wordmarks por logos SVG reais */}
+        <div class="marquee__track">
+          <div class="marquee__group">
+            {clients.map((c) => <span class="client-ph">{c}</span>)}
+          </div>
+          <div class="marquee__group" aria-hidden="true">
+            {clients.map((c) => <span class="client-ph">{c}</span>)}
+          </div>
+        </div>
       </div>
     </section>
 
@@ -227,112 +207,70 @@ const cases = [
           juntas para construir marcas que despertam <em>desejo</em> e escalam de verdade.
         </p>
 
-        {
-          services.map((s) => (
-            <div class="service">
-              <span class="service__ghost" aria-hidden="true">{s.ghost}</span>
-              <div class="service__body">
-                <p class="service__text">
-                  <em class="service__name">{s.name}</em><span class="reveal"> — {s.text}</span>
-                </p>
-                <p class="service__tags">{s.tags}</p>
-              </div>
+        <!-- ① BRANDING: descrição + identidades logo abaixo -->
+        <div class="service" id="branding">
+          <span class="service__ghost" aria-hidden="true">{services[0].ghost}</span>
+          <div class="service__body">
+            <p class="service__text">
+              <em class="service__name">{services[0].name}</em><span class="reveal"> — {services[0].text}</span>
+            </p>
+            <p class="service__tags">{services[0].tags}</p>
+            <div class="service__work service__work--b">
+              {
+                brandingWork.map((b) => (
+                  <article class="tile tile--sq">
+                    <video src={b.video} autoplay loop muted playsinline preload="metadata" />
+                    <span class="tile__tag">{b.name}</span>
+                  </article>
+                ))
+              }
             </div>
-          ))
-        }
-      </div>
-    </section>
+          </div>
+        </div>
 
-    <!-- ==================== ① BRANDING ==================== -->
-    <section class="section container" id="branding">
-      <header class="sec-head">
-        <p class="eyebrow">① Branding</p>
-        <h2 class="sec-head__title">Identidades que viram <em>desejo</em>.</h2>
-        <p class="sec-head__sub">
-          Do posicionamento ao sistema vivo de identidade — marcas impossíveis
-          de confundir com o genérico.
-        </p>
-      </header>
-      <div class="work-grid">
-        {
-          brandingWork.map((b) => (
-            <div class="work-tile">
-              <div class="bento-media">
-                <video src={b.video} autoplay loop muted playsinline preload="metadata" />
-                <span class="bento-media__tag">Branding</span>
-                <span class="bento-media__name">{b.name}</span>
-              </div>
-              <p class="work-tile__meta">{b.meta}</p>
+        <!-- ② CONTEÚDO: descrição + carrossel de reels dentro do quadrante -->
+        <div class="service" id="conteudo">
+          <span class="service__ghost" aria-hidden="true">{services[1].ghost}</span>
+          <div class="service__body">
+            <p class="service__text">
+              <em class="service__name">{services[1].name}</em><span class="reveal"> — {services[1].text}</span>
+            </p>
+            <p class="service__tags">{services[1].tags}</p>
+            <p class="reels-hint">Arraste para o lado · clique para assistir com som →</p>
+            <div class="reels-strip reels-strip--in" data-reels>
+              {
+                reels.map((r) => (
+                  <button class="reel-card" data-reel={`/videos/reels/${r.file}.mp4`} aria-label={`Assistir: ${r.name}`}>
+                    <img class="reel-card__poster" src={`/videos/posters/${r.file}.jpg`} width="540" height="960" loading="lazy" alt="" />
+                    <span class="reel-card__play" aria-hidden="true">▶</span>
+                    <span class="tile__tag">{r.cat}</span>
+                  </button>
+                ))
+              }
             </div>
-          ))
-        }
-      </div>
-    </section>
+          </div>
+        </div>
 
-    <!-- ==================== ② CONTEÚDO ==================== -->
-    <section class="section" id="conteudo">
-      <div class="container">
-        <header class="sec-head">
-          <p class="eyebrow">② Conteúdo</p>
-          <h2 class="sec-head__title">Presença que <em>vende</em>.</h2>
-          <p class="sec-head__sub">
-            Vídeo, direção de arte e linha editorial que posicionam e convertem.
-            <span class="reels-hint">Arraste para o lado · clique para assistir →</span>
-          </p>
-        </header>
-      </div>
-      <div class="reels-strip" data-reels>
-        {
-          reels.map((r) => (
-            <button class="reel-card" data-reel={`/videos/reels/${r.file}.mp4`} aria-label={`Assistir: ${r.name}`}>
-              <img class="reel-card__poster" src={`/videos/posters/${r.file}.jpg`} width="540" height="960" loading="lazy" alt="" />
-              <span class="reel-card__play" aria-hidden="true">▶</span>
-              <span class="reel-card__meta"><b>{r.cat}</b>{r.name}</span>
-            </button>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- ==================== ③ PERFORMANCE ==================== -->
-    <section class="section container" id="performance">
-      <header class="sec-head">
-        <p class="eyebrow">③ Performance</p>
-        <h2 class="sec-head__title">Estética que vira <em>pipeline</em>.</h2>
-        <p class="sec-head__sub">
-          Aquisição, mídia e funis lendo dados de verdade. O resultado não é
-          portfólio — é cliente entrando.
-        </p>
-      </header>
-      <div class="perf-grid">
-        {
-          perf.map((p) => (
-            <div class="work-tile">
-              <div class="bento-media">
-                <video src={p.video} autoplay loop muted playsinline preload="metadata" />
-                <span class="bento-media__tag">Resultado</span>
-                <span class="bento-media__name">{p.name}</span>
-              </div>
-              <p class="work-tile__meta">{p.meta}</p>
+        <!-- ③ PERFORMANCE: descrição + resultados logo abaixo -->
+        <div class="service" id="performance">
+          <span class="service__ghost" aria-hidden="true">{services[2].ghost}</span>
+          <div class="service__body">
+            <p class="service__text">
+              <em class="service__name">{services[2].name}</em><span class="reveal"> — {services[2].text}</span>
+            </p>
+            <p class="service__tags">{services[2].tags}</p>
+            <div class="service__work service__work--p">
+              {
+                perf.map((p) => (
+                  <article class="tile tile--sq">
+                    <video src={p.video} autoplay loop muted playsinline preload="metadata" />
+                    <span class="tile__tag">{p.name}</span>
+                  </article>
+                ))
+              }
             </div>
-          ))
-        }
-      </div>
-
-      <div class="cases">
-        {
-          cases.map((c, i) => (
-            <a class="case" href={`#case-${i + 1}`}>
-              <span class="case__idx">{String(i + 1).padStart(2, "0")}</span>
-              <span class="case__title">{c.name}</span>
-              <span class="case__client">{c.client}</span>
-              <span class="case__right">
-                {c.result && <span class="case__result">{c.result}</span>}
-                <span class="case__go" aria-hidden="true">↗</span>
-              </span>
-            </a>
-          ))
-        }
+          </div>
+        </div>
       </div>
     </section>
 
@@ -373,10 +311,11 @@ const cases = [
           </div>
           <!-- col 3: vertical 2:3 -->
           <div class="c2col c2col--d3">
+            {/* ASSET: animação do sistema operacional pessoal (a caminho) */}
             <div class="ph tile--23">
               <span class="ph__tag">Software</span>
               <span class="ph__name">Brand Brain</span>
-              <span class="ph__meta">Produto próprio · L.03</span>
+              <span class="ph__meta">Sistema operacional pessoal · CRM · Gestão · LPs</span>
             </div>
           </div>
           <!-- col 4: 3:2 + quadrado -->
