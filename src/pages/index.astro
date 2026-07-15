@@ -19,20 +19,20 @@ const services = [
   {
     ghost: "branding",
     name: "Branding",
-    text: "Posicionamento do zero ao DNA criativo. A diferença entre ser único no seu segmento e ser só mais um.",
-    tags: "Estratégia / Posicionamento / DNA verbal / Sistema de identidade",
+    text: "Posicionamento ou reposicionamento de marca, do conceito à experiência digital do cliente. A diferença entre ser único no seu segmento e ser só mais um.",
+    tags: "Estratégia / Identidade visual e verbal / Experiência digital / Experiência física / Estratégia de comunicação",
   },
   {
     ghost: "conteúdo",
     name: "Conteúdo",
-    text: "Produção estratégica que posiciona e converte. Estética a serviço da percepção de valor — não de vaidade.",
-    tags: "Direção de arte / Vídeo / Linha editorial / Social / Retainer",
+    text: "Produção estratégica que posiciona e converte. Estética a serviço da percepção de valor, não de vaidade.",
+    tags: "Direção de arte / Vídeo / Linha editorial / Material gráfico / Campanhas",
   },
   {
     ghost: "performance",
     name: "Performance",
-    text: "Captação ativa de clientes para a marca. Beleza estratégica que vira pipeline, não só portfólio.",
-    tags: "Aquisição / Mídia paga / Funis / Leitura de dados",
+    text: "Captação ativa de clientes pro seu negócio. Conteúdo e estética que atraem receita de verdade, não só atenção.",
+    tags: "Aquisição / Mídia paga / Funis / Leitura de dados / Campanhas / Automação",
   },
 ];
 
@@ -69,7 +69,19 @@ const perf = [
   { name: "Biva", meta: "Projeto", video: "/videos/campanhas/biva.mp4" },
 ];
 
-// Projetos autorais: colagem escalonada hardcoded na seção (placeholders).
+// Experiências digitais (autoral) — placeholders 1:1 até os vídeos chegarem.
+const experiencias = [
+  { tag: "Sistema interno", name: "Gestão do escritório", meta: "OS interno · 01" },
+  { tag: "Sistema interno", name: "Gestão do escritório", meta: "OS interno · 02" },
+  { tag: "Gestão pessoal", name: "Notion próprio", meta: "Vida pessoal · 01" },
+  { tag: "Gestão pessoal", name: "Notion próprio", meta: "Vida pessoal · 02" },
+  { tag: "Página de cliente", name: "Cliente 01", meta: "Experiência digital" },
+  { tag: "Página de cliente", name: "Cliente 02", meta: "Experiência digital" },
+  { tag: "Página de cliente", name: "Cliente 03", meta: "Experiência digital" },
+  { tag: "Página de cliente", name: "Cliente 04", meta: "Experiência digital" },
+  { tag: "Ferramenta", name: "Mapa mental", meta: "Ferramenta digital · 01" },
+  { tag: "Ferramenta", name: "Mapa mental", meta: "Ferramenta digital · 02" },
+];
 ---
 
 <Layout>
@@ -218,7 +230,7 @@ const perf = [
       <div class="studio">
         <p class="studio__statement">
           Operamos numa esteira única — estratégia, <em>estética</em> e tecnologia
-          juntas para construir marcas que despertam <em>desejo</em> e escalam de verdade.
+          juntas para construir marcas que despertam <em>desejo</em> e escalam <em>receita</em> de verdade.
         </p>
 
         <!-- ① BRANDING: descrição + identidades logo abaixo -->
@@ -288,62 +300,29 @@ const perf = [
       </div>
     </section>
 
-    <!-- ============ AUTORAIS (colagem escalonada, full-bleed) ============ -->
+    <!-- ============ EXPERIÊNCIAS DIGITAIS (autoral, full-bleed) ============ -->
     <section class="section" id="autorais">
       <div class="container">
         <h2 class="autoral__head">
-          Trabalho de cliente é só parte. Veja o que criamos por <em>conta própria</em>.
+          Além das três frentes, criamos <em>experiências digitais</em> sob medida.
         </h2>
+        <p class="autoral__sub">
+          Sistemas de gestão, ferramentas próprias e as páginas dos nossos clientes.
+          Software que vira vantagem competitiva. É o que está mais quente no estúdio.
+        </p>
       </div>
       <div class="collage-wrap">
-        <div class="collage2">
-          <!-- col 1: nasce bem abaixo -->
-          <div class="c2col c2col--d1">
-            <div class="ph tile--sq">
-              <span class="ph__tag">Marca</span>
-              <span class="ph__name">Kaju</span>
-              <span class="ph__meta">Marca própria do estúdio</span>
-            </div>
-          </div>
-          <!-- col 2: par pequeno + 4:3 -->
-          <div class="c2col c2col--d2">
-            <div class="tinypair">
-              <div class="ph tile--sq">
-                <span class="ph__tag">Colagem</span>
-                <span class="ph__name">Sleep Mode</span>
+        {/* ASSET: vídeos 1:1 das experiências (a caminho) */}
+        <div class="exp-grid">
+          {
+            experiencias.map((e) => (
+              <div class="ph exp-tile">
+                <span class="ph__tag">{e.tag}</span>
+                <span class="ph__name">{e.name}</span>
+                <span class="ph__meta">{e.meta}</span>
               </div>
-              <div class="ph tile--sq">
-                <span class="ph__tag">Colagem</span>
-                <span class="ph__name">Renascença</span>
-              </div>
-            </div>
-            <div class="ph tile--43">
-              <span class="ph__tag">Motion</span>
-              <span class="ph__name">Afresco</span>
-              <span class="ph__meta">Barroco em movimento</span>
-            </div>
-          </div>
-          <!-- col 3: vertical 2:3 -->
-          <div class="c2col c2col--d3">
-            {/* ASSET: animação do sistema operacional pessoal (a caminho) */}
-            <div class="ph tile--23">
-              <span class="ph__tag">Software</span>
-              <span class="ph__name">Brand Brain</span>
-              <span class="ph__meta">Sistema operacional pessoal · CRM · Gestão · LPs</span>
-            </div>
-          </div>
-          <!-- col 4: 3:2 + quadrado -->
-          <div class="c2col">
-            <div class="ph tile--32">
-              <span class="ph__tag">Colagem</span>
-              <span class="ph__name">Glitch Barroco</span>
-            </div>
-            <div class="ph tile--sq">
-              <span class="ph__tag">Marca</span>
-              <span class="ph__name">Vortz</span>
-              <span class="ph__meta">Arquitetura</span>
-            </div>
-          </div>
+            ))
+          }
         </div>
         <!-- banner cinematográfico full-bleed -->
         <div class="ph banner">
