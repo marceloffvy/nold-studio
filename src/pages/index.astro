@@ -3,19 +3,26 @@ import Layout from "../layouts/Layout.astro";
 
 const email = "studio@nold.studio"; // DADO: confirmar e-mail oficial
 
-// cols = colunas (de 12) · rows = linhas (unidade do grid) · video = path em /videos/
-const work = [
-  { tag: "Vídeo", name: "Max Focus", meta: "Lançamento · ~R$ 40k", cols: 8, rows: 5, video: "/videos/nold-pilares.mp4" },
-  { tag: "Vídeo", name: "Clínica LK", meta: "Fechamento · ~R$ 40k", cols: 4, rows: 5, video: "/videos/hf-01.mp4" },
-  { tag: "Marca", name: "Billy Art", meta: "Direção de arte", cols: 4, rows: 4, video: "/videos/hf-02.mp4" },
-  { tag: "Marca", name: "Dela Bella", meta: "Campanha", cols: 4, rows: 4, video: "/videos/hf-03.mp4" },
-  { tag: "Marca", name: "Kaju", meta: "Marca própria", cols: 4, rows: 4, video: "/videos/maxfocos-roi.mp4" },
-  { tag: "Marca", name: "Vortz", meta: "Arquitetura", cols: 7, rows: 4 },
-  { tag: "Vídeo", name: "Marcelo Tavares", meta: "Autoridade", cols: 5, rows: 4 },
+// ===== PRIMEIRO BLOCO — "o apanhado" (autoplay, misto 1:1 + 9:16) =====
+// A ordem monta 3 bandas de 12 colunas cada, sem buracos.
+const apanhado = [
+  // Banda 1 — feature 1:1 + 2 verticais 9:16
+  { tag: "Entregas", name: "As 4 frentes", video: "/videos/nold-entregas.mp4", cls: "feat", cols: 6, rows: 6 },
+  { tag: "Conteúdo", name: "Relato · Ortognática", video: "/videos/reels/b50.mp4", cls: "v", cols: 3, rows: 6 },
+  { tag: "Conteúdo", name: "Se o siso pode matar", video: "/videos/reels/m55.mp4", cls: "v", cols: 3, rows: 6 },
+  // Banda 2 — branding + performance intercalados
+  { tag: "Branding", name: "MaxFocos", video: "/videos/branding/maxfocos.mp4", cls: "sq", cols: 4, rows: 4 },
+  { tag: "Performance", name: "Clínica LK", video: "/videos/campanhas/lk.mp4", cls: "sq", cols: 4, rows: 4 },
+  { tag: "Branding", name: "Kaju", video: "/videos/branding/kaju.mp4", cls: "sq", cols: 4, rows: 4 },
+  // Banda 3 — branding + performance + tile de marca
+  { tag: "Branding", name: "Biva", video: "/videos/branding/biva.mp4", cls: "sq", cols: 4, rows: 4 },
+  { tag: "Performance", name: "MaxFocos", video: "/videos/campanhas/maxfocos.mp4", cls: "sq", cols: 4, rows: 4 },
+  { brand: true, cols: 4, rows: 4 },
 ];
 
-const clients = ["Max Focus", "Clínica LK", "Billy Art", "Dela Bella", "Kaju", "Vortz", "Biva"];
+const clients = ["MaxFocos", "Clínica LK", "Biliart", "Dela Bella", "Kaju", "Biva", "Marcelo Tavares"];
 
+// Manifesto — os 3 pilares (seção escura, scroll-reveal)
 const services = [
   {
     ghost: "branding",
@@ -37,25 +44,56 @@ const services = [
   },
 ];
 
-// Projetos autorais (caixas vazias)
+// ===== BRANDING — 5 motions de identidade (1:1, autoplay) =====
+const brandingWork = [
+  { name: "MaxFocos", meta: "Suplementos", video: "/videos/branding/maxfocos.mp4" },
+  { name: "Biliart", meta: "Odontologia estética", video: "/videos/branding/biliart.mp4" },
+  { name: "Biva", meta: "Arquitetura", video: "/videos/branding/biva.mp4" },
+  { name: "Dela Bella", meta: "Beleza", video: "/videos/branding/delabela.mp4" },
+  { name: "Kaju", meta: "Marca própria", video: "/videos/branding/kaju.mp4" },
+];
+
+// ===== CONTEÚDO — parede de reels 9:16 (pôster + clique) =====
+// DADO: rótulos (cat/name) editáveis — confirmar cliente/tema de cada reel.
+const reels = [
+  { cat: "Odontologia", name: "As lentes que você deseja", file: "b27" },
+  { cat: "Bastidor", name: "Vlog · Dia de cirurgia", file: "b49" },
+  { cat: "Relato", name: "Cirurgia ortognática", file: "b50" },
+  { cat: "Educativo", name: "Queixo: pra frente ou pra trás?", file: "b65" },
+  { cat: "Depoimento", name: "Paciente", file: "depoimento" },
+  { cat: "Educativo", name: "Diferença do alinhador", file: "id32" },
+  { cat: "Educativo", name: "3 coisas antes da prótese", file: "lk18" },
+  { cat: "Educativo", name: "Se o siso pode matar", file: "m55" },
+  { cat: "Estética", name: "Lipo de papada", file: "m57" },
+  { cat: "Educativo", name: "Plano de 6 meses", file: "m76" },
+  { cat: "Depoimento", name: "Paciente", file: "mt06" },
+  { cat: "Depoimento", name: "Paciente", file: "mt10" },
+];
+
+// ===== PERFORMANCE — resultados (1:1) + números =====
+const perf = [
+  { name: "MaxFocos", meta: "Lançamento", video: "/videos/campanhas/maxfocos.mp4" },
+  { name: "Clínica LK", meta: "Campanha", video: "/videos/campanhas/lk.mp4" },
+  { name: "Biva", meta: "Projeto", video: "/videos/campanhas/biva.mp4" },
+];
+
+const cases = [
+  { name: "MaxFocos", client: "Suplementos / Performance", result: "~R$ 40k num lançamento" },
+  { name: "Clínica LK", client: "Saúde / Odontologia", result: "~R$ 40k num fechamento" },
+  { name: "Biva", client: "Arquitetura", result: null },
+  { name: "Biliart", client: "Odontologia estética", result: null },
+  { name: "Dela Bella", client: "Beleza", result: null },
+  { name: "Kaju", client: "Marca própria do estúdio", result: null },
+  { name: "Marcelo Tavares", client: "Pessoal / Autoridade", result: null },
+];
+
+// Projetos autorais (caixas vazias — assets depois)
 const autoral = [
   { tag: "Software", name: "Brand Brain", meta: "Produto próprio · L.03", cols: 7, rows: 5 },
   { tag: "Colagem", name: "Sleep Mode", meta: "Anacrônico · retrofuturismo", cols: 5, rows: 5 },
   { tag: "Marca", name: "Kaju", meta: "Marca própria do estúdio", cols: 4, rows: 4 },
   { tag: "Colagem", name: "Renascença", meta: "Pintura clássica × máquina", cols: 4, rows: 4 },
   { tag: "Motion", name: "Afresco", meta: "Barroco em movimento", cols: 4, rows: 4 },
-];
-
-// Cases — cliente + trabalho (perto do final)
-const cases = [
-  { name: "Max Focus", client: "Suplementos / Performance", result: "~R$ 40k num lançamento" },
-  { name: "Clínica LK", client: "Saúde / Odontologia", result: "~R$ 40k num fechamento" },
-  { name: "Billy Art", client: "Arte / Autoral", result: null },
-  { name: "Dela Bella", client: "Beleza", result: null },
-  { name: "Kaju", client: "Marca própria do estúdio", result: null },
-  { name: "Vortz", client: "Arquitetura", result: null },
-  { name: "Biva", client: "Arquitetura", result: null },
-  { name: "Marcelo Tavares", client: "Pessoal / Autoridade", result: null },
 ];
 ---
 
@@ -79,7 +117,7 @@ const cases = [
 
       <nav class="nav-pill" aria-label="Navegação principal">
         <a href="#trabalho">Projetos</a>
-        <a href="#estudio">Estúdio</a>
+        <a href="#conteudo">Conteúdo</a>
         <a href={`mailto:${email}`} class="hi">Olá! <span aria-hidden="true">💬</span></a>
       </nav>
     </div>
@@ -110,23 +148,25 @@ const cases = [
       </div>
     </section>
 
-    <!-- ====================== TRABALHO (bento) ====================== -->
+    <!-- ================= O APANHADO (bento misto) ================= -->
     <section class="container" id="trabalho">
       <div class="bento">
         {
-          work.map((w) => (
-            <div class="bento-item" style={`grid-column: span ${w.cols}; grid-row: span ${w.rows};`}>
-              {w.video ? (
+          apanhado.map((w) => (
+            <div
+              class={`bento-item is-${w.brand ? "sq" : w.cls}`}
+              style={`grid-column: span ${w.cols}; grid-row: span ${w.rows};`}
+            >
+              {w.brand ? (
+                <a class="brand-tile" href="#conteudo">
+                  <span class="brand-tile__wm">nold</span>
+                  <span class="brand-tile__link">Ver tudo <span aria-hidden="true">→</span></span>
+                </a>
+              ) : (
                 <div class="bento-media">
-                  <video src={w.video} autoplay loop muted playsinline />
+                  <video src={w.video} autoplay loop muted playsinline preload="metadata" />
                   <span class="bento-media__tag">{w.tag}</span>
                   <span class="bento-media__name">{w.name}</span>
-                </div>
-              ) : (
-                <div class="ph">
-                  <span class="ph__tag">{w.tag}</span>
-                  <span class="ph__name">{w.name}</span>
-                  <span class="ph__meta">{w.meta}</span>
                 </div>
               )}
             </div>
@@ -144,7 +184,7 @@ const cases = [
       </div>
     </section>
 
-    <!-- ================= ESTÚDIO (seção escura) ================= -->
+    <!-- ================= ESTÚDIO (manifesto escuro) ================= -->
     <section id="estudio">
       <div class="studio">
         <p class="studio__statement">
@@ -161,14 +201,101 @@ const cases = [
                   <em class="service__name">{s.name}</em><span class="reveal"> — {s.text}</span>
                 </p>
                 <p class="service__tags">{s.tags}</p>
-                <div class="service__previews">
-                  {/* ASSET: 3 prévias do serviço (vídeo, peça, render) */}
-                  <div class="ph ph--dark"><span class="ph__tag">Prévia</span><span class="ph__name">{s.name} 01</span></div>
-                  <div class="ph ph--dark"><span class="ph__tag">Prévia</span><span class="ph__name">{s.name} 02</span></div>
-                  <div class="ph ph--dark"><span class="ph__tag">Prévia</span><span class="ph__name">{s.name} 03</span></div>
-                </div>
               </div>
             </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ==================== ① BRANDING ==================== -->
+    <section class="section container" id="branding">
+      <header class="sec-head">
+        <p class="eyebrow">① Branding</p>
+        <h2 class="sec-head__title">Identidades que viram <em>desejo</em>.</h2>
+        <p class="sec-head__sub">
+          Do posicionamento ao sistema vivo de identidade — marcas impossíveis
+          de confundir com o genérico.
+        </p>
+      </header>
+      <div class="work-grid">
+        {
+          brandingWork.map((b) => (
+            <div class="work-tile">
+              <div class="bento-media">
+                <video src={b.video} autoplay loop muted playsinline preload="metadata" />
+                <span class="bento-media__tag">Branding</span>
+                <span class="bento-media__name">{b.name}</span>
+              </div>
+              <p class="work-tile__meta">{b.meta}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ==================== ② CONTEÚDO ==================== -->
+    <section class="section" id="conteudo">
+      <div class="container">
+        <header class="sec-head">
+          <p class="eyebrow">② Conteúdo</p>
+          <h2 class="sec-head__title">Presença que <em>vende</em>.</h2>
+          <p class="sec-head__sub">
+            Vídeo, direção de arte e linha editorial que posicionam e convertem.
+            <span class="reels-hint">Arraste para o lado · clique para assistir →</span>
+          </p>
+        </header>
+      </div>
+      <div class="reels-strip" data-reels>
+        {
+          reels.map((r) => (
+            <button class="reel-card" data-reel={`/videos/reels/${r.file}.mp4`} aria-label={`Assistir: ${r.name}`}>
+              <img class="reel-card__poster" src={`/videos/posters/${r.file}.jpg`} width="540" height="960" loading="lazy" alt="" />
+              <span class="reel-card__play" aria-hidden="true">▶</span>
+              <span class="reel-card__meta"><b>{r.cat}</b>{r.name}</span>
+            </button>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ==================== ③ PERFORMANCE ==================== -->
+    <section class="section container" id="performance">
+      <header class="sec-head">
+        <p class="eyebrow">③ Performance</p>
+        <h2 class="sec-head__title">Estética que vira <em>pipeline</em>.</h2>
+        <p class="sec-head__sub">
+          Aquisição, mídia e funis lendo dados de verdade. O resultado não é
+          portfólio — é cliente entrando.
+        </p>
+      </header>
+      <div class="perf-grid">
+        {
+          perf.map((p) => (
+            <div class="work-tile">
+              <div class="bento-media">
+                <video src={p.video} autoplay loop muted playsinline preload="metadata" />
+                <span class="bento-media__tag">Resultado</span>
+                <span class="bento-media__name">{p.name}</span>
+              </div>
+              <p class="work-tile__meta">{p.meta}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="cases">
+        {
+          cases.map((c, i) => (
+            <a class="case" href={`#case-${i + 1}`}>
+              <span class="case__idx">{String(i + 1).padStart(2, "0")}</span>
+              <span class="case__title">{c.name}</span>
+              <span class="case__client">{c.client}</span>
+              <span class="case__right">
+                {c.result && <span class="case__result">{c.result}</span>}
+                <span class="case__go" aria-hidden="true">↗</span>
+              </span>
+            </a>
           ))
         }
       </div>
@@ -182,33 +309,13 @@ const cases = [
       <div class="bento">
         {
           autoral.map((a) => (
-            <div class="bento-item" style={`grid-column: span ${a.cols}; grid-row: span ${a.rows};`}>
+            <div class="bento-item is-sq" style={`grid-column: span ${a.cols}; grid-row: span ${a.rows};`}>
               <div class="ph">
                 <span class="ph__tag">{a.tag}</span>
                 <span class="ph__name">{a.name}</span>
                 <span class="ph__meta">{a.meta}</span>
               </div>
             </div>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- ========================== CASES ========================== -->
-    <section class="section container" id="cases">
-      <p class="eyebrow" style="margin-bottom: clamp(2rem,5vw,3.5rem)">Cases · cliente + resultado</p>
-      <div class="cases">
-        {
-          cases.map((c, i) => (
-            <a class="case" href={`#case-${i + 1}`}>
-              <span class="case__idx">{String(i + 1).padStart(2, "0")}</span>
-              <span class="case__title">{c.name}</span>
-              <span class="case__client">{c.client}</span>
-              <span class="case__right">
-                {c.result && <span class="case__result">{c.result}</span>}
-                <span class="case__go" aria-hidden="true">↗</span>
-              </span>
-            </a>
           ))
         }
       </div>
@@ -254,9 +361,9 @@ const cases = [
           <h4>Navegação</h4>
           <ul>
             <li><a href="#trabalho">Trabalho</a></li>
-            <li><a href="#estudio">Estúdio</a></li>
-            <li><a href="#cases">Cases</a></li>
-            <li><a href={`mailto:${email}`}>Contato</a></li>
+            <li><a href="#branding">Branding</a></li>
+            <li><a href="#conteudo">Conteúdo</a></li>
+            <li><a href="#performance">Performance</a></li>
           </ul>
         </div>
         <div class="footer__col">
@@ -276,6 +383,12 @@ const cases = [
       </div>
     </div>
   </footer>
+
+  <!-- ========================= LIGHTBOX ========================= -->
+  <div class="lightbox" data-lightbox hidden>
+    <button class="lightbox__close" data-lb-close aria-label="Fechar">✕</button>
+    <video class="lightbox__video" data-lb-video controls playsinline></video>
+  </div>
 </Layout>
 
 <script>
@@ -343,7 +456,34 @@ const cases = [
   window.addEventListener("resize", onScroll);
   onScroll();
 
-  // Bolinha “física” arrastável (detalhe lúdico)
+  // Lightbox dos reels (carrega o vídeo só no clique)
+  const lb = document.querySelector("[data-lightbox]");
+  const lbVideo = document.querySelector("[data-lb-video]");
+  function openLB(src) {
+    if (!lb || !lbVideo) return;
+    lbVideo.src = src;
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    lbVideo.play().catch(() => {});
+  }
+  function closeLB() {
+    if (!lb || !lbVideo) return;
+    lbVideo.pause();
+    lbVideo.removeAttribute("src");
+    lbVideo.load();
+    lb.hidden = true;
+    document.body.style.overflow = "";
+  }
+  document.querySelectorAll("[data-reel]").forEach((b) => {
+    b.addEventListener("click", () => openLB(b.getAttribute("data-reel")));
+  });
+  document.querySelector("[data-lb-close]")?.addEventListener("click", closeLB);
+  lb?.addEventListener("click", (e) => { if (e.target === lb) closeLB(); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lb && !lb.hidden) closeLB();
+  });
+
+  // Bolinha "física" arrastável (detalhe lúdico)
   document.querySelectorAll("[data-ball]").forEach((ball) => {
     let dragging = false, sx = 0, sy = 0, x = 0, y = 0;
     ball.addEventListener("pointerdown", (e) => {
