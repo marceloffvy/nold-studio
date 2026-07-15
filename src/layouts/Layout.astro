@@ -4,12 +4,14 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  bodyClass?: string;
 }
 
 const {
   title = "Nold Studio — Branding, Conteúdo e Performance movidos a IA",
   description =
     "Estúdio criativo founder-led movido a IA. Construímos e escalamos marcas preparadas para o futuro, sem perder a alma verdadeira.",
+  bodyClass = "",
 } = Astro.props;
 
 // Só emite canonical absoluto quando `site` estiver definido no astro.config.
@@ -56,7 +58,7 @@ const canonical = Astro.site
 
     <meta name="theme-color" content="#000000" />
   </head>
-  <body>
+  <body class={bodyClass}>
     <slot />
   </body>
 </html>
