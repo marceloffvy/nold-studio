@@ -226,6 +226,39 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
   display: inline-flex; align-items: center; gap: 0.45em;
 }
 .nav-pill .hi:hover { background: var(--green); color: var(--cru); }
+
+/* --- Colapso no scroll: meta some, pill recolhe em hambúrguer --- */
+.meta { transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+.nav-wrap { display: inline-flex; align-items: center; gap: 0.5rem; }
+.nav-pill {
+  overflow: hidden; max-width: 520px;
+  transition: max-width 0.5s var(--ease), opacity 0.4s var(--ease),
+    padding 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.nav-burger {
+  flex: 0 0 auto;
+  width: 0; height: 52px; padding: 0;
+  border-radius: var(--r-lg);
+  background: var(--cru);
+  box-shadow: 0 10px 30px -12px rgba(0,0,0,.35), 0 0 0 1px var(--line);
+  border: none; cursor: pointer; overflow: hidden;
+  display: grid; place-content: center; gap: 5px;
+  opacity: 0; pointer-events: none;
+  transition: width 0.5s var(--ease), opacity 0.4s var(--ease);
+}
+.nav-burger span {
+  display: block; width: 20px; height: 1.6px;
+  background: var(--ink); border-radius: 2px;
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.topbar.is-scrolled .meta { opacity: 0; transform: translateY(-10px); pointer-events: none; }
+.topbar.is-scrolled .nav-pill { max-width: 0; opacity: 0; padding-inline: 0; pointer-events: none; }
+.topbar.is-scrolled .nav-burger { width: 52px; opacity: 1; pointer-events: auto; }
+.nav-wrap.is-open .nav-pill { max-width: 520px; opacity: 1; padding-inline: 0.4rem; pointer-events: auto; }
+.nav-wrap.is-open .nav-burger span:nth-child(1) { transform: translateY(6.6px) rotate(45deg); }
+.nav-wrap.is-open .nav-burger span:nth-child(2) { opacity: 0; }
+.nav-wrap.is-open .nav-burger span:nth-child(3) { transform: translateY(-6.6px) rotate(-45deg); }
+
 @media (max-width: 760px) {
   .meta { display: none; }
 }
@@ -599,32 +632,34 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 }
 .trio > :nth-child(1) { grid-column: 1 / 4; }
 .trio > :nth-child(2) { grid-column: 4 / 7; }
-.trio > :nth-child(3) { grid-column: 8 / 13; }
+.trio > :nth-child(3) { grid-column: 7 / 13; }
 
-/* Copy de fecho — alinhada à direita, na base dos tiles */
+/* Copy de fecho — grande, alinhada à direita, na base dos tiles */
 .trio-copy {
   align-self: end;
   display: flex; flex-direction: column; align-items: flex-end;
-  gap: clamp(0.7rem, 1.4vw, 1.1rem);
+  gap: clamp(1rem, 2vw, 1.8rem);
   text-align: right;
   padding-bottom: clamp(0.4rem, 1.6vw, 1.4rem);
 }
-.trio-copy__eyebrow {
-  font-family: var(--font-mono); font-size: 0.68rem;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);
-}
-.trio-copy__title {
+.trio-copy__lead {
   font-family: var(--font-title); font-weight: 400;
-  font-size: clamp(1.9rem, 3.6vw, 3.2rem); line-height: 0.98;
-  letter-spacing: -0.02em; color: var(--text);
+  font-size: clamp(1.6rem, 3vw, 2.7rem); line-height: 1.08;
+  letter-spacing: -0.01em; color: var(--text);
+  max-width: 22ch;
 }
-.trio-copy__title em { font-style: italic; }
+.trio-copy__lead em { font-style: italic; }
 .trio-copy__link {
-  font-family: var(--font-ui); font-weight: 500; font-size: 0.98rem;
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
   display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text);
+  padding: 0.6rem 1rem; border-radius: var(--r-md);
+  border: 1px solid var(--line-2);
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
 }
+.trio-copy__link:hover { background: var(--ink); color: var(--cru); }
 .trio-copy__link span { transition: transform 0.3s var(--ease); }
-.trio-copy__link:hover span { transform: translateY(4px); }
+.trio-copy__link:hover span { transform: translateY(3px); }
 
 /* Colagem 2 (autorais): 4 colunas, inícios escalonados, ratios mistos */
 .collage2 {
@@ -743,3 +778,27 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
   transition: background 0.25s var(--ease);
 }
 .lightbox__close:hover { background: var(--coral); }
+
+/* =================================================================
+   CURSOR — bolinha (só em ponteiro fino; some no toque)
+   ================================================================= */
+.cursor { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .has-cursor .cursor {
+    display: block;
+    position: fixed; top: 0; left: 0; z-index: 300;
+    width: 13px; height: 13px; border-radius: 50%;
+    background: #f6f6f6; mix-blend-mode: difference;
+    pointer-events: none;
+    transition: width 0.25s var(--ease), height 0.25s var(--ease),
+      background 0.25s var(--ease), opacity 0.3s var(--ease);
+    will-change: transform;
+  }
+  .has-cursor .cursor.is-hover {
+    width: 46px; height: 46px;
+    background: var(--coral); mix-blend-mode: normal; opacity: 0.9;
+  }
+  /* esconde o cursor nativo em favor da bolinha */
+  .has-cursor, .has-cursor a, .has-cursor button,
+  .has-cursor .tile, .has-cursor .reel-card, .has-cursor label { cursor: none; }
+}

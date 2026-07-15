@@ -74,13 +74,13 @@ const perf = [
 
 <Layout>
   <!-- ============================ TOPBAR ============================ -->
-  <header class="topbar">
+  <header class="topbar" data-topbar>
     <div class="container topbar__inner">
       <a href="/" class="logo-card" aria-label="Nold — início">
         <span style="font-family:var(--font-title); font-size:1.9rem; line-height:1; color:var(--green)">n</span>
       </a>
 
-      <div class="meta">
+      <div class="meta" data-nav-meta>
         <span class="meta__pair">São Paulo <b data-clock>--:--</b></span>
         <button class="copy-btn" type="button" data-copy={email} aria-label="Copiar e-mail">
           <span data-copy-label>{email}</span>
@@ -90,11 +90,16 @@ const perf = [
         </button>
       </div>
 
-      <nav class="nav-pill" aria-label="Navegação principal">
-        <a href="#trabalho">Projetos</a>
-        <a href="#conteudo">Conteúdo</a>
-        <a href={`mailto:${email}`} class="hi">Olá! <span aria-hidden="true">💬</span></a>
-      </nav>
+      <div class="nav-wrap" data-nav>
+        <nav class="nav-pill" aria-label="Navegação principal">
+          <a href="#trabalho">Projetos</a>
+          <a href="#conteudo">Conteúdo</a>
+          <a href={`mailto:${email}`} class="hi">Olá! <span aria-hidden="true">💬</span></a>
+        </nav>
+        <button class="nav-burger" type="button" data-nav-toggle aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -181,8 +186,10 @@ const perf = [
           <span class="brand-tile__link">Ver tudo <span aria-hidden="true">→</span></span>
         </a>
         <div class="trio-copy">
-          <p class="trio-copy__eyebrow">A seguir</p>
-          <p class="trio-copy__title">Cada frente,<br />por <em>inteiro</em>.</p>
+          <p class="trio-copy__lead">
+            Nosso trabalho é um só: fazer o seu negócio <em>gerar receita</em>.
+            E a gente chega lá por três frentes.
+          </p>
           <a class="trio-copy__link" href="#estudio">
             Ver como funciona <span aria-hidden="true">↓</span>
           </a>
@@ -415,6 +422,9 @@ const perf = [
     <button class="lightbox__close" data-lb-close aria-label="Fechar">✕</button>
     <video class="lightbox__video" data-lb-video controls playsinline></video>
   </div>
+
+  <!-- ===================== CURSOR (bolinha) ===================== -->
+  <div class="cursor" data-cursor aria-hidden="true"></div>
 </Layout>
 
 <script>
@@ -509,7 +519,51 @@ const perf = [
     if (e.key === "Escape" && lb && !lb.hidden) closeLB();
   });
 
-  // Bolinha "física" arrastável (detalhe lúdico)
+  // Topbar: colapsa no scroll (meta some, pill vira hambúrguer)
+  const topbar = document.querySelector("[data-topbar]");
+  const navWrap = document.querySelector("[data-nav]");
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  function closeNav() {
+    navWrap?.classList.remove("is-open");
+    navToggle?.setAttribute("aria-expanded", "false");
+  }
+  function onNavScroll() {
+    if (!topbar) return;
+    const scrolled = window.scrollY > 40;
+    topbar.classList.toggle("is-scrolled", scrolled);
+    if (!scrolled) closeNav();
+  }
+  navToggle?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = navWrap.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(open));
+  });
+  navWrap?.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
+  document.addEventListener("click", (e) => {
+    if (navWrap && !navWrap.contains(e.target)) closeNav();
+  });
+  window.addEventListener("scroll", onNavScroll, { passive: true });
+  onNavScroll();
+
+  // Cursor bolinha (só em ponteiro fino)
+  const cursor = document.querySelector("[data-cursor]");
+  if (cursor && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.documentElement.classList.add("has-cursor");
+    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y;
+    addEventListener("pointermove", (e) => { x = e.clientX; y = e.clientY; }, { passive: true });
+    (function loop() {
+      cx += (x - cx) * 0.22; cy += (y - cy) * 0.22;
+      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      requestAnimationFrame(loop);
+    })();
+    const hoverSel = "a, button, .tile, .reel-card, input, [data-ball]";
+    document.querySelectorAll(hoverSel).forEach((el) => {
+      el.addEventListener("pointerenter", () => cursor.classList.add("is-hover"));
+      el.addEventListener("pointerleave", () => cursor.classList.remove("is-hover"));
+    });
+  }
+
+  // Bolinha “física” arrastável (detalhe lúdico)
   document.querySelectorAll("[data-ball]").forEach((ball) => {
     let dragging = false, sx = 0, sy = 0, x = 0, y = 0;
     ball.addEventListener("pointerdown", (e) => {
