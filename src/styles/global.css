@@ -334,18 +334,21 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 .clients { border-top: 1px solid var(--line); }
 .clients__label { text-align: center; margin-bottom: clamp(1.5rem, 4vw, 2.5rem); color: var(--muted); justify-content: center; display: flex; }
 .clients__row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
   gap: clamp(1rem, 3vw, 2.5rem);
-  align-items: center;
 }
 .client-ph {
-  height: 46px; border-radius: var(--r-sm);
-  display: grid; place-items: center;
-  background: var(--ph); border: 1px solid var(--ph-line);
-  font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--faint);
+  /* logos em linha única, sem caixa — como a referência */
+  font-family: var(--font-title);
+  font-size: clamp(1.15rem, 1.9vw, 1.7rem);
+  color: var(--ink); opacity: 0.72;
+  white-space: nowrap;
+  transition: opacity 0.3s var(--ease);
 }
+.client-ph:hover { opacity: 1; }
 
 /* =================================================================
    STUDIO — seção escura (statement + serviços com reveal)
@@ -504,6 +507,107 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 }
 
 /* =================================================================
+   COLAGEM (apanhado + autorais) — masonry de macro-colunas, full-bleed
+   ================================================================= */
+.collage-wrap {
+  --cgap: clamp(10px, 0.8vw, 14px);
+  padding-inline: var(--cgap);
+  margin-top: clamp(1rem, 2.5vw, 2rem);
+}
+.collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--cgap);
+  align-items: start; /* colunas fluem independentes (masonry) */
+}
+.mcol { display: flex; flex-direction: column; gap: var(--cgap); }
+.mcol--late { padding-top: clamp(48px, 6vw, 96px); } /* stagger da referência */
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--cgap); }
+
+.tile {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--ink);
+  display: block;
+}
+.tile--sq { aspect-ratio: 1 / 1; }
+.tile--v  { aspect-ratio: 9 / 16; }
+.tile--32 { aspect-ratio: 3 / 2; }
+.tile--43 { aspect-ratio: 4 / 3; }
+.tile--23 { aspect-ratio: 2 / 3; }
+.tile video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease);
+}
+.tile:hover video { transform: scale(1.03); }
+.tile::after { /* brilho sutil no hover */
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 32%, rgba(255,255,255,0.07) 50%, transparent 68%);
+  opacity: 0; transition: opacity 0.45s var(--ease);
+  pointer-events: none;
+}
+.tile:hover::after { opacity: 1; }
+
+/* Label no topo, sobre gradiente (como a referência) */
+.tile__label {
+  position: absolute; inset-inline: 0; top: 0; z-index: 1;
+  display: flex; flex-direction: column; gap: 0.25rem;
+  padding: clamp(0.9rem, 1.6vw, 1.5rem) clamp(1rem, 1.8vw, 1.6rem) 2.6rem;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
+  color: var(--cru);
+  pointer-events: none;
+}
+.tile__name { font-family: var(--font-ui); font-weight: 500; font-size: clamp(0.9rem, 1.15vw, 1.05rem); line-height: 1.25; }
+.tile__meta { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.72; }
+
+/* Trio final: alinhado à esquerda com respiro à direita (whitespace intencional) */
+.trio {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--cgap);
+  margin-top: var(--cgap);
+}
+.trio > :nth-child(1) { grid-column: 1 / 4; }
+.trio > :nth-child(2) { grid-column: 4 / 7; }
+.trio > :nth-child(3) { grid-column: 7 / 10; }
+.stag { margin-top: clamp(48px, 6vw, 96px); }
+
+/* Colagem 2 (autorais): 4 colunas, inícios escalonados, ratios mistos */
+.collage2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--cgap);
+  align-items: start;
+}
+.c2col { display: flex; flex-direction: column; gap: var(--cgap); }
+.c2col--d1 { padding-top: clamp(90px, 13vw, 266px); }
+.c2col--d2 { padding-top: clamp(56px, 8vw, 165px); }
+.c2col--d3 { padding-top: clamp(26px, 4vw, 76px); }
+.tinypair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--cgap); }
+.banner { margin-top: var(--cgap); aspect-ratio: 3.87 / 1; width: 100%; }
+.collage2 .ph, .banner.ph { width: 100%; height: auto; }
+.collage2 .tile--sq.ph, .collage2 .tile--32.ph, .collage2 .tile--43.ph, .collage2 .tile--23.ph { min-height: 0; }
+
+@media (max-width: 760px) {
+  .collage { grid-template-columns: 1fr; }
+  .mcol--late { padding-top: 0; }
+  .trio { grid-template-columns: repeat(2, 1fr); }
+  .trio > :nth-child(1) { grid-column: 1; }
+  .trio > :nth-child(2) { grid-column: 2; }
+  .trio > :nth-child(3) { grid-column: 1 / -1; aspect-ratio: 21 / 9; }
+  .stag { margin-top: 0; }
+  .collage2 { grid-template-columns: repeat(2, 1fr); }
+  .c2col--d1 { padding-top: 36px; }
+  .c2col--d2 { padding-top: 0; }
+  .c2col--d3 { padding-top: 36px; }
+  .banner { aspect-ratio: 2 / 1; }
+}
+
+/* =================================================================
    TILE DE MARCA (dentro do apanhado)
    ================================================================= */
 .brand-tile {
@@ -512,6 +616,10 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
   padding: clamp(1rem, 1.6vw, 1.6rem);
   background: var(--green); color: var(--cru);
   border-radius: var(--r-lg); text-decoration: none;
+}
+.trio .brand-tile { aspect-ratio: 1 / 1; height: auto; }
+@media (max-width: 760px) {
+  .trio .brand-tile { aspect-ratio: 21 / 9; }
 }
 .brand-tile__wm { font-family: var(--font-title); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1; }
 .brand-tile__link { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; gap: 0.4rem; transition: color 0.25s var(--ease); }

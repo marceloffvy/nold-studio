@@ -3,22 +3,10 @@ import Layout from "../layouts/Layout.astro";
 
 const email = "studio@nold.studio"; // DADO: confirmar e-mail oficial
 
-// ===== PRIMEIRO BLOCO — "o apanhado" (autoplay, misto 1:1 + 9:16) =====
-// A ordem monta 3 bandas de 12 colunas cada, sem buracos.
-const apanhado = [
-  // Banda 1 — feature 1:1 + 2 verticais 9:16
-  { tag: "Entregas", name: "As 4 frentes", video: "/videos/nold-entregas.mp4", cls: "feat", cols: 6, rows: 6 },
-  { tag: "Conteúdo", name: "Relato · Ortognática", video: "/videos/reels/b50.mp4", cls: "v", cols: 3, rows: 6 },
-  { tag: "Conteúdo", name: "Se o siso pode matar", video: "/videos/reels/m55.mp4", cls: "v", cols: 3, rows: 6 },
-  // Banda 2 — branding + performance intercalados
-  { tag: "Branding", name: "MaxFocos", video: "/videos/branding/maxfocos.mp4", cls: "sq", cols: 4, rows: 4 },
-  { tag: "Performance", name: "Clínica LK", video: "/videos/campanhas/lk.mp4", cls: "sq", cols: 4, rows: 4 },
-  { tag: "Branding", name: "Kaju", video: "/videos/branding/kaju.mp4", cls: "sq", cols: 4, rows: 4 },
-  // Banda 3 — branding + performance + tile de marca
-  { tag: "Branding", name: "Biva", video: "/videos/branding/biva.mp4", cls: "sq", cols: 4, rows: 4 },
-  { tag: "Performance", name: "MaxFocos", video: "/videos/campanhas/maxfocos.mp4", cls: "sq", cols: 4, rows: 4 },
-  { brand: true, cols: 4, rows: 4 },
-];
+// ===== PRIMEIRO BLOCO — "o apanhado" =====
+// Colagem masonry em 2 macro-colunas (como a referência): a coluna direita
+// nasce deslocada; trio final alinhado à esquerda com respiro à direita.
+// A estrutura é intencional demais para data-map — markup direto na seção.
 
 const clients = ["MaxFocos", "Clínica LK", "Biliart", "Dela Bella", "Kaju", "Biva", "Marcelo Tavares"];
 
@@ -87,14 +75,7 @@ const cases = [
   { name: "Marcelo Tavares", client: "Pessoal / Autoridade", result: null },
 ];
 
-// Projetos autorais (caixas vazias — assets depois)
-const autoral = [
-  { tag: "Software", name: "Brand Brain", meta: "Produto próprio · L.03", cols: 7, rows: 5 },
-  { tag: "Colagem", name: "Sleep Mode", meta: "Anacrônico · retrofuturismo", cols: 5, rows: 5 },
-  { tag: "Marca", name: "Kaju", meta: "Marca própria do estúdio", cols: 4, rows: 4 },
-  { tag: "Colagem", name: "Renascença", meta: "Pintura clássica × máquina", cols: 4, rows: 4 },
-  { tag: "Motion", name: "Afresco", meta: "Barroco em movimento", cols: 4, rows: 4 },
-];
+// Projetos autorais: colagem escalonada hardcoded na seção (placeholders).
 ---
 
 <Layout>
@@ -148,30 +129,84 @@ const autoral = [
       </div>
     </section>
 
-    <!-- ================= O APANHADO (bento misto) ================= -->
-    <section class="container" id="trabalho">
-      <div class="bento">
-        {
-          apanhado.map((w) => (
-            <div
-              class={`bento-item is-${w.brand ? "sq" : w.cls}`}
-              style={`grid-column: span ${w.cols}; grid-row: span ${w.rows};`}
-            >
-              {w.brand ? (
-                <a class="brand-tile" href="#conteudo">
-                  <span class="brand-tile__wm">nold</span>
-                  <span class="brand-tile__link">Ver tudo <span aria-hidden="true">→</span></span>
-                </a>
-              ) : (
-                <div class="bento-media">
-                  <video src={w.video} autoplay loop muted playsinline preload="metadata" />
-                  <span class="bento-media__tag">{w.tag}</span>
-                  <span class="bento-media__name">{w.name}</span>
-                </div>
-              )}
+    <!-- ============ O APANHADO (colagem masonry, full-bleed) ============ -->
+    <section class="collage-wrap" id="trabalho">
+      <div class="collage">
+        <!-- Macro-coluna esquerda: feature grande + par de quadrados -->
+        <div class="mcol">
+          <article class="tile tile--sq">
+            <video src="/videos/nold-entregas.mp4" autoplay loop muted playsinline preload="metadata"></video>
+            <div class="tile__label">
+              <span class="tile__name">As 4 frentes do estúdio</span>
+              <span class="tile__meta">Nold · Entregas</span>
             </div>
-          ))
-        }
+          </article>
+          <div class="pair">
+            <article class="tile tile--sq">
+              <video src="/videos/branding/kaju.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <div class="tile__label">
+                <span class="tile__name">Kaju</span>
+                <span class="tile__meta">Branding · Identidade</span>
+              </div>
+            </article>
+            <article class="tile tile--sq">
+              <video src="/videos/branding/biva.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <div class="tile__label">
+                <span class="tile__name">Biva</span>
+                <span class="tile__meta">Branding · Identidade</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Macro-coluna direita: nasce deslocada; par + quadrado grande -->
+        <div class="mcol mcol--late">
+          <div class="pair">
+            <article class="tile tile--sq">
+              <video src="/videos/branding/maxfocos.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <div class="tile__label">
+                <span class="tile__name">MaxFocos</span>
+                <span class="tile__meta">Branding · Identidade</span>
+              </div>
+            </article>
+            <article class="tile tile--sq">
+              <video src="/videos/campanhas/lk.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <div class="tile__label">
+                <span class="tile__name">Clínica LK</span>
+                <span class="tile__meta">Performance · Resultado</span>
+              </div>
+            </article>
+          </div>
+          <article class="tile tile--sq">
+            <video src="/videos/campanhas/maxfocos.mp4" autoplay loop muted playsinline preload="metadata"></video>
+            <div class="tile__label">
+              <span class="tile__name">MaxFocos — ROI da campanha</span>
+              <span class="tile__meta">Performance · Resultado</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Trio final: verticais + marca, respiro à direita -->
+      <div class="trio">
+        <article class="tile tile--v">
+          <video src="/videos/reels/b50.mp4" autoplay loop muted playsinline preload="metadata"></video>
+          <div class="tile__label">
+            <span class="tile__name">Relato · Ortognática</span>
+            <span class="tile__meta">Conteúdo · Vídeo</span>
+          </div>
+        </article>
+        <article class="tile tile--v">
+          <video src="/videos/reels/m55.mp4" autoplay loop muted playsinline preload="metadata"></video>
+          <div class="tile__label">
+            <span class="tile__name">Se o siso pode matar</span>
+            <span class="tile__meta">Conteúdo · Vídeo</span>
+          </div>
+        </article>
+        <a class="brand-tile stag" href="#conteudo">
+          <span class="brand-tile__wm">nold</span>
+          <span class="brand-tile__link">Ver tudo <span aria-hidden="true">→</span></span>
+        </a>
       </div>
     </section>
 
@@ -301,23 +336,68 @@ const autoral = [
       </div>
     </section>
 
-    <!-- ===================== AUTORAIS (bento) ===================== -->
-    <section class="section container" id="autorais">
-      <h2 class="autoral__head">
-        Trabalho de cliente é só parte. Veja o que criamos por <em>conta própria</em>.
-      </h2>
-      <div class="bento">
-        {
-          autoral.map((a) => (
-            <div class="bento-item is-sq" style={`grid-column: span ${a.cols}; grid-row: span ${a.rows};`}>
-              <div class="ph">
-                <span class="ph__tag">{a.tag}</span>
-                <span class="ph__name">{a.name}</span>
-                <span class="ph__meta">{a.meta}</span>
+    <!-- ============ AUTORAIS (colagem escalonada, full-bleed) ============ -->
+    <section class="section" id="autorais">
+      <div class="container">
+        <h2 class="autoral__head">
+          Trabalho de cliente é só parte. Veja o que criamos por <em>conta própria</em>.
+        </h2>
+      </div>
+      <div class="collage-wrap">
+        <div class="collage2">
+          <!-- col 1: nasce bem abaixo -->
+          <div class="c2col c2col--d1">
+            <div class="ph tile--sq">
+              <span class="ph__tag">Marca</span>
+              <span class="ph__name">Kaju</span>
+              <span class="ph__meta">Marca própria do estúdio</span>
+            </div>
+          </div>
+          <!-- col 2: par pequeno + 4:3 -->
+          <div class="c2col c2col--d2">
+            <div class="tinypair">
+              <div class="ph tile--sq">
+                <span class="ph__tag">Colagem</span>
+                <span class="ph__name">Sleep Mode</span>
+              </div>
+              <div class="ph tile--sq">
+                <span class="ph__tag">Colagem</span>
+                <span class="ph__name">Renascença</span>
               </div>
             </div>
-          ))
-        }
+            <div class="ph tile--43">
+              <span class="ph__tag">Motion</span>
+              <span class="ph__name">Afresco</span>
+              <span class="ph__meta">Barroco em movimento</span>
+            </div>
+          </div>
+          <!-- col 3: vertical 2:3 -->
+          <div class="c2col c2col--d3">
+            <div class="ph tile--23">
+              <span class="ph__tag">Software</span>
+              <span class="ph__name">Brand Brain</span>
+              <span class="ph__meta">Produto próprio · L.03</span>
+            </div>
+          </div>
+          <!-- col 4: 3:2 + quadrado -->
+          <div class="c2col">
+            <div class="ph tile--32">
+              <span class="ph__tag">Colagem</span>
+              <span class="ph__name">Glitch Barroco</span>
+            </div>
+            <div class="ph tile--sq">
+              <span class="ph__tag">Marca</span>
+              <span class="ph__name">Vortz</span>
+              <span class="ph__meta">Arquitetura</span>
+            </div>
+          </div>
+        </div>
+        <!-- banner cinematográfico full-bleed -->
+        <div class="ph banner">
+          <span class="ph__tag">Filme</span>
+          <span class="ph__name">Anacrônico</span>
+          <span class="ph__meta">Retrofuturismo · clássico × máquina</span>
+        </div>
       </div>
     </section>
 
