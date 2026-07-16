@@ -69,19 +69,8 @@ const perf = [
   { name: "Biva", meta: "Projeto", video: "/videos/campanhas/biva.mp4" },
 ];
 
-// Experiências digitais (autoral) — placeholders 1:1 até os vídeos chegarem.
-const experiencias = [
-  { tag: "Sistema interno", name: "Gestão do escritório", meta: "OS interno · 01" },
-  { tag: "Sistema interno", name: "Gestão do escritório", meta: "OS interno · 02" },
-  { tag: "Gestão pessoal", name: "Notion próprio", meta: "Vida pessoal · 01" },
-  { tag: "Gestão pessoal", name: "Notion próprio", meta: "Vida pessoal · 02" },
-  { tag: "Página de cliente", name: "Cliente 01", meta: "Experiência digital" },
-  { tag: "Página de cliente", name: "Cliente 02", meta: "Experiência digital" },
-  { tag: "Página de cliente", name: "Cliente 03", meta: "Experiência digital" },
-  { tag: "Página de cliente", name: "Cliente 04", meta: "Experiência digital" },
-  { tag: "Ferramenta", name: "Mapa mental", meta: "Ferramenta digital · 01" },
-  { tag: "Ferramenta", name: "Mapa mental", meta: "Ferramenta digital · 02" },
-];
+// Experiências digitais (autoral) — 14 mockups 1:1 reais em /exp/.
+const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
 ---
 
 <Layout bodyClass="theme-v02">
@@ -313,14 +302,11 @@ const experiencias = [
         </p>
       </div>
       <div class="collage-wrap">
-        {/* ASSET: vídeos 1:1 das experiências (a caminho) */}
         <div class="exp-grid">
           {
-            experiencias.map((e) => (
-              <div class="ph exp-tile">
-                <span class="ph__tag">{e.tag}</span>
-                <span class="ph__name">{e.name}</span>
-                <span class="ph__meta">{e.meta}</span>
+            experiencias.map((src, i) => (
+              <div class="exp-tile">
+                <img src={src} width="720" height="720" loading="lazy" alt={`Experiência digital ${i + 1}`} />
               </div>
             ))
           }
@@ -549,7 +535,7 @@ const experiencias = [
     !matchMedia("(prefers-reduced-motion: reduce)").matches
   ) {
     const MAX = 9;
-    document.querySelectorAll("#trabalho .tile, #trabalho .brand-tile").forEach((card) => {
+    document.querySelectorAll("#trabalho .tile, #trabalho .brand-tile, #autorais .exp-tile").forEach((card) => {
       card.addEventListener("pointerenter", () => {
         card.style.transition = "transform 0.12s linear, box-shadow 0.3s var(--ease)";
       });
