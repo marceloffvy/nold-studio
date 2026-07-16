@@ -889,3 +889,75 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 .theme-v02 .topbar.is-scrolled .logo-morph__icon {
   opacity: 1; transform: translateY(-50%) scale(1);
 }
+
+/* =================================================================
+   BOTÕES · CTA duplo · FORMULÁRIO de lead · LOGO do footer
+   ================================================================= */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase; line-height: 1;
+  padding: 0.8rem 1.25rem; border-radius: var(--r-md);
+  border: 1px solid transparent; cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease),
+    border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--lg { padding: 1rem 1.7rem; font-size: 0.78rem; }
+/* claro — sobre off-white */
+.btn--primary { background: var(--green); color: var(--cru); }
+.btn--primary:hover { background: var(--ink); color: var(--cru); }
+.btn--ghost { border-color: var(--line-2); color: var(--text); }
+.btn--ghost:hover { background: var(--green); color: var(--cru); border-color: var(--green); }
+/* escuro — sobre verde (studio, green card) */
+.studio .btn--primary, .brand-tile .btn--primary { background: var(--cru); color: var(--green); }
+.studio .btn--primary:hover, .brand-tile .btn--primary:hover { background: var(--yellow); color: var(--ink); }
+.studio .btn--ghost, .brand-tile .btn--ghost { border-color: rgba(246,242,230,0.4); color: var(--cru); }
+.studio .btn--ghost:hover, .brand-tile .btn--ghost:hover { background: var(--cru); color: var(--green); border-color: var(--cru); }
+
+.cta-duo { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: clamp(1.6rem, 3.5vw, 2.6rem); }
+.cta-duo--stack { flex-direction: column; gap: 0.6rem; margin-top: auto; }
+.cta-duo--stack .btn { width: 100%; }
+@media (max-width: 760px) { .trio .brand-tile { aspect-ratio: auto; } }
+
+/* Subhead de contato com ênfase */
+.cta__lead {
+  margin: clamp(1.2rem, 2.5vw, 1.9rem) auto clamp(2.4rem, 5vw, 3.6rem);
+  max-width: 42ch;
+  font-family: var(--font-ui); font-size: clamp(1.15rem, 1.9vw, 1.55rem);
+  line-height: 1.4; color: var(--text);
+}
+.cta__lead strong { font-weight: 500; box-shadow: inset 0 -0.5em 0 rgba(254, 95, 85, 0.28); }
+
+/* Formulário de lead */
+.lead-form { max-width: 720px; margin: 0 auto; text-align: left; }
+.lead-form__honey { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.lead-form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.4vw, 1.6rem); }
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field--full { grid-column: 1 / -1; }
+.field > span {
+  font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted);
+}
+.field input, .field select, .field textarea {
+  font-family: var(--font-ui); font-size: 1rem; color: var(--text);
+  background: transparent; border: none; border-bottom: 1px solid var(--line-2);
+  padding: 0.5rem 0; outline: none; border-radius: 0;
+  transition: border-color 0.25s var(--ease);
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--faint); }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); }
+.field textarea { resize: vertical; min-height: 3.5em; }
+.field select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23053225' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.2rem center; padding-right: 1.4rem;
+}
+.field option { color: var(--ink); }
+.lead-form__foot { margin-top: clamp(2rem, 4vw, 3rem); display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.lead-form__status { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--green); min-height: 1.2em; }
+.lead-form__status.is-error { color: var(--coral); }
+@media (max-width: 620px) { .lead-form__grid { grid-template-columns: 1fr; } }
+
+/* Logo do footer (lockup nold studio criativo) */
+.footer__logo { height: clamp(2.6rem, 5.5vw, 3.6rem); width: auto; display: block; }

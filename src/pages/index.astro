@@ -1,7 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const email = "studio@nold.studio"; // DADO: confirmar e-mail oficial
+const email = "studio@nold.studio"; // e-mail público exibido
+const formEmail = "marcelomelo.nold@gmail.com"; // destino do formulário de leads
+const whatsapp = "5511996465055"; // WhatsApp corporativo (+55 11 99646-5055)
+const waText = encodeURIComponent(
+  "Olá! Vim pelo site da Nold e quero falar com um especialista sobre reposicionar e escalar minha marca.",
+);
+const waLink = `https://wa.me/${whatsapp}?text=${waText}`;
+const instagram = "https://instagram.com/nold.studio"; // DADO: confirmar @
+
+const segmentos = [
+  "Odontologia", "Medicina", "Estética & Beleza", "Saúde",
+  "Advocacia", "Engenharia", "Construção civil", "Imobiliário & Incorporação",
+  "Startups", "Tecnologia", "Logística", "Consultoria",
+  "Infoproduto", "Educação", "Institutos", "Outro",
+];
 
 // ===== PRIMEIRO BLOCO — "o apanhado" =====
 // Colagem masonry em 2 macro-colunas (como a referência): a coluna direita
@@ -183,10 +197,13 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
           <video src="/videos/campanhas/lk-verde.mp4" autoplay loop muted playsinline preload="metadata"></video>
           <span class="tile__tag">Performance</span>
         </article>
-        <a class="brand-tile" href="#conteudo">
+        <div class="brand-tile">
           <span class="brand-tile__wm">nold</span>
-          <span class="brand-tile__link">Ver tudo <span aria-hidden="true">→</span></span>
-        </a>
+          <div class="cta-duo cta-duo--stack">
+            <a class="btn btn--primary" href="#contato">Começar um projeto</a>
+            <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
+          </div>
+        </div>
         <div class="trio-copy">
           <p class="trio-copy__lead">
             Nosso trabalho é um só: fazer o seu negócio <em>gerar receita</em>.
@@ -241,6 +258,10 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
                 ))
               }
             </div>
+            <div class="cta-duo">
+              <a class="btn btn--primary" href="#contato">Começar um projeto</a>
+              <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
+            </div>
           </div>
         </div>
 
@@ -264,6 +285,10 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
                 ))
               }
             </div>
+            <div class="cta-duo">
+              <a class="btn btn--primary" href="#contato">Começar um projeto</a>
+              <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
+            </div>
           </div>
         </div>
 
@@ -284,6 +309,10 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
                   </article>
                 ))
               }
+            </div>
+            <div class="cta-duo">
+              <a class="btn btn--primary" href="#contato">Começar um projeto</a>
+              <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
             </div>
           </div>
         </div>
@@ -319,15 +348,58 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
     </section>
 
     <!-- =========================== CTA =========================== -->
-    <section class="section container cta">
+    <section class="section container cta" id="contato">
       <h2 class="cta__title">Sua marca merece<br />ser <em>inevitável</em>.</h2>
-      <p class="cta__sub">
-        Para empresas a partir de R$ 150k/mês prontas para reposicionar e escalar.
-        Se você não aceita genérico, a gente se entende.
+      <p class="cta__lead">
+        Para empresas que faturam <strong>acima de R$ 100 mil por mês</strong> e
+        querem escalar seus resultados financeiros.
       </p>
-      <a href={`mailto:${email}`} class="cta__email">
-        {email} <span aria-hidden="true">→</span>
-      </a>
+
+      <form class="lead-form" data-lead data-email={formEmail} action={`https://formsubmit.co/${formEmail}`} method="POST">
+        <input type="hidden" name="_subject" value="Novo lead — site Nold 🚀" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" class="lead-form__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="lead-form__grid">
+          <label class="field">
+            <span>Nome</span>
+            <input type="text" name="Nome" required placeholder="Seu nome" />
+          </label>
+          <label class="field">
+            <span>Empresa</span>
+            <input type="text" name="Empresa" required placeholder="Nome da empresa" />
+          </label>
+          <label class="field">
+            <span>Instagram</span>
+            <input type="text" name="Instagram" placeholder="@suaempresa" />
+          </label>
+          <label class="field">
+            <span>WhatsApp</span>
+            <input type="tel" name="WhatsApp" required placeholder="(11) 99999-9999" />
+          </label>
+          <label class="field">
+            <span>E-mail</span>
+            <input type="email" name="E-mail" required placeholder="voce@empresa.com" />
+          </label>
+          <label class="field">
+            <span>Segmento</span>
+            <select name="Segmento" required>
+              <option value="" disabled selected>Selecione</option>
+              {segmentos.map((s) => <option value={s}>{s}</option>)}
+            </select>
+          </label>
+          <label class="field field--full">
+            <span>Onde está o problema e o que você deseja?</span>
+            <textarea name="Mensagem" rows="4" required placeholder="Conte rapidamente o seu momento e o seu objetivo."></textarea>
+          </label>
+        </div>
+
+        <div class="lead-form__foot">
+          <button type="submit" class="btn btn--primary btn--lg">Quero ser inevitável →</button>
+          <p class="lead-form__status" data-lead-status aria-live="polite"></p>
+        </div>
+      </form>
     </section>
 
     <!-- ======================= NEWSLETTER ======================= -->
@@ -351,8 +423,7 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
     <div class="container">
       <div class="footer__top">
         <div class="footer__brand">
-          <span class="wm">nold</span>
-          <span class="sub">Studio Criativo</span>
+          <img class="footer__logo" src="/brand/wordmark-lockup.png" width="600" height="395" alt="nold — studio criativo" />
         </div>
         <div class="footer__col">
           <h4>Navegação</h4>
@@ -366,11 +437,7 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
         <div class="footer__col">
           <h4>Social</h4>
           <ul>
-            {/* DADO: confirmar @ e URLs reais */}
-            <li><a href="#">Instagram ↗</a></li>
-            <li><a href="#">Behance ↗</a></li>
-            <li><a href="#">LinkedIn ↗</a></li>
-            <li><a href={`mailto:${email}`}>{email}</a></li>
+            <li><a href={instagram} target="_blank" rel="noopener">Instagram ↗</a></li>
           </ul>
         </div>
       </div>
@@ -416,6 +483,43 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
       } catch (e) {}
     });
   });
+
+  // Formulário de lead → FormSubmit (AJAX), com status inline
+  const leadForm = document.querySelector("[data-lead]");
+  if (leadForm) {
+    const status = leadForm.querySelector("[data-lead-status]");
+    const btn = leadForm.querySelector('button[type="submit"]');
+    leadForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (leadForm.querySelector('[name="_honey"]').value) return; // honeypot
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = "Enviando…";
+      status.classList.remove("is-error");
+      status.textContent = "";
+      try {
+        const payload = Object.fromEntries(new FormData(leadForm));
+        const res = await fetch("https://formsubmit.co/ajax/" + leadForm.dataset.email, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (String(data.success) === "true") {
+          leadForm.reset();
+          status.textContent = "Recebido! A gente te retorna em breve. 🚀";
+        } else {
+          throw new Error(data.message || "erro");
+        }
+      } catch (err) {
+        status.classList.add("is-error");
+        status.textContent = "Não deu pra enviar agora — tenta pelo WhatsApp?";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  }
 
   // Reveal palavra-a-palavra. .reveal contém só texto puro -> split limpo.
   const reveals = Array.from(document.querySelectorAll(".reveal"));
