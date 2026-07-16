@@ -608,14 +608,27 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
   transition: transform 0.9s var(--ease);
 }
 .tile:hover video { transform: scale(1.03); }
-.tile::after { /* brilho sutil no hover */
+.tile::after { /* brilho que segue o cursor */
   content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(120deg, transparent 32%, rgba(255,255,255,0.07) 50%, transparent 68%);
-  opacity: 0; transition: opacity 0.45s var(--ease);
+  position: absolute; inset: 0; z-index: 2;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.16), transparent 45%);
+  opacity: 0; transition: opacity 0.4s var(--ease);
   pointer-events: none;
 }
-.tile:hover::after { opacity: 1; }
+.tile:hover::after,
+.tile.is-tilting::after { opacity: 1; }
+
+/* Tilt 3D no apanhado — transform aplicado via JS; aqui a mola de volta e a sombra */
+#trabalho .tile,
+#trabalho .brand-tile {
+  transform-origin: center;
+  transition: transform 0.55s var(--ease), box-shadow 0.55s var(--ease);
+}
+#trabalho .tile.is-tilting,
+#trabalho .brand-tile.is-tilting {
+  box-shadow: 0 30px 55px -24px rgba(5, 30, 22, 0.5);
+  z-index: 3;
+}
 
 /* Tag mínima: chip discreto no canto — interface limpa como a referência */
 .tile__tag {
