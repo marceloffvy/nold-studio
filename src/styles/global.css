@@ -805,13 +805,18 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
    Escopo em body.theme-v02 → afeta só /v02. A home / permanece intacta.
    ================================================================= */
 
-/* Símbolo pontilhado oficial no topo — o "n" clássico reconstruído em pontos */
-.theme-v02 .logo-card--symbol {
-  background: transparent; box-shadow: none; padding: 0; overflow: hidden;
+/* Texto em verde profundo no lugar do preto — foge do preto/branco.
+   Fundo segue o off-white oficial da marca (#F6F6F6 = --cru). */
+.theme-v02 {
+  --text: #053225;
+  --muted: rgba(5, 50, 37, 0.62);
+  --faint: rgba(5, 50, 37, 0.42);
+  --line: rgba(5, 50, 37, 0.14);
+  --line-2: rgba(5, 50, 37, 0.24);
 }
-.theme-v02 .logo-card--symbol img {
-  width: 100%; height: 100%; display: block; border-radius: var(--r-lg);
-}
+/* Botão "Olá!" deixa o preto e assume o verde (verde · off-white) */
+.theme-v02 .nav-pill .hi { background: var(--green); }
+.theme-v02 .nav-pill .hi:hover { background: var(--ink); }
 
 /* Cor-mãe domina: superfícies escuras deixam o quase-preto e viram verde */
 .theme-v02 .bento-media,
@@ -829,3 +834,26 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 .theme-v02 .studio__statement { font-family: var(--font-title); font-weight: 400; letter-spacing: -0.005em; }
 .theme-v02 .autoral__head { font-family: var(--font-title); font-weight: 400; letter-spacing: -0.01em; }
 .theme-v02 .nav-pill a { font-family: var(--font-ui); font-weight: 600; }
+
+/* Logo que se transforma: wordmark "nold" → ícone ponto-pixel ao rolar */
+.theme-v02 .logo-morph {
+  position: relative; display: flex; align-items: center;
+  height: 52px; width: 66px;
+}
+.theme-v02 .logo-morph__word {
+  height: 30px; width: auto; display: block; transform-origin: left center;
+  transition: opacity 0.4s var(--ease), transform 0.45s var(--ease);
+}
+.theme-v02 .logo-morph__icon {
+  position: absolute; left: 0; top: 50%;
+  width: 52px; height: 52px; border-radius: var(--r-lg);
+  transform: translateY(-50%) scale(0.55); opacity: 0;
+  box-shadow: 0 10px 30px -12px rgba(0,0,0,.35);
+  transition: opacity 0.4s var(--ease), transform 0.45s var(--ease);
+}
+.theme-v02 .topbar.is-scrolled .logo-morph__word {
+  opacity: 0; transform: scale(0.72); pointer-events: none;
+}
+.theme-v02 .topbar.is-scrolled .logo-morph__icon {
+  opacity: 1; transform: translateY(-50%) scale(1);
+}
