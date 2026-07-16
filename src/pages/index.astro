@@ -1,8 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const email = "studio@nold.studio"; // e-mail público exibido
-const formEmail = "marcelomelo.nold@gmail.com"; // destino do formulário de leads
+const email = "marcelomelo.nold@gmail.com"; // e-mail exibido no header + destino do formulário
+const formEmail = email;
 const whatsapp = "5511996465055"; // WhatsApp corporativo (+55 11 99646-5055)
 const waText = encodeURIComponent(
   "Olá! Vim pelo site da Nold e quero falar com um especialista sobre reposicionar e escalar minha marca.",
@@ -110,7 +110,7 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
         <nav class="nav-pill" aria-label="Navegação principal">
           <a href="#trabalho">Projetos</a>
           <a href="#conteudo">Conteúdo</a>
-          <a href={`mailto:${email}`} class="hi">Olá! <span aria-hidden="true">💬</span></a>
+          <a href={waLink} target="_blank" rel="noopener" class="hi">Olá! <span aria-hidden="true">💬</span></a>
         </nav>
         <button class="nav-burger" type="button" data-nav-toggle aria-label="Abrir menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -197,12 +197,15 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
           <video src="/videos/campanhas/lk-verde.mp4" autoplay loop muted playsinline preload="metadata"></video>
           <span class="tile__tag">Performance</span>
         </article>
-        <div class="brand-tile">
-          <span class="brand-tile__wm">nold</span>
-          <div class="cta-duo cta-duo--stack">
-            <a class="btn btn--primary" href="#contato">Começar um projeto</a>
-            <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
-          </div>
+        <div class="brand-tile brand-tile--split">
+          <a class="cta-split__half cta-split__half--form" href="#contato">
+            <span class="cta-split__label">Começar um projeto</span>
+            <span class="cta-split__arw" aria-hidden="true">→</span>
+          </a>
+          <a class="cta-split__half cta-split__half--wa" href={waLink} target="_blank" rel="noopener">
+            <span class="cta-split__label">Falar com um especialista</span>
+            <span class="cta-split__arw" aria-hidden="true">↗</span>
+          </a>
         </div>
         <div class="trio-copy">
           <p class="trio-copy__lead">
@@ -401,21 +404,6 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
         </div>
       </form>
     </section>
-
-    <!-- ======================= NEWSLETTER ======================= -->
-    <section class="section container newsletter">
-      <div class="newsletter__inner">
-        <div>
-          <h3>Fique no radar.</h3>
-          <p>Bastidores do estúdio, estética aplicada a negócio e o que estamos construindo. Sem ruído.</p>
-        </div>
-        {/* INTEGRAÇÃO: conectar a um provedor (Resend / Mailchimp) */}
-        <form action="#" method="post">
-          <input type="email" name="email" placeholder="seu@email.com" aria-label="Seu e-mail" required />
-          <button type="submit">Assinar →</button>
-        </form>
-      </div>
-    </section>
   </main>
 
   <!-- ============================ FOOTER ============================ -->
@@ -443,7 +431,7 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
       </div>
       <div class="footer__bottom">
         <span>© 2026 Nold Studio</span>
-        <span>Beleza estratégica · Movido a IA</span>
+        <span>Beleza estratégica</span>
       </div>
     </div>
   </footer>

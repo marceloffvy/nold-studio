@@ -916,9 +916,23 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 .studio .btn--ghost:hover, .brand-tile .btn--ghost:hover { background: var(--cru); color: var(--green); border-color: var(--cru); }
 
 .cta-duo { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: clamp(1.6rem, 3.5vw, 2.6rem); }
-.cta-duo--stack { flex-direction: column; gap: 0.6rem; margin-top: auto; }
-.cta-duo--stack .btn { width: 100%; }
-@media (max-width: 760px) { .trio .brand-tile { aspect-ratio: auto; } }
+
+/* Card verde do apanhado = dois CTAs grandes, 50/50, cores distintas */
+.brand-tile--split {
+  padding: 0; background: transparent; overflow: hidden;
+  display: grid; grid-template-rows: 1fr 1fr; gap: 0;
+}
+.cta-split__half {
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: clamp(1.1rem, 1.9vw, 1.7rem); text-decoration: none;
+  font-family: var(--font-ui); font-weight: 500; line-height: 1.1;
+  font-size: clamp(1.15rem, 2vw, 1.7rem); letter-spacing: -0.01em;
+  transition: filter 0.3s var(--ease);
+}
+.cta-split__half--form { background: var(--coral); color: var(--cru); }
+.cta-split__half--wa { background: var(--green); color: var(--cru); }
+.cta-split__half:hover { filter: brightness(1.07); }
+.cta-split__arw { align-self: flex-end; font-size: 1.5em; line-height: 0.8; }
 
 /* Subhead de contato com ênfase */
 .cta__lead {
@@ -959,5 +973,8 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 .lead-form__status.is-error { color: var(--coral); }
 @media (max-width: 620px) { .lead-form__grid { grid-template-columns: 1fr; } }
 
-/* Logo do footer (lockup nold studio criativo) */
-.footer__logo { height: clamp(2.6rem, 5.5vw, 3.6rem); width: auto; display: block; }
+/* Logo do footer (lockup nold studio criativo) — sem esticar */
+.footer__logo {
+  height: clamp(2.4rem, 4vw, 3.2rem); width: auto; align-self: flex-start;
+  object-fit: contain; display: block;
+}
