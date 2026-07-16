@@ -817,6 +817,8 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 /* Botão "Olá!" deixa o preto e assume o verde (verde · off-white) */
 .theme-v02 .nav-pill .hi { background: var(--green); }
 .theme-v02 .nav-pill .hi:hover { background: var(--ink); }
+/* Bolinha lúdica do hero também sai do preto */
+.theme-v02 .ball { background: var(--green); }
 
 /* Cor-mãe domina: superfícies escuras deixam o quase-preto e viram verde */
 .theme-v02 .bento-media,
