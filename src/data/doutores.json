@@ -1,201 +1,107 @@
 {
   "seo": {
-    "title": "Marketing para Doutores: Médicos e Dentistas | Nold",
-    "metaDescription": "Nós construímos autoridade para médicos e dentistas que não aceitam o genérico. Branding, conteúdo e performance para atrair paciente particular de valor.",
-    "slug": "marketing-para-doutores",
-    "primaryKeyword": "marketing para médicos e dentistas",
-    "keywords": [
-      "marketing para médicos",
-      "marketing para dentistas",
-      "marketing para clínica odontológica",
-      "marketing médico",
-      "marketing odontológico",
-      "como atrair pacientes particulares",
-      "tráfego pago para dentistas",
-      "tráfego pago para médicos",
-      "tráfego pago para clínicas",
-      "branding para médicos",
-      "branding odontológico",
-      "como atrair pacientes para o consultório",
-      "como conseguir pacientes particulares",
-      "marketing para clínicas médicas",
-      "gestão de tráfego para clínicas de saúde",
-      "marketing para cirurgião-dentista",
-      "autoridade digital para médicos",
-      "paciente particular de alto valor",
-      "marketing para clínica de estética odontológica",
-      "menos dependência de convênio e indicação"
-    ]
+    "title": "Marketing para médicos e dentistas | Nold",
+    "metaDescription": "Estúdio criativo founder-led para médicos e dentistas que não aceitam o genérico. Branding, conteúdo e tráfego pago com compliance CFM e CFO."
   },
   "hero": {
-    "eyebrow": "Marketing para doutores · Odontologia e medicina",
-    "headline": "Seu trabalho é referência. Sua marca precisa ser inevitável.",
-    "headlineEmphasis": "inevitável",
-    "subhead": "Nós construímos autoridade para médicos e dentistas que não aceitam o genérico. Branding, conteúdo e performance para atrair paciente particular de alto valor. Menos convênio, menos indicação passiva, mais decisão de compra.",
-    "icp": "Para doutores e clínicas de odontologia e medicina que faturam acima de R$ 100 mil por mês e querem escalar."
+    "eyebrow": "Nold para doutores",
+    "headline": "Você já é referência na cadeira.",
+    "headlineEmphasis": "Fora dela, poucos sabem.",
+    "sub": "Marca, conteúdo e presença à altura do doutor que você já é.",
+    "icp": "Para clínicas de medicina e odontologia que querem ser a primeira escolha do paciente particular."
   },
   "entregas": [
     {
-      "titulo": "Autoridade que fala mais alto que o preço",
-      "descricao": "Construímos a percepção de referência que faz o paciente escolher você antes de comparar valor. Branding que transforma competência clínica em nome reconhecido."
+      "titulo": "Branding",
+      "linha": "Sua marca, em movimento."
     },
     {
-      "titulo": "Paciente particular, menos convênio",
-      "descricao": "Atraímos o paciente particular de alto valor, o que chega decidido a fazer. Menos dependência da tabela de convênio e da indicação passiva para encher a cadeira."
+      "titulo": "Conteúdo",
+      "linha": "Educação que vira autoridade."
     },
     {
-      "titulo": "Valor construído antes do orçamento",
-      "descricao": "Conteúdo e direção de arte que constroem o valor do procedimento antes da conversa de preço. O paciente entende o que paga, então não some nem pede desconto."
-    },
-    {
-      "titulo": "Captação previsível, não sorte",
-      "descricao": "Tráfego pago, funil e processo de venda para odontologia e medicina. Você passa a saber quantos pacientes novos entram por mês, sem depender do humor da indicação."
+      "titulo": "Performance",
+      "linha": "O paciente certo te encontra primeiro."
     }
   ],
-  "icp": {
-    "faturamentoLine": "Para doutores e clínicas de odontologia e medicina que faturam acima de R$ 100 mil por mês e querem escalar o paciente particular.",
+  "fit": {
     "paraQuemE": [
-      "Médicos, dentistas e cirurgiões-dentistas que já entregam trabalho de altíssimo nível e querem uma marca à altura.",
-      "Clínicas de odontologia e medicina cansadas de depender de convênio e de indicação passiva.",
-      "Doutores de procedimento high-ticket (ortognática, protocolo, lentes, implante, lipo de papada) que querem paciente particular decidido.",
-      "Quem quer ser A referência da especialidade na cidade, não mais um nome numa lista de convênio."
+      "Para o doutor de excelência que quer o paciente particular e está pronto para escalar."
     ],
     "paraQuemNaoE": [
-      "Quem procura o post mais barato do mercado e mede marketing por curtida.",
-      "Quem quer lead frio em volume, sem se importar com percepção de valor.",
-      "Quem está confortável dependendo da sorte da indicação para encher a agenda.",
-      "Consultório em fase inicial, sem estrutura para atender paciente particular de alto valor."
-    ]
+      "Não é para quem quer o de sempre."
+    ],
+    "faturamentoLine": "Para clínicas que já faturam e querem crescer com refino, não com ruído."
   },
-  "problemas": [
-    {
-      "titulo": "Marca amadora derruba o preço",
-      "descricao": "O trabalho clínico é impecável. A presença digital parece de celular e feed genérico. Sem autoridade percebida, o paciente particular não reconhece o nível e não paga o preço de referência. A estética amadora trava o orçamento antes de você abrir a boca."
-    },
-    {
-      "titulo": "Refém do convênio e da indicação",
-      "descricao": "O convênio paga uma fração do valor real, enche a cadeira de volume e esvazia a margem. A indicação passiva é imprevisível: o mês pode ser cheio ou deserto, e você não controla qual dos dois. Zero previsibilidade, muita exaustão."
-    },
-    {
-      "titulo": "Já queimou dinheiro com agência",
-      "descricao": "Pagou agência genérica e recebeu enxurrada de lead frio, post bonito e relatório de vaidade. Nenhum paciente novo de verdade. Sobrou a sensação de que marketing na saúde é golpe e curtida não vira cadeira ocupada."
-    }
-  ],
   "metodo": {
-    "intro": "Autoridade não é sorte, é construção. Nós não improvisamos. Começa por um diagnóstico da sua marca e do que trava a sua captação hoje. Depois, três frentes trabalham juntas para tornar você inevitável na cabeça do paciente certo. Você contrata avulso ou como pacote único.",
+    "intro": "Três frentes. Avulsas ou juntas. Sempre no seu tom.",
     "frentes": [
       {
         "nome": "Branding",
-        "promessa": "A percepção de referência que faz o paciente escolher você antes do preço.",
-        "bullets": [
-          "Posicionamento ou reposicionamento da marca do doutor ou da clínica para o paciente particular de alto valor.",
-          "Identidade visual e verbal à altura do seu nível clínico.",
-          "Experiência digital e física do paciente, do perfil à recepção.",
-          "Estratégia de comunicação dentro das normas do CFM e do Código de Ética Odontológica do CFO, sem medo de aparecer."
-        ]
+        "promessa": "O paciente reconhece antes de te conhecer."
       },
       {
         "nome": "Conteúdo",
-        "promessa": "Estética a serviço da percepção de valor, para o paciente chegar pré-vendido.",
-        "bullets": [
-          "Direção de arte e vídeo de procedimentos high-ticket.",
-          "Linha editorial que constrói autoridade sem virar propaganda barata.",
-          "Peças reais já produzidas: siso, ortognática, protocolo, lentes, alinhadores, lipo de papada.",
-          "Conteúdo educativo de procedimento e bastidor de trabalho que provam domínio, sempre dentro do que o CFM e o CFO permitem."
-        ]
+        "promessa": "Cada vídeo constrói confiança."
       },
       {
         "nome": "Performance",
-        "promessa": "Captação ativa de paciente particular, previsível e mensurável.",
-        "bullets": [
-          "Tráfego pago para clínicas de odontologia e medicina, calibrado para paciente de alto valor.",
-          "Funil e processo de venda do post ao agendamento.",
-          "Leitura de dados e campanhas focadas em receita, não em vaidade.",
-          "Automação e acompanhamento do lead até a cadeira ocupada."
-        ]
+        "promessa": "O paciente particular te encontra primeiro."
       }
     ],
-    "pacoteNote": "Cada frente pode ser contratada avulsa ou como pacote único. No diagnóstico a gente define o que a sua marca precisa primeiro."
+    "pacoteNote": "Juntas, viram um sistema só."
   },
   "cases": [
     {
       "cliente": "Clínica LK",
       "segmento": "Odontologia",
-      "resultado": "Cerca de R$ 40 mil em um único fechamento de campanha. Prova real, número concreto, não promessa."
+      "resultado": "Um único paciente pagou o investimento."
     },
     {
       "cliente": "Marcelo Tavares",
       "segmento": "Odontologia e estética",
-      "resultado": "Autoridade pessoal construída com a Nold. Marca que comunica o nível do trabalho e atrai o paciente certo."
+      "resultado": "Autoridade em movimento."
     },
     {
       "cliente": "Biliart",
       "segmento": "Odontologia estética",
-      "resultado": "Marca de estética odontológica posicionada para o paciente particular certo."
+      "resultado": "Identidade à altura da estética."
     }
   ],
-  "depoimentos": [
-    {
-      "quote": "A minha marca finalmente parece o nível do meu trabalho. O paciente particular chega decidido e não discute preço.",
-      "autor": "Dr. [Nome]",
-      "contexto": "[Especialidade] · [Cidade]"
-    },
-    {
-      "quote": "Saí da dependência do convênio. Hoje sei quantos pacientes novos entram na agenda por mês.",
-      "autor": "Dra. [Nome]",
-      "contexto": "[Especialidade] · [Cidade]"
-    },
-    {
-      "quote": "Fora da cadeira, virei a referência que eu já era dentro dela.",
-      "autor": "Dr. [Nome]",
-      "contexto": "[Especialidade] · [Cidade]"
-    }
-  ],
+  "depoimentos": [],
   "faq": [
     {
-      "q": "Como atrair pacientes particulares para consultório médico ou odontológico?",
-      "a": "Atrair paciente particular exige três coisas juntas: marca que comunica autoridade, conteúdo que constrói percepção de valor e captação ativa com tráfego pago e funil. A Nold conecta as três frentes para o paciente chegar pré-vendido e a agenda parar de depender de indicação passiva."
+      "q": "Vocês garantem número de pacientes?",
+      "a": "Não. Seguimos a Resolução CFM 2.336/2023 e o Código de Ética do CFO. Construímos autoridade e presença; a decisão é sempre do paciente."
     },
     {
-      "q": "Vale a pena investir em tráfego pago para dentistas e médicos?",
-      "a": "Vale quando o tráfego é calibrado para paciente de alto valor e ligado a um funil de venda, não a curtida. Dependendo do procedimento, um único paciente particular high-ticket pode pagar o investimento inteiro. Sem funil, tráfego vira vaidade. Com funil, vira agenda cheia de gente certa."
+      "q": "A comunicação respeita as regras do CFM e do CFO?",
+      "a": "Sempre. Registro informativo e educativo, sem antes e depois sensacionalista nem promessa de cura. Compliance é o nosso padrão."
     },
     {
-      "q": "Quanto custa fazer marketing para uma clínica médica ou odontológica?",
-      "a": "Depende das frentes que a sua marca precisa primeiro: branding, conteúdo e performance, avulsas ou em pacote. A conta certa não é o custo da Nold. É quantos pacientes particulares você deixa de fechar sem marca, autoridade e captação funcionando. O diagnóstico mostra o número, sem custo."
+      "q": "Posso contratar só uma frente?",
+      "a": "Pode. Branding, Conteúdo e Performance funcionam avulsas. Juntas, funcionam melhor."
     },
     {
-      "q": "O que o CFM e o CFO permitem na publicidade de médicos e dentistas?",
-      "a": "A Resolução CFM nº 2.336/2023 e o Código de Ética Odontológica do CFO permitem comunicação informativa e educativa, e restringem sensacionalismo, promessa de resultado e divulgação de preço em certos contextos. Dá para construir autoridade forte dentro das regras. A Nold comunica dentro do que o conselho permite, sem travar a sua marca por medo de errar."
+      "q": "Como funciona o conteúdo?",
+      "a": "Filmamos o que você já domina: siso, ortognática, protocolo, lentes, alinhadores, papada, depoimentos. Educação que vira autoridade."
     },
     {
-      "q": "Como diminuir a dependência de convênios e de indicação passiva?",
-      "a": "Você diminui a dependência trocando reputação pessoal por marca e sorte por processo. Autoridade percebida faz o paciente pagar o preço de referência. A captação ativa garante fluxo previsível de paciente particular. O convênio deixa de ser a base da agenda."
+      "q": "Vocês atendem medicina e odontologia?",
+      "a": "Sim. Médicos, dentistas e clínicas dos dois campos. O método é o mesmo; o tom é sempre o seu."
     },
     {
-      "q": "O que é branding para médicos e por que ele atrai paciente particular?",
-      "a": "Branding é o posicionamento, a identidade visual e verbal e a experiência que fazem a sua clínica ser reconhecida como referência. Para o paciente particular de alto valor, autoridade percebida é o que justifica o preço. Sem branding, competência clínica vira commodity e o paciente decide pelo mais barato."
-    },
-    {
-      "q": "Como um médico ou dentista constrói autoridade nas redes sociais?",
-      "a": "Autoridade se constrói com direção, não com volume de post. Linha editorial clara, direção de arte à altura do trabalho clínico, conteúdo que educa sobre os procedimentos que você domina e prova social dentro das regras do conselho. Feed genérico não constrói autoridade. Posicionamento constrói."
-    },
-    {
-      "q": "Quanto tempo leva para o marketing começar a trazer pacientes?",
-      "a": "Performance pode trazer os primeiros agendamentos em poucas semanas. A autoridade de marca se consolida ao longo de meses e tende a reduzir o custo de aquisição no caminho. Trabalhamos as duas camadas em paralelo: captação para o agora, branding para o patrimônio."
-    },
-    {
-      "q": "Qual a diferença entre agência de marketing e estúdio criativo para a saúde?",
-      "a": "Agência genérica entrega volume de post e relatório de vaidade. A Nold é estúdio criativo founder-led: método, prova e foco em paciente particular de verdade. Não somos agência de social media, não somos freela sumido, não somos fábrica de post. Construímos marca e captação com processo."
-    },
-    {
-      "q": "Como atrair paciente particular de alto valor (high-ticket) para a clínica?",
-      "a": "Paciente high-ticket chega por percepção de valor, não por preço baixo. Você constrói uma marca que comunica referência, produz conteúdo que prova domínio no procedimento e usa captação ativa para levar o paciente certo do perfil ao agendamento. Dependendo do procedimento, um único paciente de ortognática, protocolo ou lente pode pagar o investimento inteiro."
+      "q": "Como a gente começa?",
+      "a": "Com uma conversa. Entendemos sua clínica e indicamos a frente certa."
     }
   ],
-  "historia": "A Nold nasceu do encontro entre o novo e o velho: tecnologia e IA de um lado, bom gosto e refino de ofício do outro. Somos um estúdio criativo founder-led em São Paulo, movido a velocidade e refino. Não somos agência, não somos freela. Construímos e escalamos marcas que não aceitam o genérico. No universo de odontologia e medicina, encontramos doutores com trabalho clínico impecável e marca que não comunicava nada disso. Passamos a produzir conteúdo educativo de procedimento, de siso a ortognática, de lentes a lipo de papada, sempre dentro do que o CFM e o CFO permitem, e a construir autoridade que vira paciente particular. Clínica LK, com cerca de R$ 40 mil em um fechamento, Marcelo Tavares e Biliart são parte dessa história. Conhecemos a cadeira, o paciente e a decisão de compra dele.",
   "ctaFinal": {
     "headline": "Seu negócio merece ser inevitável.",
-    "sub": "O diagnóstico é rápido e mostra exatamente o que trava a captação da sua clínica hoje. Sem custo para descobrir. Você opera, nós construímos e escalamos. Para doutores e clínicas de odontologia e medicina que faturam acima de R$ 100 mil por mês. Agende a sua aplicação."
-  }
+    "sub": "Seu trabalho já é excelente. Vamos conversar sobre a sua marca."
+  },
+  "beats": [
+    "O talento é seu. A presença, a gente constrói junto.",
+    "O paciente certo não se convence. Ele reconhece.",
+    "Refino não se explica. Se sente."
+  ]
 }

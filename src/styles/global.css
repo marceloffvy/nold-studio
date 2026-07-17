@@ -1067,3 +1067,7 @@ html { scroll-behavior: smooth; }
 .lp-story { max-width: 780px; text-align: center; }
 .lp-story .eyebrow { display: inline-flex; margin-bottom: 1.4rem; }
 .lp-story__text { font-family: var(--font-title); font-size: clamp(1.25rem, 2.1vw, 1.7rem); line-height: 1.35; color: var(--text); }
+
+/* Beat — frase-ideia evocativa (divisor Draper) */
+.beat { text-align: center; max-width: 920px; }
+.beat__line { font-family: var(--font-title); font-style: italic; font-size: clamp(1.6rem, 4vw, 3.2rem); line-height: 1.16; letter-spacing: -0.01em; color: var(--text); }

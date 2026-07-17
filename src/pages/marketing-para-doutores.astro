@@ -5,7 +5,7 @@ import deck from "../data/doutores.json";
 const email = "marcelomelo.nold@gmail.com";
 const whatsapp = "5511996465055";
 const waText = encodeURIComponent(
-  "Olá! Vim pela página para doutores da Nold e quero falar com um especialista sobre a minha clínica.",
+  "Olá! Vim pela página para doutores da Nold e quero conversar sobre a minha marca.",
 );
 const waLink = `https://wa.me/${whatsapp}?text=${waText}`;
 const instagram = "https://instagram.com/nold.studio";
@@ -16,27 +16,40 @@ const segmentos = [
   "Startups", "Tecnologia", "Logística", "Consultoria",
   "Infoproduto", "Educação", "Institutos", "Outro",
 ];
+const clientes = ["Clínica LK", "Marcelo Tavares", "Biliart", "Odontogon", "Hospitalar"];
 
-// Headline com a palavra de ênfase em itálico
-const heroTitle = deck.hero.headline.replace(
-  deck.hero.headlineEmphasis,
-  `<em>${deck.hero.headlineEmphasis}</em>`,
-);
+// Assets reais (mesmos da home)
+const brandingWork = [
+  { name: "MaxFocos", video: "/videos/branding/maxfocos.mp4" },
+  { name: "Biliart", video: "/videos/branding/biliart.mp4" },
+  { name: "Biva", video: "/videos/branding/biva.mp4" },
+  { name: "Dela Bella", video: "/videos/branding/delabela.mp4" },
+  { name: "Kaju", video: "/videos/branding/kaju.mp4" },
+];
+const reels = [
+  { cat: "Odontologia", file: "b27" }, { cat: "Bastidor", file: "b49" },
+  { cat: "Relato", file: "b50" }, { cat: "Educativo", file: "b65" },
+  { cat: "Depoimento", file: "depoimento" }, { cat: "Educativo", file: "id32" },
+  { cat: "Educativo", file: "lk18" }, { cat: "Educativo", file: "m55" },
+  { cat: "Estética", file: "m57" }, { cat: "Educativo", file: "m76" },
+  { cat: "Depoimento", file: "mt06" }, { cat: "Depoimento", file: "mt10" },
+];
+const perf = [
+  { name: "MaxFocos", video: "/videos/campanhas/maxfocos.mp4" },
+  { name: "Clínica LK", video: "/videos/campanhas/lk.mp4" },
+  { name: "Biva", video: "/videos/campanhas/biva.mp4" },
+];
 
-// Schema FAQPage (GEO/SEO)
+const heroTitle = `${deck.hero.headline}<br /><em>${deck.hero.headlineEmphasis}</em>`;
+const linhaOf = (nome) => (deck.entregas.find((e) => e.titulo === nome) || {}).linha || "";
+
 const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: deck.faq.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
+  "@context": "https://schema.org", "@type": "FAQPage",
+  mainEntity: deck.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
 };
 const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Marketing, branding e performance para médicos e dentistas",
+  "@context": "https://schema.org", "@type": "Service",
+  serviceType: "Branding, conteúdo e performance para médicos e dentistas",
   provider: { "@type": "Organization", name: "Nold Studio Criativo", areaServed: "BR" },
   audience: { "@type": "Audience", audienceType: "Médicos, dentistas e clínicas de odontologia e medicina" },
 };
@@ -50,7 +63,6 @@ const serviceSchema = {
         <img class="logo-morph__word" src="/brand/wordmark-nold.png" width="320" height="167" alt="nold" />
         <img class="logo-morph__icon" src="/brand/symbol-pixel.png" width="200" height="200" alt="" aria-hidden="true" />
       </a>
-
       <div class="meta" data-nav-meta>
         <span class="meta__pair">São Paulo <b data-clock>--:--</b></span>
         <button class="copy-btn" type="button" data-copy={email} aria-label="Copiar e-mail">
@@ -60,7 +72,6 @@ const serviceSchema = {
           </svg>
         </button>
       </div>
-
       <div class="nav-wrap" data-nav>
         <nav class="nav-pill" aria-label="Navegação principal">
           <a href="/">Início</a>
@@ -79,7 +90,7 @@ const serviceSchema = {
     <section class="lp-hero container">
       <p class="eyebrow">{deck.hero.eyebrow}</p>
       <h1 class="lp-hero__title" set:html={heroTitle}></h1>
-      <p class="lp-hero__sub">{deck.hero.subhead}</p>
+      <p class="lp-hero__sub">{deck.hero.sub}</p>
       <p class="lp-hero__icp">{deck.hero.icp}</p>
       <div class="cta-duo lp-hero__cta">
         <a class="btn btn--primary btn--lg" href="#contato">Começar um projeto</a>
@@ -87,87 +98,132 @@ const serviceSchema = {
       </div>
     </section>
 
-    <!-- ======================= O QUE RESOLVEMOS ======================= -->
-    <section class="section container">
-      <header class="sec-head">
-        <p class="eyebrow">O que resolvemos</p>
-        <h2 class="sec-head__title">Da competência clínica ao <em>paciente certo</em>.</h2>
-      </header>
-      <div class="deliver-grid">
-        {
-          deck.entregas.map((e, i) => (
-            <article class="deliver" data-tilt>
-              <span class="deliver__idx">{String(i + 1).padStart(2, "0")}</span>
-              <h3 class="deliver__title">{e.titulo}</h3>
-              <p class="deliver__desc">{e.descricao}</p>
+    <!-- ============ COLAGEM DE ASSETS (asset-forward) ============ -->
+    <section class="collage-wrap" id="trabalho">
+      <div class="collage">
+        <div class="mcol">
+          <article class="tile tile--sq" data-tilt>
+            <video src="/videos/nold-entregas.mp4" autoplay loop muted playsinline preload="metadata"></video>
+            <span class="tile__tag">Nold · Entregas</span>
+          </article>
+          <div class="pair">
+            <article class="tile tile--sq" data-tilt>
+              <video src="/videos/branding/kaju.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <span class="tile__tag">Branding</span>
             </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- ====================== PRA QUEM É / NÃO É ====================== -->
-    <section class="section container">
-      <header class="sec-head">
-        <p class="eyebrow">Pra quem é</p>
-        <h2 class="sec-head__title">A gente não é pra todo mundo. <em>De propósito.</em></h2>
-        <p class="sec-head__sub">{deck.icp.faturamentoLine}</p>
-      </header>
-      <div class="fit">
-        <div class="fit__col fit__col--yes">
-          <h3>É pra você se…</h3>
-          <ul class="fit__list">
-            {deck.icp.paraQuemE.map((x) => <li>{x}</li>)}
-          </ul>
-        </div>
-        <div class="fit__col fit__col--no">
-          <h3>Não é pra você se…</h3>
-          <ul class="fit__list">
-            {deck.icp.paraQuemNaoE.map((x) => <li>{x}</li>)}
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== PROBLEMAS DO MERCADO ==================== -->
-    <section class="section container">
-      <header class="sec-head">
-        <p class="eyebrow">O mercado hoje</p>
-        <h2 class="sec-head__title">Três coisas travando a sua <em>agenda particular</em>.</h2>
-      </header>
-      <div class="problems">
-        {
-          deck.problemas.map((p, i) => (
-            <article class="problem">
-              <span class="problem__idx">{String(i + 1).padStart(2, "0")}</span>
-              <h3 class="problem__title">{p.titulo}</h3>
-              <p class="problem__desc">{p.descricao}</p>
+            <article class="tile tile--sq" data-tilt>
+              <video src="/videos/branding/biva.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <span class="tile__tag">Branding</span>
             </article>
-          ))
-        }
+          </div>
+        </div>
+        <div class="mcol mcol--late">
+          <div class="pair">
+            <article class="tile tile--sq" data-tilt>
+              <video src="/videos/branding/maxfocos.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <span class="tile__tag">Branding</span>
+            </article>
+            <article class="tile tile--sq" data-tilt>
+              <video src="/videos/campanhas/maxfocos-verde.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <span class="tile__tag">Performance</span>
+            </article>
+          </div>
+          <div class="pair">
+            <article class="tile tile--v" data-tilt>
+              <video src="/videos/reels/b50.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <span class="tile__tag">Conteúdo</span>
+            </article>
+            <article class="tile tile--v" data-tilt>
+              <video src="/videos/reels/m55.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              <span class="tile__tag">Conteúdo</span>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="trio">
+        <article class="tile tile--sq" data-tilt>
+          <video src="/videos/campanhas/lk-verde.mp4" autoplay loop muted playsinline preload="metadata"></video>
+          <span class="tile__tag">Performance</span>
+        </article>
+        <div class="brand-tile cta-box" data-tilt>
+          <a class="cta-box__item cta-box__item--wa" href={waLink} target="_blank" rel="noopener">
+            <span class="cta-box__label">Falar com um especialista</span>
+            <span class="cta-box__arw" aria-hidden="true">→</span>
+          </a>
+          <a class="cta-box__item cta-box__item--form" href="#contato">
+            <span class="cta-box__label">Começar um projeto</span>
+            <span class="cta-box__arw" aria-hidden="true">↓</span>
+          </a>
+        </div>
+        <div class="trio-copy">
+          <p class="trio-copy__lead">{deck.beats[0]}</p>
+          <a class="trio-copy__link" href="#metodo">Ver o método <span aria-hidden="true">↓</span></a>
+        </div>
       </div>
     </section>
 
-    <!-- ========================= O MÉTODO ========================= -->
+    <!-- ========================= CLIENTES ========================= -->
+    <section class="section container clients">
+      <p class="eyebrow clients__label">Doutores que já são referência</p>
+      <div class="marquee" aria-label="Clientes">
+        <div class="marquee__track">
+          <div class="marquee__group">{clientes.map((c) => <span class="client-ph">{c}</span>)}</div>
+          <div class="marquee__group" aria-hidden="true">{clientes.map((c) => <span class="client-ph">{c}</span>)}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MÉTODO (estúdio verde) ================= -->
     <section id="metodo">
       <div class="studio">
         <p class="studio__statement">{deck.metodo.intro}</p>
 
-        {
-          deck.metodo.frentes.map((f) => (
-            <div class="service">
-              <span class="service__ghost" aria-hidden="true">{f.nome.toLowerCase()}</span>
-              <div class="service__body">
-                <p class="service__text">
-                  <em class="service__name">{f.nome}</em> — {f.promessa}
-                </p>
-                <ul class="frente-bullets">
-                  {f.bullets.map((b) => <li>{b}</li>)}
-                </ul>
-              </div>
+        <div class="service">
+          <span class="service__ghost" aria-hidden="true">branding</span>
+          <div class="service__body">
+            <p class="service__text"><em class="service__name">Branding</em> — {linhaOf("Branding")}</p>
+            <div class="service__work service__work--b">
+              {brandingWork.map((b) => (
+                <article class="tile tile--sq">
+                  <video src={b.video} autoplay loop muted playsinline preload="metadata" />
+                  <span class="tile__tag">{b.name}</span>
+                </article>
+              ))}
             </div>
-          ))
-        }
+          </div>
+        </div>
+
+        <div class="service" id="conteudo">
+          <span class="service__ghost" aria-hidden="true">conteúdo</span>
+          <div class="service__body">
+            <p class="service__text"><em class="service__name">Conteúdo</em> — {linhaOf("Conteúdo")}</p>
+            <p class="reels-hint">Arraste para o lado · clique para assistir com som →</p>
+            <div class="reels-strip reels-strip--in" data-reels>
+              {reels.map((r) => (
+                <button class="reel-card" data-reel={`/videos/reels/${r.file}.mp4`} aria-label="Assistir">
+                  <img class="reel-card__poster" src={`/videos/posters/${r.file}.jpg`} width="540" height="960" loading="lazy" alt="" />
+                  <span class="reel-card__play" aria-hidden="true">▶</span>
+                  <span class="tile__tag">{r.cat}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="service">
+          <span class="service__ghost" aria-hidden="true">performance</span>
+          <div class="service__body">
+            <p class="service__text"><em class="service__name">Performance</em> — {linhaOf("Performance")}</p>
+            <div class="service__work service__work--p">
+              {perf.map((p) => (
+                <article class="tile tile--sq">
+                  <video src={p.video} autoplay loop muted playsinline preload="metadata" />
+                  <span class="tile__tag">{p.name}</span>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
 
         <p class="studio__note">{deck.metodo.pacoteNote}</p>
         <div class="cta-duo">
@@ -177,72 +233,62 @@ const serviceSchema = {
       </div>
     </section>
 
+    <!-- ====================== PRA QUEM É ====================== -->
+    <section class="section container">
+      <header class="sec-head">
+        <p class="eyebrow">Pra quem é</p>
+        <h2 class="sec-head__title">Feito para <em>doutores de excelência</em>.</h2>
+        <p class="sec-head__sub">{deck.fit.faturamentoLine}</p>
+      </header>
+      <div class="fit">
+        <div class="fit__col fit__col--yes">
+          <h3>É pra você</h3>
+          <ul class="fit__list">{deck.fit.paraQuemE.map((x) => <li>{x}</li>)}</ul>
+        </div>
+        <div class="fit__col fit__col--no">
+          <h3>Não é pra você</h3>
+          <ul class="fit__list">{deck.fit.paraQuemNaoE.map((x) => <li>{x}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+
     <!-- =========================== CASES =========================== -->
     <section class="section container">
       <header class="sec-head">
         <p class="eyebrow">Prova</p>
-        <h2 class="sec-head__title">Resultado real, não <em>promessa</em>.</h2>
+        <h2 class="sec-head__title">O trabalho fala. A marca <em>amplifica</em>.</h2>
       </header>
       <div class="cases">
-        {
-          deck.cases.map((c, i) => (
-            <div class="case case--static">
-              <span class="case__idx">{String(i + 1).padStart(2, "0")}</span>
-              <span class="case__title">{c.cliente}</span>
-              <span class="case__client">{c.segmento}</span>
-              <span class="case__right">
-                {c.resultado && <span class="case__result">{c.resultado}</span>}
-              </span>
-            </div>
-          ))
-        }
+        {deck.cases.map((c, i) => (
+          <div class="case case--static">
+            <span class="case__idx">{String(i + 1).padStart(2, "0")}</span>
+            <span class="case__title">{c.cliente}</span>
+            <span class="case__client">{c.segmento}</span>
+            <span class="case__right">{c.resultado && <span class="case__result">{c.resultado}</span>}</span>
+          </div>
+        ))}
       </div>
     </section>
 
-    <!-- ======================= DEPOIMENTOS ======================= -->
-    <section class="section container">
-      <header class="sec-head">
-        <p class="eyebrow">Quem já é inevitável</p>
-        <h2 class="sec-head__title">A marca no nível do <em>trabalho</em>.</h2>
-        <p class="sec-head__sub">Depoimentos ilustrativos — a serem substituídos pelos reais dos nossos doutores.</p>
-      </header>
-      <div class="quotes">
-        {
-          deck.depoimentos.map((d) => (
-            <figure class="quote">
-              <blockquote>{d.quote}</blockquote>
-              <figcaption>
-                <b>{d.autor}</b>
-                <span>{d.contexto}</span>
-              </figcaption>
-            </figure>
-          ))
-        }
-      </div>
+    <!-- ========================= BEAT ========================= -->
+    <section class="section container beat">
+      <p class="beat__line">{deck.beats[2]}</p>
     </section>
 
     <!-- ============================ FAQ ============================ -->
     <section class="section container">
       <header class="sec-head">
         <p class="eyebrow">Perguntas frequentes</p>
-        <h2 class="sec-head__title">O que os doutores <em>perguntam</em>.</h2>
+        <h2 class="sec-head__title">Direto ao <em>ponto</em>.</h2>
       </header>
       <div class="faq">
-        {
-          deck.faq.map((f) => (
-            <details class="faq__item">
-              <summary>{f.q}<span class="faq__mark" aria-hidden="true"></span></summary>
-              <div class="faq__a"><p>{f.a}</p></div>
-            </details>
-          ))
-        }
+        {deck.faq.map((f) => (
+          <details class="faq__item">
+            <summary>{f.q}<span class="faq__mark" aria-hidden="true"></span></summary>
+            <div class="faq__a"><p>{f.a}</p></div>
+          </details>
+        ))}
       </div>
-    </section>
-
-    <!-- ========================= HISTÓRIA ========================= -->
-    <section class="section container lp-story">
-      <p class="eyebrow">Nossa história</p>
-      <p class="lp-story__text">{deck.historia}</p>
     </section>
 
     <!-- ==================== CTA FINAL + FORM ==================== -->
@@ -256,7 +302,6 @@ const serviceSchema = {
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="Origem" value="LP marketing-para-doutores" />
         <input type="text" name="_honey" class="lead-form__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
         <div class="lead-form__grid">
           <label class="field"><span>Nome</span><input type="text" name="Nome" required placeholder="Seu nome" /></label>
           <label class="field"><span>Clínica / Empresa</span><input type="text" name="Empresa" required placeholder="Nome da clínica" /></label>
@@ -275,7 +320,6 @@ const serviceSchema = {
             <textarea name="Mensagem" rows="4" required placeholder="Conte rapidamente o seu momento e o seu objetivo."></textarea>
           </label>
         </div>
-
         <div class="lead-form__foot">
           <button type="submit" class="btn btn--primary btn--lg">Quero ser inevitável →</button>
           <p class="lead-form__status" data-lead-status aria-live="polite"></p>
@@ -301,9 +345,7 @@ const serviceSchema = {
         </div>
         <div class="footer__col">
           <h4>Social</h4>
-          <ul>
-            <li><a href={instagram} target="_blank" rel="noopener">Instagram ↗</a></li>
-          </ul>
+          <ul><li><a href={instagram} target="_blank" rel="noopener">Instagram ↗</a></li></ul>
         </div>
       </div>
       <div class="footer__bottom">
@@ -313,7 +355,12 @@ const serviceSchema = {
     </div>
   </footer>
 
-  <!-- ===================== CURSOR (bolinha) ===================== -->
+  <!-- ========================= LIGHTBOX ========================= -->
+  <div class="lightbox" data-lightbox hidden>
+    <button class="lightbox__close" data-lb-close aria-label="Fechar">✕</button>
+    <video class="lightbox__video" data-lb-video controls playsinline></video>
+  </div>
+
   <div class="cursor" data-cursor aria-hidden="true"></div>
 
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
@@ -321,12 +368,10 @@ const serviceSchema = {
 </Layout>
 
 <script>
-  // Relógio de São Paulo
   const fmt = new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
   function tick() { document.querySelectorAll("[data-clock]").forEach((el) => (el.textContent = fmt.format(new Date()))); }
   tick(); setInterval(tick, 15000);
 
-  // Copiar e-mail
   document.querySelectorAll("[data-copy]").forEach((btn) => {
     btn.addEventListener("click", async () => {
       try {
@@ -338,7 +383,6 @@ const serviceSchema = {
     });
   });
 
-  // Topbar: colapsa no scroll
   const topbar = document.querySelector("[data-topbar]");
   const navWrap = document.querySelector("[data-nav]");
   const navToggle = document.querySelector("[data-nav-toggle]");
@@ -349,7 +393,6 @@ const serviceSchema = {
   document.addEventListener("click", (e) => { if (navWrap && !navWrap.contains(e.target)) closeNav(); });
   window.addEventListener("scroll", onNavScroll, { passive: true }); onNavScroll();
 
-  // Cursor bolinha + tilt 3D (ponteiro fino, respeita reduced-motion)
   const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
   const noReduce = !matchMedia("(prefers-reduced-motion: reduce)").matches;
   const cursor = document.querySelector("[data-cursor]");
@@ -358,7 +401,7 @@ const serviceSchema = {
     let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y;
     addEventListener("pointermove", (e) => { x = e.clientX; y = e.clientY; }, { passive: true });
     (function loop() { cx += (x - cx) * 0.22; cy += (y - cy) * 0.22; cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; requestAnimationFrame(loop); })();
-    document.querySelectorAll("a, button, .deliver, input, select, textarea").forEach((el) => {
+    document.querySelectorAll("a, button, .tile, .reel-card, input, select, textarea").forEach((el) => {
       el.addEventListener("pointerenter", () => cursor.classList.add("is-hover"));
       el.addEventListener("pointerleave", () => cursor.classList.remove("is-hover"));
     });
@@ -369,19 +412,25 @@ const serviceSchema = {
       card.addEventListener("pointerenter", () => (card.style.transition = "transform 0.12s linear, box-shadow 0.3s var(--ease)"));
       card.addEventListener("pointermove", (e) => {
         const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
+        const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
         card.style.transform = `perspective(900px) rotateX(${(-py * MAX).toFixed(2)}deg) rotateY(${(px * MAX).toFixed(2)}deg) scale(1.02)`;
         card.classList.add("is-tilting");
       });
-      card.addEventListener("pointerleave", () => {
-        card.style.transition = "transform 0.55s var(--ease), box-shadow 0.55s var(--ease)";
-        card.style.transform = ""; card.classList.remove("is-tilting");
-      });
+      card.addEventListener("pointerleave", () => { card.style.transition = "transform 0.55s var(--ease), box-shadow 0.55s var(--ease)"; card.style.transform = ""; card.classList.remove("is-tilting"); });
     });
   }
 
-  // Formulário de lead → FormSubmit (AJAX)
+  // Lightbox dos reels
+  const lb = document.querySelector("[data-lightbox]");
+  const lbVideo = document.querySelector("[data-lb-video]");
+  function openLB(src) { if (!lb || !lbVideo) return; lbVideo.src = src; lb.hidden = false; document.body.style.overflow = "hidden"; lbVideo.play().catch(() => {}); }
+  function closeLB() { if (!lb || !lbVideo) return; lbVideo.pause(); lbVideo.removeAttribute("src"); lbVideo.load(); lb.hidden = true; document.body.style.overflow = ""; }
+  document.querySelectorAll("[data-reel]").forEach((b) => b.addEventListener("click", () => openLB(b.getAttribute("data-reel"))));
+  document.querySelector("[data-lb-close]")?.addEventListener("click", closeLB);
+  lb?.addEventListener("click", (e) => { if (e.target === lb) closeLB(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && lb && !lb.hidden) closeLB(); });
+
+  // Formulário → FormSubmit (AJAX)
   const leadForm = document.querySelector("[data-lead]");
   if (leadForm) {
     const status = leadForm.querySelector("[data-lead-status]");
