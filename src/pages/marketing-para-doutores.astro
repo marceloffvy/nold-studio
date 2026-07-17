@@ -1,0 +1,406 @@
+---
+import Layout from "../layouts/Layout.astro";
+import deck from "../data/doutores.json";
+
+const email = "marcelomelo.nold@gmail.com";
+const whatsapp = "5511996465055";
+const waText = encodeURIComponent(
+  "Olá! Vim pela página para doutores da Nold e quero falar com um especialista sobre a minha clínica.",
+);
+const waLink = `https://wa.me/${whatsapp}?text=${waText}`;
+const instagram = "https://instagram.com/nold.studio";
+
+const segmentos = [
+  "Odontologia", "Medicina", "Estética & Beleza", "Saúde",
+  "Advocacia", "Engenharia", "Construção civil", "Imobiliário & Incorporação",
+  "Startups", "Tecnologia", "Logística", "Consultoria",
+  "Infoproduto", "Educação", "Institutos", "Outro",
+];
+
+// Headline com a palavra de ênfase em itálico
+const heroTitle = deck.hero.headline.replace(
+  deck.hero.headlineEmphasis,
+  `<em>${deck.hero.headlineEmphasis}</em>`,
+);
+
+// Schema FAQPage (GEO/SEO)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: deck.faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Marketing, branding e performance para médicos e dentistas",
+  provider: { "@type": "Organization", name: "Nold Studio Criativo", areaServed: "BR" },
+  audience: { "@type": "Audience", audienceType: "Médicos, dentistas e clínicas de odontologia e medicina" },
+};
+---
+
+<Layout title={deck.seo.title} description={deck.seo.metaDescription} bodyClass="theme-v02">
+  <!-- ============================ TOPBAR ============================ -->
+  <header class="topbar" data-topbar>
+    <div class="container topbar__inner">
+      <a href="/" class="logo-morph" aria-label="Nold — início">
+        <img class="logo-morph__word" src="/brand/wordmark-nold.png" width="320" height="167" alt="nold" />
+        <img class="logo-morph__icon" src="/brand/symbol-pixel.png" width="200" height="200" alt="" aria-hidden="true" />
+      </a>
+
+      <div class="meta" data-nav-meta>
+        <span class="meta__pair">São Paulo <b data-clock>--:--</b></span>
+        <button class="copy-btn" type="button" data-copy={email} aria-label="Copiar e-mail">
+          <span data-copy-label>{email}</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="nav-wrap" data-nav>
+        <nav class="nav-pill" aria-label="Navegação principal">
+          <a href="/">Início</a>
+          <a href="#metodo">Método</a>
+          <a href={waLink} target="_blank" rel="noopener" class="hi">Olá! <span aria-hidden="true">💬</span></a>
+        </nav>
+        <button class="nav-burger" type="button" data-nav-toggle aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================ HERO ============================ -->
+    <section class="lp-hero container">
+      <p class="eyebrow">{deck.hero.eyebrow}</p>
+      <h1 class="lp-hero__title" set:html={heroTitle}></h1>
+      <p class="lp-hero__sub">{deck.hero.subhead}</p>
+      <p class="lp-hero__icp">{deck.hero.icp}</p>
+      <div class="cta-duo lp-hero__cta">
+        <a class="btn btn--primary btn--lg" href="#contato">Começar um projeto</a>
+        <a class="btn btn--ghost btn--lg" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
+      </div>
+    </section>
+
+    <!-- ======================= O QUE RESOLVEMOS ======================= -->
+    <section class="section container">
+      <header class="sec-head">
+        <p class="eyebrow">O que resolvemos</p>
+        <h2 class="sec-head__title">Da competência clínica ao <em>paciente certo</em>.</h2>
+      </header>
+      <div class="deliver-grid">
+        {
+          deck.entregas.map((e, i) => (
+            <article class="deliver" data-tilt>
+              <span class="deliver__idx">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="deliver__title">{e.titulo}</h3>
+              <p class="deliver__desc">{e.descricao}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ====================== PRA QUEM É / NÃO É ====================== -->
+    <section class="section container">
+      <header class="sec-head">
+        <p class="eyebrow">Pra quem é</p>
+        <h2 class="sec-head__title">A gente não é pra todo mundo. <em>De propósito.</em></h2>
+        <p class="sec-head__sub">{deck.icp.faturamentoLine}</p>
+      </header>
+      <div class="fit">
+        <div class="fit__col fit__col--yes">
+          <h3>É pra você se…</h3>
+          <ul class="fit__list">
+            {deck.icp.paraQuemE.map((x) => <li>{x}</li>)}
+          </ul>
+        </div>
+        <div class="fit__col fit__col--no">
+          <h3>Não é pra você se…</h3>
+          <ul class="fit__list">
+            {deck.icp.paraQuemNaoE.map((x) => <li>{x}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROBLEMAS DO MERCADO ==================== -->
+    <section class="section container">
+      <header class="sec-head">
+        <p class="eyebrow">O mercado hoje</p>
+        <h2 class="sec-head__title">Três coisas travando a sua <em>agenda particular</em>.</h2>
+      </header>
+      <div class="problems">
+        {
+          deck.problemas.map((p, i) => (
+            <article class="problem">
+              <span class="problem__idx">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="problem__title">{p.titulo}</h3>
+              <p class="problem__desc">{p.descricao}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ========================= O MÉTODO ========================= -->
+    <section id="metodo">
+      <div class="studio">
+        <p class="studio__statement">{deck.metodo.intro}</p>
+
+        {
+          deck.metodo.frentes.map((f) => (
+            <div class="service">
+              <span class="service__ghost" aria-hidden="true">{f.nome.toLowerCase()}</span>
+              <div class="service__body">
+                <p class="service__text">
+                  <em class="service__name">{f.nome}</em> — {f.promessa}
+                </p>
+                <ul class="frente-bullets">
+                  {f.bullets.map((b) => <li>{b}</li>)}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+
+        <p class="studio__note">{deck.metodo.pacoteNote}</p>
+        <div class="cta-duo">
+          <a class="btn btn--primary btn--lg" href="#contato">Começar um projeto</a>
+          <a class="btn btn--ghost btn--lg" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== CASES =========================== -->
+    <section class="section container">
+      <header class="sec-head">
+        <p class="eyebrow">Prova</p>
+        <h2 class="sec-head__title">Resultado real, não <em>promessa</em>.</h2>
+      </header>
+      <div class="cases">
+        {
+          deck.cases.map((c, i) => (
+            <div class="case case--static">
+              <span class="case__idx">{String(i + 1).padStart(2, "0")}</span>
+              <span class="case__title">{c.cliente}</span>
+              <span class="case__client">{c.segmento}</span>
+              <span class="case__right">
+                {c.resultado && <span class="case__result">{c.resultado}</span>}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ======================= DEPOIMENTOS ======================= -->
+    <section class="section container">
+      <header class="sec-head">
+        <p class="eyebrow">Quem já é inevitável</p>
+        <h2 class="sec-head__title">A marca no nível do <em>trabalho</em>.</h2>
+        <p class="sec-head__sub">Depoimentos ilustrativos — a serem substituídos pelos reais dos nossos doutores.</p>
+      </header>
+      <div class="quotes">
+        {
+          deck.depoimentos.map((d) => (
+            <figure class="quote">
+              <blockquote>{d.quote}</blockquote>
+              <figcaption>
+                <b>{d.autor}</b>
+                <span>{d.contexto}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ============================ FAQ ============================ -->
+    <section class="section container">
+      <header class="sec-head">
+        <p class="eyebrow">Perguntas frequentes</p>
+        <h2 class="sec-head__title">O que os doutores <em>perguntam</em>.</h2>
+      </header>
+      <div class="faq">
+        {
+          deck.faq.map((f) => (
+            <details class="faq__item">
+              <summary>{f.q}<span class="faq__mark" aria-hidden="true"></span></summary>
+              <div class="faq__a"><p>{f.a}</p></div>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ========================= HISTÓRIA ========================= -->
+    <section class="section container lp-story">
+      <p class="eyebrow">Nossa história</p>
+      <p class="lp-story__text">{deck.historia}</p>
+    </section>
+
+    <!-- ==================== CTA FINAL + FORM ==================== -->
+    <section class="section container cta" id="contato">
+      <h2 class="cta__title" set:html={deck.ctaFinal.headline.replace("inevitável", "<em>inevitável</em>")}></h2>
+      <p class="cta__lead">{deck.ctaFinal.sub}</p>
+
+      <form class="lead-form" data-lead data-email={email} action={`https://formsubmit.co/${email}`} method="POST">
+        <input type="hidden" name="_subject" value="Novo lead — Doutores (site Nold) 🩺" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="Origem" value="LP marketing-para-doutores" />
+        <input type="text" name="_honey" class="lead-form__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="lead-form__grid">
+          <label class="field"><span>Nome</span><input type="text" name="Nome" required placeholder="Seu nome" /></label>
+          <label class="field"><span>Clínica / Empresa</span><input type="text" name="Empresa" required placeholder="Nome da clínica" /></label>
+          <label class="field"><span>Instagram</span><input type="text" name="Instagram" placeholder="@suaclinica" /></label>
+          <label class="field"><span>WhatsApp</span><input type="tel" name="WhatsApp" required placeholder="(11) 99999-9999" /></label>
+          <label class="field"><span>E-mail</span><input type="email" name="E-mail" required placeholder="voce@clinica.com" /></label>
+          <label class="field">
+            <span>Segmento</span>
+            <select name="Segmento" required>
+              <option value="" disabled selected>Selecione</option>
+              {segmentos.map((s) => <option value={s}>{s}</option>)}
+            </select>
+          </label>
+          <label class="field field--full">
+            <span>Onde está o problema e o que você deseja?</span>
+            <textarea name="Mensagem" rows="4" required placeholder="Conte rapidamente o seu momento e o seu objetivo."></textarea>
+          </label>
+        </div>
+
+        <div class="lead-form__foot">
+          <button type="submit" class="btn btn--primary btn--lg">Quero ser inevitável →</button>
+          <p class="lead-form__status" data-lead-status aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img class="footer__logo" src="/brand/wordmark-lockup.png" width="600" height="395" alt="nold — studio criativo" />
+        </div>
+        <div class="footer__col">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="/">Início</a></li>
+            <li><a href="#metodo">Método</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Social</h4>
+          <ul>
+            <li><a href={instagram} target="_blank" rel="noopener">Instagram ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Nold Studio</span>
+        <span>Beleza estratégica</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== CURSOR (bolinha) ===================== -->
+  <div class="cursor" data-cursor aria-hidden="true"></div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+</Layout>
+
+<script>
+  // Relógio de São Paulo
+  const fmt = new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
+  function tick() { document.querySelectorAll("[data-clock]").forEach((el) => (el.textContent = fmt.format(new Date()))); }
+  tick(); setInterval(tick, 15000);
+
+  // Copiar e-mail
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(btn.getAttribute("data-copy"));
+        const label = btn.querySelector("[data-copy-label]") || btn;
+        const old = label.textContent; label.textContent = "copiado ✓";
+        setTimeout(() => (label.textContent = old), 1400);
+      } catch (e) {}
+    });
+  });
+
+  // Topbar: colapsa no scroll
+  const topbar = document.querySelector("[data-topbar]");
+  const navWrap = document.querySelector("[data-nav]");
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  function closeNav() { navWrap?.classList.remove("is-open"); navToggle?.setAttribute("aria-expanded", "false"); }
+  function onNavScroll() { if (!topbar) return; const s = window.scrollY > 40; topbar.classList.toggle("is-scrolled", s); if (!s) closeNav(); }
+  navToggle?.addEventListener("click", (e) => { e.stopPropagation(); const o = navWrap.classList.toggle("is-open"); navToggle.setAttribute("aria-expanded", String(o)); });
+  navWrap?.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
+  document.addEventListener("click", (e) => { if (navWrap && !navWrap.contains(e.target)) closeNav(); });
+  window.addEventListener("scroll", onNavScroll, { passive: true }); onNavScroll();
+
+  // Cursor bolinha + tilt 3D (ponteiro fino, respeita reduced-motion)
+  const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const noReduce = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cursor = document.querySelector("[data-cursor]");
+  if (cursor && fine) {
+    document.documentElement.classList.add("has-cursor");
+    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y;
+    addEventListener("pointermove", (e) => { x = e.clientX; y = e.clientY; }, { passive: true });
+    (function loop() { cx += (x - cx) * 0.22; cy += (y - cy) * 0.22; cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; requestAnimationFrame(loop); })();
+    document.querySelectorAll("a, button, .deliver, input, select, textarea").forEach((el) => {
+      el.addEventListener("pointerenter", () => cursor.classList.add("is-hover"));
+      el.addEventListener("pointerleave", () => cursor.classList.remove("is-hover"));
+    });
+  }
+  if (fine && noReduce) {
+    const MAX = 8;
+    document.querySelectorAll("[data-tilt]").forEach((card) => {
+      card.addEventListener("pointerenter", () => (card.style.transition = "transform 0.12s linear, box-shadow 0.3s var(--ease)"));
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateX(${(-py * MAX).toFixed(2)}deg) rotateY(${(px * MAX).toFixed(2)}deg) scale(1.02)`;
+        card.classList.add("is-tilting");
+      });
+      card.addEventListener("pointerleave", () => {
+        card.style.transition = "transform 0.55s var(--ease), box-shadow 0.55s var(--ease)";
+        card.style.transform = ""; card.classList.remove("is-tilting");
+      });
+    });
+  }
+
+  // Formulário de lead → FormSubmit (AJAX)
+  const leadForm = document.querySelector("[data-lead]");
+  if (leadForm) {
+    const status = leadForm.querySelector("[data-lead-status]");
+    const btn = leadForm.querySelector('button[type="submit"]');
+    leadForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (leadForm.querySelector('[name="_honey"]').value) return;
+      const original = btn.textContent; btn.disabled = true; btn.textContent = "Enviando…";
+      status.classList.remove("is-error"); status.textContent = "";
+      try {
+        const res = await fetch("https://formsubmit.co/ajax/" + leadForm.dataset.email, {
+          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(Object.fromEntries(new FormData(leadForm))),
+        });
+        const data = await res.json();
+        if (String(data.success) === "true") { leadForm.reset(); status.textContent = "Recebido! A gente te retorna em breve. 🚀"; }
+        else throw new Error();
+      } catch (err) { status.classList.add("is-error"); status.textContent = "Não deu pra enviar agora — tenta pelo WhatsApp?"; }
+      finally { btn.disabled = false; btn.textContent = original; }
+    });
+  }
+</script>

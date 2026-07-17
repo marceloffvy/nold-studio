@@ -982,3 +982,88 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
   height: clamp(2.4rem, 4vw, 3.2rem); width: auto; align-self: flex-start;
   object-fit: contain; display: block;
 }
+
+/* =================================================================
+   PÁGINAS DE NICHO (landing pages por vertical)
+   ================================================================= */
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 92px; }
+
+/* Hero da LP */
+.lp-hero { padding-top: clamp(4rem, 12vh, 8.5rem); padding-bottom: clamp(2.5rem, 6vw, 4.5rem); text-align: center; max-width: 1040px; }
+.lp-hero .eyebrow { display: inline-flex; margin-bottom: 1.4rem; }
+.lp-hero__title { font-family: var(--font-title); font-weight: 400; font-size: clamp(2.1rem, 5.2vw, 4.4rem); line-height: 1.03; letter-spacing: -0.02em; max-width: 22ch; margin-inline: auto; }
+.lp-hero__title em { font-style: italic; }
+.lp-hero__sub { margin: clamp(1.4rem, 3vw, 2rem) auto 0; max-width: 62ch; font-family: var(--font-ui); font-size: clamp(1.02rem, 1.35vw, 1.2rem); line-height: 1.5; color: var(--muted); }
+.lp-hero__icp { margin: 1.2rem auto 0; max-width: 56ch; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+.lp-hero__cta { justify-content: center; margin-top: clamp(2rem, 4vw, 3rem); }
+
+/* O que resolvemos */
+.deliver-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(12px, 1.5vw, 20px); }
+@media (max-width: 720px) { .deliver-grid { grid-template-columns: 1fr; } }
+.deliver { position: relative; padding: clamp(1.4rem, 2.5vw, 2.2rem); border-radius: var(--r-lg); background: var(--cru); box-shadow: 0 0 0 1px var(--line); transform-origin: center; transition: transform 0.55s var(--ease), box-shadow 0.55s var(--ease); }
+.deliver.is-tilting { box-shadow: 0 26px 50px -24px rgba(5, 30, 22, 0.4); z-index: 2; }
+.deliver__idx { font-family: var(--font-mono); font-size: 0.7rem; color: var(--coral); letter-spacing: 0.1em; }
+.deliver__title { font-family: var(--font-title); font-size: clamp(1.3rem, 2.2vw, 1.9rem); line-height: 1.1; margin: 0.5rem 0 0.7rem; }
+.deliver__desc { color: var(--muted); font-size: clamp(0.98rem, 1.2vw, 1.08rem); line-height: 1.5; }
+
+/* Pra quem é / não é */
+.fit { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.5vw, 20px); }
+@media (max-width: 720px) { .fit { grid-template-columns: 1fr; } }
+.fit__col { border-radius: var(--r-lg); padding: clamp(1.6rem, 3vw, 2.6rem); }
+.fit__col--yes { background: var(--green); color: var(--cru); background-image: radial-gradient(rgba(246,246,246,0.09) 1px, transparent 1.5px); background-size: 22px 22px; }
+.fit__col--no { background: var(--cru); box-shadow: 0 0 0 1px var(--line); }
+.fit__col h3 { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.72rem; margin-bottom: 1.3rem; }
+.fit__col--yes h3 { color: rgba(246,242,230,0.7); }
+.fit__col--no h3 { color: var(--faint); }
+.fit__list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+.fit__list li { position: relative; padding-left: 1.8rem; line-height: 1.4; font-size: clamp(0.98rem, 1.2vw, 1.08rem); }
+.fit__list li::before { position: absolute; left: 0; top: 0; font-family: var(--font-mono); font-weight: 500; }
+.fit__col--yes .fit__list li::before { content: "✓"; color: var(--yellow); }
+.fit__col--no .fit__list li { color: var(--muted); }
+.fit__col--no .fit__list li::before { content: "✕"; color: var(--coral); }
+
+/* Problemas do mercado */
+.problems { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.5vw, 20px); }
+@media (max-width: 820px) { .problems { grid-template-columns: 1fr; } }
+.problem { padding: clamp(1.4rem, 2.5vw, 2.2rem); border-radius: var(--r-lg); background: var(--cru); box-shadow: 0 0 0 1px var(--line); }
+.problem__idx { font-family: var(--font-title); font-style: italic; font-size: clamp(2rem, 4vw, 3rem); color: var(--line-2); line-height: 1; }
+.problem__title { font-family: var(--font-title); font-size: clamp(1.2rem, 2vw, 1.6rem); margin: 0.5rem 0 0.7rem; line-height: 1.1; }
+.problem__desc { color: var(--muted); font-size: clamp(0.95rem, 1.15vw, 1.05rem); line-height: 1.5; }
+
+/* Método — bullets das frentes (dentro do estúdio verde) */
+.frente-bullets { list-style: none; margin-top: 1.2rem; display: grid; gap: 0.7rem; max-width: 48ch; }
+.frente-bullets li { position: relative; padding-left: 1.5rem; color: var(--muted); font-family: var(--font-ui); font-size: clamp(0.95rem, 1.15vw, 1.05rem); line-height: 1.45; }
+.frente-bullets li::before { content: "→"; position: absolute; left: 0; color: var(--cru); opacity: 0.45; }
+.studio__note { margin-top: clamp(2rem, 4vw, 3rem); font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.03em; color: var(--muted); }
+.studio .cta-duo { margin-top: clamp(1.4rem, 3vw, 2.2rem); }
+
+.case--static { cursor: default; }
+.cases .case--static:hover { padding-left: 0; }
+
+/* Depoimentos */
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.5vw, 20px); }
+@media (max-width: 820px) { .quotes { grid-template-columns: 1fr; } }
+.quote { padding: clamp(1.4rem, 2.5vw, 2.2rem); border-radius: var(--r-lg); background: var(--green); color: var(--cru); display: flex; flex-direction: column; justify-content: space-between; gap: 1.4rem; }
+.quote blockquote { font-family: var(--font-title); font-style: italic; font-size: clamp(1.15rem, 1.8vw, 1.4rem); line-height: 1.28; }
+.quote figcaption { display: flex; flex-direction: column; gap: 0.2rem; }
+.quote figcaption b { font-family: var(--font-ui); font-weight: 500; font-size: 0.95rem; }
+.quote figcaption span { font-family: var(--font-mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(246,242,230,0.6); }
+
+/* FAQ (acordeão nativo) */
+.faq { max-width: 840px; margin-inline: auto; }
+.faq__item { border-top: 1px solid var(--line); }
+.faq__item:last-child { border-bottom: 1px solid var(--line); }
+.faq__item summary { list-style: none; cursor: pointer; padding: clamp(1.1rem, 2vw, 1.5rem) 0; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; font-family: var(--font-title); font-size: clamp(1.05rem, 1.6vw, 1.35rem); line-height: 1.2; color: var(--text); }
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__mark { position: relative; flex: 0 0 auto; width: 18px; height: 18px; }
+.faq__mark::before, .faq__mark::after { content: ""; position: absolute; background: var(--green); border-radius: 2px; }
+.faq__mark::before { left: 0; top: 8px; width: 18px; height: 2px; }
+.faq__mark::after { left: 8px; top: 0; width: 2px; height: 18px; transition: transform 0.3s var(--ease); }
+.faq__item[open] .faq__mark::after { transform: scaleY(0); }
+.faq__a p { padding-bottom: clamp(1.1rem, 2vw, 1.5rem); max-width: 74ch; color: var(--muted); line-height: 1.55; font-size: clamp(0.98rem, 1.2vw, 1.08rem); }
+
+/* História */
+.lp-story { max-width: 780px; text-align: center; }
+.lp-story .eyebrow { display: inline-flex; margin-bottom: 1.4rem; }
+.lp-story__text { font-family: var(--font-title); font-size: clamp(1.25rem, 2.1vw, 1.7rem); line-height: 1.35; color: var(--text); }
