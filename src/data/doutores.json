@@ -1,55 +1,86 @@
 {
   "seo": {
     "title": "Marketing para médicos e dentistas | Nold",
-    "metaDescription": "Estúdio criativo founder-led para médicos e dentistas que não aceitam o genérico. Branding, conteúdo e tráfego pago com compliance CFM e CFO."
+    "metaDescription": "Estúdio criativo founder-led para médicos e dentistas. Branding, conteúdo e tráfego pago com compliance CFM e CFO. Mais que posts: pacientes que chegam decididos."
   },
   "hero": {
     "eyebrow": "Nold para doutores",
     "headline": "Você já é referência na cadeira.",
     "headlineEmphasis": "Fora dela, poucos sabem.",
-    "sub": "Marca, conteúdo e presença à altura do doutor que você já é.",
+    "sub": "Marca, conteúdo e presença à altura do doutor que você já é. Mais que posts: pacientes que chegam decididos.",
     "icp": "Para clínicas de medicina e odontologia que querem ser a primeira escolha do paciente particular."
   },
+  "redline": {
+    "linha1": "Você cuida dos pacientes.",
+    "linha2": "A gente cuida do seu crescimento.",
+    "sub": "Para doutores que querem mais que posts. Querem resultado, sem precisar virar influenciador."
+  },
+  "crencas": [
+    {
+      "t": "Especialistas em saúde",
+      "d": "A gente não atende todo mundo. Só médico, dentista e clínica. É o que nos deixa afiados no seu mundo, na sua linguagem e nas suas regras."
+    },
+    {
+      "t": "O seu tempo de volta",
+      "d": "Você não precisa aprender a editar vídeo nem virar influenciador. Cuida do paciente. A marca e a presença ficam com a gente."
+    },
+    {
+      "t": "Agenda, não vaidade",
+      "d": "A métrica que importa é paciente na cadeira. Curtida é consequência, nunca o objetivo. A gente constrói para converter."
+    }
+  ],
   "entregas": [
     {
       "titulo": "Branding",
-      "linha": "Sua marca, em movimento."
+      "linha": "Sua marca, em movimento.",
+      "detalhe": "Diagnóstico, identidade visual, narrativa e tom de voz. A base que sustenta todo o resto."
     },
     {
       "titulo": "Conteúdo",
-      "linha": "Educação que vira autoridade."
+      "linha": "Educação que vira autoridade.",
+      "detalhe": "Roteiro, captação e edição. Posts, vídeos e materiais que provam o que você já sabe fazer."
     },
     {
       "titulo": "Performance",
-      "linha": "O paciente certo te encontra primeiro."
+      "linha": "O paciente certo te encontra primeiro.",
+      "detalhe": "Campanhas segmentadas e tráfego qualificado. Presença que vira agenda, não vaidade."
     }
   ],
   "fit": {
+    "faturamentoLine": "Para clínicas que já faturam e querem crescer com refino, não com ruído.",
     "paraQuemE": [
-      "Para o doutor de excelência que quer o paciente particular e está pronto para escalar."
+      "Você é médico ou dentista e já é referência técnica na sua área.",
+      "Sua clínica já fatura e quer crescer com refino, não com volume.",
+      "Você quer o paciente particular certo, não a enxurrada de curioso.",
+      "Você quer uma marca à altura do trabalho que já entrega."
     ],
     "paraQuemNaoE": [
-      "Não é para quem quer o de sempre."
+      "Quer viralizar e virar influenciador.",
+      "Busca promessa de número de pacientes.",
+      "Quer o pacote genérico, igual ao de todo mundo.",
+      "Ainda não tem estrutura para atender mais demanda."
     ],
-    "faturamentoLine": "Para clínicas que já faturam e querem crescer com refino, não com ruído."
+    "especialidades": [
+      "Odontologia",
+      "Medicina",
+      "Implantodontia",
+      "Ortodontia",
+      "Bucomaxilo",
+      "Ortopedia",
+      "Dermatologia",
+      "Cirurgia plástica",
+      "Estética",
+      "Harmonização"
+    ]
   },
   "metodo": {
     "intro": "Três frentes. Avulsas ou juntas. Sempre no seu tom.",
     "frentes": [
-      {
-        "nome": "Branding",
-        "promessa": "O paciente reconhece antes de te conhecer."
-      },
-      {
-        "nome": "Conteúdo",
-        "promessa": "Cada vídeo constrói confiança."
-      },
-      {
-        "nome": "Performance",
-        "promessa": "O paciente particular te encontra primeiro."
-      }
+      { "nome": "Branding", "promessa": "O paciente reconhece antes de te conhecer." },
+      { "nome": "Conteúdo", "promessa": "Cada vídeo constrói confiança." },
+      { "nome": "Performance", "promessa": "O paciente particular te encontra primeiro." }
     ],
-    "pacoteNote": "Juntas, viram um sistema só."
+    "pacoteNote": "Três frentes integradas. Uma operação só."
   },
   "cases": [
     {
@@ -75,29 +106,41 @@
       "a": "Não. Seguimos a Resolução CFM 2.336/2023 e o Código de Ética do CFO. Construímos autoridade e presença; a decisão é sempre do paciente."
     },
     {
+      "q": "Vocês trabalham só com médicos e dentistas?",
+      "a": "Somos especialistas em saúde. Atendemos médicos, dentistas e clínicas. A gente não atende todo mundo, e é isso que nos deixa afiados no seu mundo."
+    },
+    {
+      "q": "Em quanto tempo aparece resultado?",
+      "a": "Marca e conteúdo mudam a percepção já nas primeiras semanas. A captação costuma dar os primeiros sinais por volta de 60 dias, sempre construindo autoridade e nunca prometendo número."
+    },
+    {
+      "q": "Como funciona a conversa de diagnóstico?",
+      "a": "É uma conversa de uma hora, sem custo. Entendemos sua clínica, sua especialidade e o seu objetivo. No fim, você sai com um plano claro, fechando com a gente ou não."
+    },
+    {
       "q": "A comunicação respeita as regras do CFM e do CFO?",
       "a": "Sempre. Registro informativo e educativo, sem antes e depois sensacionalista nem promessa de cura. Compliance é o nosso padrão."
     },
     {
       "q": "Posso contratar só uma frente?",
-      "a": "Pode. Branding, Conteúdo e Performance funcionam avulsas. Juntas, funcionam melhor."
+      "a": "Pode. Branding, Conteúdo e Performance funcionam avulsas. A gente conversa no diagnóstico para entender o que faz mais sentido pro seu momento. Juntas, viram um sistema só."
+    },
+    {
+      "q": "Vocês atendem fora de São Paulo?",
+      "a": "Sim. Trabalhamos 100% remoto com clínicas de todo o Brasil."
+    },
+    {
+      "q": "Tem contrato de fidelidade?",
+      "a": "Não. Renovação mensal e relatório transparente. Se não estiver funcionando, você encerra. Nosso negócio é fazer dar certo, não prender cliente."
     },
     {
       "q": "Como funciona o conteúdo?",
       "a": "Filmamos o que você já domina: siso, ortognática, protocolo, lentes, alinhadores, papada, depoimentos. Educação que vira autoridade."
-    },
-    {
-      "q": "Vocês atendem medicina e odontologia?",
-      "a": "Sim. Médicos, dentistas e clínicas dos dois campos. O método é o mesmo; o tom é sempre o seu."
-    },
-    {
-      "q": "Como a gente começa?",
-      "a": "Com uma conversa. Entendemos sua clínica e indicamos a frente certa."
     }
   ],
   "ctaFinal": {
     "headline": "Seu negócio merece ser inevitável.",
-    "sub": "Seu trabalho já é excelente. Vamos conversar sobre a sua marca."
+    "sub": "Seu trabalho já é excelente. Vamos construir a marca que ele merece. Comece com uma conversa de diagnóstico, sem custo."
   },
   "beats": [
     "O talento é seu. A presença, a gente constrói junto.",

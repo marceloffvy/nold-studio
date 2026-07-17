@@ -992,7 +992,7 @@ html { scroll-behavior: smooth; }
 /* Hero da LP */
 .lp-hero { padding-top: clamp(4rem, 12vh, 8.5rem); padding-bottom: clamp(2.5rem, 6vw, 4.5rem); text-align: center; max-width: 1040px; }
 .lp-hero .eyebrow { display: inline-flex; margin-bottom: 1.4rem; }
-.lp-hero__title { font-family: var(--font-title); font-weight: 400; font-size: clamp(2.1rem, 5.2vw, 4.4rem); line-height: 1.03; letter-spacing: -0.02em; max-width: 22ch; margin-inline: auto; }
+.lp-hero__title { font-family: var(--font-title); font-weight: 400; font-size: clamp(2.7rem, 7.8vw, 6.8rem); line-height: 0.95; letter-spacing: -0.025em; margin-inline: auto; text-wrap: balance; }
 .lp-hero__title em { font-style: italic; }
 .lp-hero__sub { margin: clamp(1.4rem, 3vw, 2rem) auto 0; max-width: 62ch; font-family: var(--font-ui); font-size: clamp(1.02rem, 1.35vw, 1.2rem); line-height: 1.5; color: var(--muted); }
 .lp-hero__icp { margin: 1.2rem auto 0; max-width: 56ch; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
@@ -1071,3 +1071,68 @@ html { scroll-behavior: smooth; }
 /* Beat — frase-ideia evocativa (divisor Draper) */
 .beat { text-align: center; max-width: 920px; }
 .beat__line { font-family: var(--font-title); font-style: italic; font-size: clamp(1.6rem, 4vw, 3.2rem); line-height: 1.16; letter-spacing: -0.01em; color: var(--text); }
+
+/* =================================================================
+   REDLINE — statement-assinatura (adaptado da Kaju)
+   ================================================================= */
+.redline { text-align: center; padding-block: clamp(2.8rem, 8vw, 6rem); }
+.redline__line {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.9rem, 5.8vw, 4.4rem); line-height: 1.0; letter-spacing: -0.025em;
+  color: var(--text); max-width: 20ch; margin-inline: auto;
+}
+.redline__line em {
+  display: block; font-family: var(--font-title); font-style: italic; font-weight: 400; letter-spacing: -0.01em;
+}
+.redline__sub {
+  margin: clamp(1.2rem, 2.6vw, 1.9rem) auto 0; max-width: 46ch;
+  font-family: var(--font-ui); font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.5; color: var(--muted);
+  text-wrap: balance;
+}
+
+/* =================================================================
+   CRENÇAS — banda de imagem cinematográfica + 3 princípios
+   ================================================================= */
+.crencas-figure {
+  position: relative; border-radius: var(--r-lg); overflow: hidden;
+  aspect-ratio: 16 / 7; margin-bottom: clamp(1.6rem, 3vw, 2.6rem);
+}
+@media (max-width: 640px) { .crencas-figure { aspect-ratio: 4 / 3; } }
+.crencas-figure img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; filter: saturate(0.94); }
+.crencas-figure::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5, 30, 22, 0.62), rgba(5, 30, 22, 0.05) 62%); }
+.crencas-figure figcaption {
+  position: absolute; left: clamp(1.2rem, 3vw, 2.6rem); bottom: clamp(1.1rem, 3vw, 2.2rem); z-index: 1;
+  font-family: var(--font-title); font-style: italic; color: var(--cru);
+  font-size: clamp(1.2rem, 2.7vw, 2.15rem); line-height: 1.14; max-width: 20ch;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+.crencas { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.5vw, 20px); }
+@media (max-width: 820px) { .crencas { grid-template-columns: 1fr; } }
+.crenca { padding: clamp(1.5rem, 2.6vw, 2.3rem); border-radius: var(--r-lg); background: var(--cru); box-shadow: 0 0 0 1px var(--line); }
+.crenca__t { font-family: var(--font-title); font-size: clamp(1.25rem, 2vw, 1.7rem); line-height: 1.08; margin-bottom: 0.7rem; }
+.crenca__d { color: var(--muted); font-size: clamp(0.96rem, 1.15vw, 1.06rem); line-height: 1.52; }
+
+/* =================================================================
+   PRA QUEM É — layout com retrato + especialidades (v2)
+   ================================================================= */
+.fit-grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(14px, 2vw, 26px); align-items: stretch; }
+@media (max-width: 860px) { .fit-grid { grid-template-columns: 1fr; } }
+.fit-figure {
+  position: relative; border-radius: var(--r-lg); overflow: hidden;
+  min-height: 100%; aspect-ratio: 4 / 5;
+}
+@media (max-width: 860px) { .fit-figure { aspect-ratio: 3 / 2; } }
+.fit-figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 28%; filter: saturate(0.94); }
+.fit-figure::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5, 30, 22, 0.5), transparent 52%); }
+.fit-figure__tag {
+  position: absolute; left: clamp(1rem, 2vw, 1.4rem); bottom: clamp(0.9rem, 2vw, 1.3rem); z-index: 1;
+  font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246, 242, 230, 0.85);
+}
+.fit-cols { display: flex; flex-direction: column; gap: clamp(12px, 1.5vw, 20px); }
+.fit-cols .fit__col { flex: 1; }
+.especialidades { margin-top: clamp(1.6rem, 3vw, 2.4rem); display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem 0.6rem; }
+.especialidades__label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--faint); margin-right: 0.3rem; }
+.chip { font-family: var(--font-ui); font-size: clamp(0.82rem, 1vw, 0.92rem); padding: 0.4rem 0.9rem; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); color: var(--muted); white-space: nowrap; }
+
+/* Método — linha de detalhe por frente */
+.service__detail { margin-top: 0.55rem; color: var(--muted); font-family: var(--font-ui); font-size: clamp(0.96rem, 1.2vw, 1.08rem); line-height: 1.5; max-width: 44ch; }

@@ -41,7 +41,9 @@ const perf = [
 ];
 
 const heroTitle = `${deck.hero.headline}<br /><em>${deck.hero.headlineEmphasis}</em>`;
+const redlineTitle = `${deck.redline.linha1}<em>${deck.redline.linha2}</em>`;
 const linhaOf = (nome) => (deck.entregas.find((e) => e.titulo === nome) || {}).linha || "";
+const detalheOf = (nome) => (deck.entregas.find((e) => e.titulo === nome) || {}).detalhe || "";
 
 const faqSchema = {
   "@context": "https://schema.org", "@type": "FAQPage",
@@ -96,6 +98,12 @@ const serviceSchema = {
         <a class="btn btn--primary btn--lg" href="#contato">Começar um projeto</a>
         <a class="btn btn--ghost btn--lg" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
       </div>
+    </section>
+
+    <!-- ===================== REDLINE (assinatura) ===================== -->
+    <section class="section container redline">
+      <p class="redline__line" set:html={redlineTitle}></p>
+      <p class="redline__sub">{deck.redline.sub}</p>
     </section>
 
     <!-- ============ COLAGEM DE ASSETS (asset-forward) ============ -->
@@ -173,6 +181,22 @@ const serviceSchema = {
       </div>
     </section>
 
+    <!-- ===================== CRENÇAS ===================== -->
+    <section class="section container">
+      <figure class="crencas-figure">
+        <img src="/images/doutores/consultorio.jpg" width="2000" height="1116" loading="lazy" alt="Médico em consultório sob luz baixa" />
+        <figcaption>{deck.beats[1]}</figcaption>
+      </figure>
+      <div class="crencas">
+        {deck.crencas.map((c) => (
+          <article class="crenca">
+            <h3 class="crenca__t">{c.t}</h3>
+            <p class="crenca__d">{c.d}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
     <!-- ================= MÉTODO (estúdio verde) ================= -->
     <section id="metodo">
       <div class="studio">
@@ -182,6 +206,7 @@ const serviceSchema = {
           <span class="service__ghost" aria-hidden="true">branding</span>
           <div class="service__body">
             <p class="service__text"><em class="service__name">Branding</em> — {linhaOf("Branding")}</p>
+            <p class="service__detail">{detalheOf("Branding")}</p>
             <div class="service__work service__work--b">
               {brandingWork.map((b) => (
                 <article class="tile tile--sq">
@@ -197,6 +222,7 @@ const serviceSchema = {
           <span class="service__ghost" aria-hidden="true">conteúdo</span>
           <div class="service__body">
             <p class="service__text"><em class="service__name">Conteúdo</em> — {linhaOf("Conteúdo")}</p>
+            <p class="service__detail">{detalheOf("Conteúdo")}</p>
             <p class="reels-hint">Arraste para o lado · clique para assistir com som →</p>
             <div class="reels-strip reels-strip--in" data-reels>
               {reels.map((r) => (
@@ -214,6 +240,7 @@ const serviceSchema = {
           <span class="service__ghost" aria-hidden="true">performance</span>
           <div class="service__body">
             <p class="service__text"><em class="service__name">Performance</em> — {linhaOf("Performance")}</p>
+            <p class="service__detail">{detalheOf("Performance")}</p>
             <div class="service__work service__work--p">
               {perf.map((p) => (
                 <article class="tile tile--sq">
@@ -240,15 +267,25 @@ const serviceSchema = {
         <h2 class="sec-head__title">Feito para <em>doutores de excelência</em>.</h2>
         <p class="sec-head__sub">{deck.fit.faturamentoLine}</p>
       </header>
-      <div class="fit">
-        <div class="fit__col fit__col--yes">
-          <h3>É pra você</h3>
-          <ul class="fit__list">{deck.fit.paraQuemE.map((x) => <li>{x}</li>)}</ul>
+      <div class="fit-grid">
+        <figure class="fit-figure">
+          <img src="/images/doutores/dentista.jpg" width="1400" height="1738" loading="lazy" alt="Dentista em consultório, retrato cinematográfico" />
+          <span class="fit-figure__tag">Doutores de excelência</span>
+        </figure>
+        <div class="fit-cols">
+          <div class="fit__col fit__col--yes">
+            <h3>É pra você</h3>
+            <ul class="fit__list">{deck.fit.paraQuemE.map((x) => <li>{x}</li>)}</ul>
+          </div>
+          <div class="fit__col fit__col--no">
+            <h3>Não é pra você</h3>
+            <ul class="fit__list">{deck.fit.paraQuemNaoE.map((x) => <li>{x}</li>)}</ul>
+          </div>
         </div>
-        <div class="fit__col fit__col--no">
-          <h3>Não é pra você</h3>
-          <ul class="fit__list">{deck.fit.paraQuemNaoE.map((x) => <li>{x}</li>)}</ul>
-        </div>
+      </div>
+      <div class="especialidades">
+        <span class="especialidades__label">Atendemos</span>
+        {deck.fit.especialidades.map((s) => <span class="chip">{s}</span>)}
       </div>
     </section>
 
