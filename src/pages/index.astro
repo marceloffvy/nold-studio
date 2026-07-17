@@ -197,14 +197,14 @@ const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
           <video src="/videos/campanhas/lk-verde.mp4" autoplay loop muted playsinline preload="metadata"></video>
           <span class="tile__tag">Performance</span>
         </article>
-        <div class="brand-tile brand-tile--split">
-          <a class="cta-split__half cta-split__half--form" href="#contato">
-            <span class="cta-split__label">Começar um projeto</span>
-            <span class="cta-split__arw" aria-hidden="true">→</span>
+        <div class="brand-tile cta-box">
+          <a class="cta-box__item cta-box__item--wa" href={waLink} target="_blank" rel="noopener">
+            <span class="cta-box__label">Falar com um especialista</span>
+            <span class="cta-box__arw" aria-hidden="true">→</span>
           </a>
-          <a class="cta-split__half cta-split__half--wa" href={waLink} target="_blank" rel="noopener">
-            <span class="cta-split__label">Falar com um especialista</span>
-            <span class="cta-split__arw" aria-hidden="true">↗</span>
+          <a class="cta-box__item cta-box__item--form" href="#contato">
+            <span class="cta-box__label">Começar um projeto</span>
+            <span class="cta-box__arw" aria-hidden="true">↓</span>
           </a>
         </div>
         <div class="trio-copy">

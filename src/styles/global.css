@@ -917,22 +917,26 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 
 .cta-duo { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: clamp(1.6rem, 3.5vw, 2.6rem); }
 
-/* Card verde do apanhado = dois CTAs grandes, 50/50, cores distintas */
-.brand-tile--split {
-  padding: 0; background: transparent; overflow: hidden;
-  display: grid; grid-template-rows: 1fr 1fr; gap: 0;
+/* Card do apanhado = frame com 2 CTAs boleados soltos, com profundidade */
+.cta-box {
+  padding: clamp(10px, 1.1vw, 15px);
+  background: var(--cru);
+  display: grid; grid-template-rows: 1fr 1fr; gap: clamp(10px, 1.1vw, 15px);
+  box-shadow: 0 12px 34px -16px rgba(5, 30, 22, 0.4), 0 0 0 1px var(--line);
 }
-.cta-split__half {
+.cta-box__item {
   display: flex; flex-direction: column; justify-content: space-between;
-  padding: clamp(1.1rem, 1.9vw, 1.7rem); text-decoration: none;
+  padding: clamp(0.9rem, 1.5vw, 1.4rem); border-radius: var(--r-md);
+  text-decoration: none; color: var(--cru);
   font-family: var(--font-ui); font-weight: 500; line-height: 1.1;
-  font-size: clamp(1.15rem, 2vw, 1.7rem); letter-spacing: -0.01em;
-  transition: filter 0.3s var(--ease);
+  font-size: clamp(1rem, 1.7vw, 1.5rem); letter-spacing: -0.01em;
+  box-shadow: 0 10px 22px -12px rgba(5, 30, 22, 0.5);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
-.cta-split__half--form { background: var(--coral); color: var(--cru); }
-.cta-split__half--wa { background: var(--green); color: var(--cru); }
-.cta-split__half:hover { filter: brightness(1.07); }
-.cta-split__arw { align-self: flex-end; font-size: 1.5em; line-height: 0.8; }
+.cta-box__item--wa { background: var(--green); }
+.cta-box__item--form { background: var(--coral); }
+.cta-box__item:hover { transform: translateY(-3px); box-shadow: 0 18px 30px -12px rgba(5, 30, 22, 0.55); }
+.cta-box__arw { align-self: flex-end; font-size: 1.4em; line-height: 0.8; }
 
 /* Subhead de contato com ênfase */
 .cta__lead {
