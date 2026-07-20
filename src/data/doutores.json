@@ -53,10 +53,10 @@
     }
   ],
   "fit": {
-    "faturamentoLine": "Para clínicas que já faturam e querem crescer com refino, não com ruído.",
+    "faturamentoLine": "Pra clínica que precisa escalar a receita, profissionalizar o marketing e atrair demanda qualificada.",
     "paraQuemE": [
-      "Você é médico ou dentista e já é referência técnica na sua área.",
-      "Sua clínica já fatura e quer crescer com refino, não com volume.",
+      "Você é médico ou dentista e já é especialista na sua área.",
+      "Sua clínica já fatura e quer crescer com uma operação de marketing escalável.",
       "Você quer o paciente particular certo, não a enxurrada de curioso.",
       "Você quer uma marca à altura do trabalho que já entrega."
     ],
@@ -147,6 +147,10 @@
   "ctaFinal": {
     "headline": "Seu negócio merece ser inevitável.",
     "sub": "Seu trabalho já é excelente. Vamos construir a marca que ele merece. Comece com uma conversa de diagnóstico, sem custo."
+  },
+  "fundadores": {
+    "eyebrow": "Quem está por trás",
+    "texto": "A Nold é tocada de perto pelos fundadores, <em>Marcelo e Luiza</em>. Sem intermediário: quem fecha com a gente trabalha direto com quem pensa a estratégia. Antes daqui, os dois já construíam marcas e operações de marketing dentro da saúde. A Nold nasceu pra fazer isso com mais foco, pra médicos, dentistas e clínicas que querem crescer com estratégia."
   },
   "beats": [
     "O talento é seu. A presença, a gente constrói junto.",

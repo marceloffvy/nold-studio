@@ -10,11 +10,20 @@ const waText = encodeURIComponent(
 const waLink = `https://wa.me/${whatsapp}?text=${waText}`;
 const instagram = "https://instagram.com/nold.studio";
 
+// Especialidades enviesadas para saúde — diferente do formulário da Home
 const segmentos = [
-  "Odontologia", "Medicina", "Estética & Beleza", "Saúde",
-  "Advocacia", "Engenharia", "Construção civil", "Imobiliário & Incorporação",
-  "Startups", "Tecnologia", "Logística", "Consultoria",
-  "Infoproduto", "Educação", "Institutos", "Outro",
+  {
+    grupo: "Odontologia",
+    opcoes: ["Clínico geral", "Implantodontia", "Ortodontia", "Endodontia", "Prótese dentária", "Cirurgia bucomaxilofacial", "Periodontia", "Odontopediatria", "Harmonização orofacial", "Estética dental"],
+  },
+  {
+    grupo: "Medicina",
+    opcoes: ["Cardiologia", "Dermatologia", "Neurologia", "Oftalmologia", "Otorrinolaringologia", "Ortopedia", "Endocrinologia", "Ginecologia e obstetrícia", "Pediatria", "Psiquiatria", "Cirurgia plástica", "Nutrologia"],
+  },
+  {
+    grupo: "Outras áreas da saúde",
+    opcoes: ["Nutrição", "Psicologia", "Fisioterapia", "Estética"],
+  },
 ];
 const clientes = ["Clínica LK", "Marcelo Tavares", "Biliart", "Odontogon", "Hospitalar"];
 
@@ -263,7 +272,7 @@ const serviceSchema = {
     <section class="section container">
       <header class="sec-head">
         <p class="eyebrow">Pra quem é</p>
-        <h2 class="sec-head__title">Feito para <em>doutores de excelência</em>.</h2>
+        <h2 class="sec-head__title">Feito pra clínica que quer <em>crescer com estratégia</em>.</h2>
         <p class="sec-head__sub">{deck.fit.faturamentoLine}</p>
       </header>
       <div class="fit-grid">
@@ -288,27 +297,12 @@ const serviceSchema = {
       </div>
     </section>
 
-    <!-- =========================== CASES =========================== -->
-    <section class="section container">
-      <header class="sec-head">
-        <p class="eyebrow">Prova</p>
-        <h2 class="sec-head__title">O trabalho fala. A marca <em>amplifica</em>.</h2>
-      </header>
-      <div class="cases">
-        {deck.cases.map((c, i) => (
-          <div class="case case--static">
-            <span class="case__idx">{String(i + 1).padStart(2, "0")}</span>
-            <span class="case__title">{c.cliente}</span>
-            <span class="case__client">{c.segmento}</span>
-            <span class="case__right">{c.resultado && <span class="case__result">{c.resultado}</span>}</span>
-          </div>
-        ))}
-      </div>
-    </section>
+    <!-- ===== PROVA/CASES: oculto até termos depoimentos reais (dados preservados em deck.cases) ===== -->
 
-    <!-- ========================= BEAT ========================= -->
-    <section class="section container beat">
-      <p class="beat__line">{deck.beats[2]}</p>
+    <!-- ========================= FUNDADORES ========================= -->
+    <section class="section container lp-story">
+      <p class="eyebrow">{deck.fundadores.eyebrow}</p>
+      <p class="lp-story__text" set:html={deck.fundadores.texto}></p>
     </section>
 
     <!-- ============================ FAQ ============================ -->
@@ -345,10 +339,15 @@ const serviceSchema = {
           <label class="field"><span>WhatsApp</span><input type="tel" name="WhatsApp" required placeholder="(11) 99999-9999" /></label>
           <label class="field"><span>E-mail</span><input type="email" name="E-mail" required placeholder="voce@clinica.com" /></label>
           <label class="field">
-            <span>Segmento</span>
-            <select name="Segmento" required>
-              <option value="" disabled selected>Selecione</option>
-              {segmentos.map((s) => <option value={s}>{s}</option>)}
+            <span>Especialidade</span>
+            <select name="Especialidade" required>
+              <option value="" disabled selected>Selecione a especialidade</option>
+              {segmentos.map((g) => (
+                <optgroup label={g.grupo}>
+                  {g.opcoes.map((o) => <option value={`${g.grupo} / ${o}`}>{o}</option>)}
+                </optgroup>
+              ))}
+              <option value="Outra especialidade">Outra especialidade</option>
             </select>
           </label>
           <label class="field field--full">
