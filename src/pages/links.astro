@@ -1,0 +1,314 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// ---- Páginas agregadas (uma por card + um nó no grafo) ----
+const pages = [
+  {
+    id: "home",
+    href: "/",
+    tag: "Institucional",
+    title: "Nold Studio",
+    desc: "Branding, conteúdo e performance. A marca-mãe, com todo o portfólio.",
+  },
+  {
+    id: "doutores",
+    href: "/marketing-para-doutores",
+    tag: "Saúde",
+    title: "Marketing para doutores",
+    desc: "Marca, conteúdo e captação para médicos, dentistas e clínicas.",
+  },
+];
+
+// ---- Grafo: hub central (marca) + um nó por página (topologia estrela) ----
+const graphNodes = [
+  { id: "hub", label: "Nold", url: "#", isCenter: true, x: 400, y: 300 },
+  { id: "home", label: "Home", url: "/", x: 250, y: 205 },
+  { id: "doutores", label: "Doutores", url: "/marketing-para-doutores", x: 560, y: 395 },
+];
+const graphEdges = [
+  { source: "hub", target: "home" },
+  { source: "hub", target: "doutores" },
+];
+---
+
+<Layout
+  title="Central de Páginas — Nold"
+  description="Todas as páginas da Nold em um mapa. Navegue pelos cards ou pelo grafo interativo."
+  bodyClass="hub-body"
+>
+  <main class="hub">
+    <!-- ============ ESQUERDA: BENTO ============ -->
+    <aside class="hub__bento">
+      <header class="bento-head">
+        <img class="bento-logo" src="/brand/wordmark-nold.png" width="320" height="167" alt="Nold" />
+        <h1 class="bento-title">Central de Páginas</h1>
+        <p class="bento-sub">Toda a Nold num lugar só. Navegue pelos cards ou pelo mapa ao lado.</p>
+      </header>
+
+      <div class="bento-cards">
+        {pages.map((p) => (
+          <a class="bento-card" href={p.href} data-node={p.id}>
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="bento-card__tag">{p.tag}</span>
+            <span class="bento-card__title">{p.title}</span>
+            <span class="bento-card__desc">{p.desc}</span>
+            <span class="bento-card__foot">Acessar página <span class="arw" aria-hidden="true">→</span></span>
+          </a>
+        ))}
+
+        <div class="bento-card bento-stats">
+          <div><b>{pages.length}</b><span>páginas ativas</span></div>
+          <div><b>Astro</b><span>· Vercel</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============ DIREITA: GRAFO ============ -->
+    <div class="hub__map">
+      <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet" class="graph" data-graph aria-label="Mapa das páginas">
+        <g id="edgesGroup"></g>
+        <g id="nodesGroup"></g>
+      </svg>
+      <p class="map-hint">Arraste os nós · clique para abrir</p>
+    </div>
+  </main>
+
+  <script define:vars={{ graphNodes, graphEdges }}>
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.querySelector("[data-graph]");
+    const edgesG = svg.querySelector("#edgesGroup");
+    const nodesG = svg.querySelector("#nodesGroup");
+    const VB = { w: 800, h: 600 };
+    const CENTER = { x: 400, y: 300 };
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const nodes = graphNodes.map((n) => ({
+      id: n.id, label: n.label, url: n.url, isCenter: !!n.isCenter,
+      x: n.x, y: n.y, vx: 0, vy: 0,
+      fx: n.isCenter ? CENTER.x : null, fy: n.isCenter ? CENTER.y : null,
+      r: n.isCenter ? 13 : 8,
+    }));
+    const byId = {};
+    nodes.forEach((n) => (byId[n.id] = n));
+
+    const edgeEls = graphEdges.map((e) => {
+      const l = document.createElementNS(NS, "line");
+      l.setAttribute("class", "edge");
+      edgesG.appendChild(l);
+      return { l, s: e.source, t: e.target };
+    });
+
+    const nodeEls = nodes.map((n) => {
+      const g = document.createElementNS(NS, "g");
+      g.setAttribute("class", "node" + (n.isCenter ? " node--center" : ""));
+      g.dataset.id = n.id;
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("r", n.r);
+      const t = document.createElementNS(NS, "text");
+      t.setAttribute("class", "node__label");
+      t.setAttribute("text-anchor", "middle");
+      t.setAttribute("dy", n.isCenter ? "-22" : "-15");
+      t.textContent = n.label;
+      g.appendChild(c);
+      g.appendChild(t);
+      nodesG.appendChild(g);
+      return { g, node: n };
+    });
+
+    function toVB(cx, cy) {
+      const pt = svg.createSVGPoint();
+      pt.x = cx; pt.y = cy;
+      const m = svg.getScreenCTM();
+      if (!m) return { x: cx, y: cy };
+      const p = pt.matrixTransform(m.inverse());
+      return { x: p.x, y: p.y };
+    }
+
+    let raf = null, sleep = 0, drag = null, downPt = null, moved = false;
+
+    function step() {
+      let energy = 0;
+      for (const n of nodes) {
+        if (n.fx != null) { n.x = n.fx; n.y = n.fy; continue; }
+        // 1. repulsão entre nós próximos
+        for (const m of nodes) {
+          if (m === n) continue;
+          const dx = n.x - m.x, dy = n.y - m.y;
+          const d = Math.hypot(dx, dy) || 0.001;
+          if (d < 200) {
+            const f = ((200 - d) / d) * 0.6;
+            n.vx += (dx / d) * f;
+            n.vy += (dy / d) * f;
+          }
+        }
+        // 2. atração ao centro
+        n.vx += (CENTER.x - n.x) * 0.005;
+        n.vy += (CENTER.y - n.y) * 0.005;
+        // 3. atrito
+        n.vx *= 0.85;
+        n.vy *= 0.85;
+        n.x += n.vx;
+        n.y += n.vy;
+        n.x = Math.max(n.r + 12, Math.min(VB.w - n.r - 12, n.x));
+        n.y = Math.max(n.r + 28, Math.min(VB.h - n.r - 12, n.y));
+        energy += Math.abs(n.vx) + Math.abs(n.vy);
+      }
+      for (const e of edgeEls) {
+        const s = byId[e.s], t = byId[e.t];
+        e.l.setAttribute("x1", s.x); e.l.setAttribute("y1", s.y);
+        e.l.setAttribute("x2", t.x); e.l.setAttribute("y2", t.y);
+      }
+      for (const ne of nodeEls) {
+        ne.g.setAttribute("transform", `translate(${ne.node.x},${ne.node.y})`);
+      }
+      if (energy < 0.05 && !drag) sleep++; else sleep = 0;
+      if (sleep < 30 && !reduce) raf = requestAnimationFrame(step);
+      else raf = null;
+    }
+    function wake() { if (!raf) { sleep = 0; raf = requestAnimationFrame(step); } }
+    step();
+    if (reduce) { for (let i = 0; i < 200; i++) step(); } // assenta sem animar
+
+    nodeEls.forEach(({ g, node }) => {
+      if (!node.isCenter) {
+        g.addEventListener("pointerdown", (e) => {
+          drag = node; moved = false; downPt = { x: e.clientX, y: e.clientY };
+          node.fx = node.x; node.fy = node.y;
+          try { g.setPointerCapture(e.pointerId); } catch (_) {}
+          wake();
+        });
+        g.addEventListener("pointermove", (e) => {
+          if (drag !== node) return;
+          if (Math.hypot(e.clientX - downPt.x, e.clientY - downPt.y) > 4) moved = true;
+          const p = toVB(e.clientX, e.clientY);
+          node.fx = Math.max(node.r + 12, Math.min(VB.w - node.r - 12, p.x));
+          node.fy = Math.max(node.r + 28, Math.min(VB.h - node.r - 12, p.y));
+          wake();
+        });
+        g.addEventListener("pointerup", (e) => {
+          if (drag !== node) return;
+          node.fx = null; node.fy = null;
+          if (!moved) window.location.href = node.url;
+          drag = null; wake();
+          try { g.releasePointerCapture(e.pointerId); } catch (_) {}
+        });
+      }
+      g.addEventListener("pointerenter", () => setActive(node.id, true));
+      g.addEventListener("pointerleave", () => { if (drag !== node) setActive(node.id, false); });
+    });
+
+    function setActive(id, on) {
+      const ne = nodeEls.find((x) => x.node.id === id);
+      if (ne) ne.g.classList.toggle("active", on);
+      edgeEls.forEach((e) => { if (e.s === id || e.t === id) e.l.classList.toggle("active", on); });
+      const card = document.querySelector(`.bento-card[data-node="${id}"]`);
+      if (card) card.classList.toggle("active-node", on);
+    }
+    document.querySelectorAll(".bento-card[data-node]").forEach((card) => {
+      const id = card.dataset.node;
+      card.addEventListener("pointerenter", () => setActive(id, true));
+      card.addEventListener("pointerleave", () => setActive(id, false));
+    });
+  </script>
+</Layout>
+
+<style is:global>
+  body.hub-body {
+    --lk-bg: #04231b;
+    --lk-surface-solid: #063527;
+    --lk-card: #0a4132;
+    --lk-card-hover: #0e4d3b;
+    --lk-accent: #fdca40;
+    --lk-white: #f6f6f6;
+    --lk-gray: rgba(246, 246, 246, 0.56);
+    --lk-border: rgba(246, 246, 246, 0.12);
+    --lk-mono: "IBMPlexMono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --lk-title: "DtHebrinks", Georgia, "Times New Roman", serif;
+    --lk-ui: "Aeonik", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0;
+    background: var(--lk-bg);
+    color: var(--lk-white);
+    font-family: var(--lk-ui);
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (min-width: 961px) { body.hub-body { overflow: hidden; } }
+
+  .hub { display: grid; grid-template-columns: 460px 1fr; height: 100svh; }
+  @media (max-width: 960px) {
+    body.hub-body { overflow-y: auto; }
+    .hub { grid-template-columns: 1fr; height: auto; }
+  }
+
+  /* ---------- Bento (esquerda) ---------- */
+  .hub__bento {
+    background: var(--lk-surface-solid);
+    border-right: 1px solid var(--lk-border);
+    padding: clamp(1.6rem, 3vw, 2.6rem);
+    display: flex; flex-direction: column;
+    gap: clamp(1.3rem, 2.5vw, 1.9rem);
+  }
+  @media (min-width: 961px) { .hub__bento { height: 100svh; overflow-y: auto; } }
+
+  .bento-head { display: flex; flex-direction: column; gap: 0.9rem; }
+  .bento-logo { width: 84px; height: auto; filter: brightness(0) invert(1); opacity: 0.96; }
+  .bento-title { margin: 0; font-family: var(--lk-title); font-weight: 400; font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1.02; letter-spacing: -0.02em; }
+  .bento-sub { margin: 0; color: var(--lk-gray); font-size: 0.95rem; line-height: 1.5; max-width: 34ch; }
+
+  .bento-cards { display: flex; flex-direction: column; gap: 12px; }
+  .bento-card {
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 0.45rem;
+    padding: clamp(1.1rem, 2vw, 1.45rem);
+    border-radius: 14px;
+    background: var(--lk-card);
+    border: 1px solid var(--lk-border);
+    text-decoration: none; color: var(--lk-white);
+    transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .bento-card:hover, .bento-card.active-node {
+    background: var(--lk-card-hover);
+    border-color: rgba(253, 202, 64, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.65);
+  }
+  .card-glow {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0;
+    background: radial-gradient(220px circle at 25% 0%, rgba(253, 202, 64, 0.16), transparent 60%);
+    transition: opacity 0.35s ease;
+  }
+  .bento-card:hover .card-glow, .bento-card.active-node .card-glow { opacity: 1; }
+  .bento-card > *:not(.card-glow) { position: relative; z-index: 1; }
+  .bento-card__tag { font-family: var(--lk-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--lk-accent); }
+  .bento-card__title { font-family: var(--lk-title); font-size: clamp(1.3rem, 2.2vw, 1.7rem); line-height: 1.05; }
+  .bento-card__desc { color: var(--lk-gray); font-size: 0.92rem; line-height: 1.45; }
+  .bento-card__foot { margin-top: 0.35rem; font-family: var(--lk-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .bento-card__foot .arw { transition: transform 0.3s ease; }
+  .bento-card:hover .bento-card__foot .arw, .bento-card.active-node .bento-card__foot .arw { transform: translateX(4px); }
+
+  .bento-stats { flex-direction: row; gap: 1.6rem; background: transparent; border: 1px dashed var(--lk-border); }
+  .bento-stats:hover { transform: none; box-shadow: none; background: transparent; border-color: var(--lk-border); }
+  .bento-stats > div { display: flex; flex-direction: column; }
+  .bento-stats b { font-family: var(--lk-title); font-size: 1.6rem; line-height: 1; }
+  .bento-stats span { margin-top: 0.3rem; font-family: var(--lk-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--lk-gray); }
+
+  /* ---------- Mapa (direita) ---------- */
+  .hub__map {
+    position: relative; overflow: hidden;
+    background-color: var(--lk-bg);
+    background-image: radial-gradient(rgba(246, 246, 246, 0.05) 1.2px, transparent 1.3px);
+    background-size: 26px 26px;
+  }
+  @media (max-width: 960px) { .hub__map { height: 400px; border-top: 1px solid var(--lk-border); } }
+  .graph { width: 100%; height: 100%; display: block; touch-action: none; }
+  .map-hint { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); margin: 0; font-family: var(--lk-mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--lk-gray); pointer-events: none; }
+
+  .edge { stroke: rgba(246, 246, 246, 0.16); stroke-width: 1.5; transition: stroke 0.25s ease, stroke-width 0.25s ease; }
+  .edge.active { stroke: var(--lk-accent); stroke-width: 2.5; }
+  .node { cursor: pointer; }
+  .node circle { fill: var(--lk-card); stroke: rgba(246, 246, 246, 0.42); stroke-width: 1.5; transition: fill 0.25s ease, stroke 0.25s ease; }
+  .node--center { cursor: default; }
+  .node--center circle { fill: var(--lk-accent); stroke: none; }
+  .node.active circle { fill: var(--lk-accent); stroke: var(--lk-accent); }
+  .node__label { fill: var(--lk-white); font-family: var(--lk-mono); font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; pointer-events: none; }
+  .node--center .node__label { font-family: var(--lk-title); font-size: 19px; letter-spacing: 0; text-transform: none; }
+</style>
