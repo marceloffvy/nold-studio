@@ -663,9 +663,9 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
 }
 .trio-copy__lead {
   font-family: var(--font-title); font-weight: 400;
-  font-size: clamp(1.6rem, 3vw, 2.7rem); line-height: 1.08;
-  letter-spacing: -0.01em; color: var(--text);
-  max-width: 22ch;
+  font-size: clamp(2.3rem, 5vw, 4.6rem); line-height: 1.02;
+  letter-spacing: -0.02em; color: var(--text);
+  max-width: 15ch;
 }
 .trio-copy__lead em { font-style: italic; }
 .trio-copy__link {
