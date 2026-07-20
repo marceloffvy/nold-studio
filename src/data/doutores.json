@@ -150,7 +150,14 @@
   },
   "fundadores": {
     "eyebrow": "Quem está por trás",
-    "texto": "A Nold é tocada de perto pelos fundadores, <em>Marcelo e Luiza</em>. Sem intermediário: quem fecha com a gente trabalha direto com quem pensa a estratégia. Antes daqui, os dois já construíam marcas e operações de marketing dentro da saúde. A Nold nasceu pra fazer isso com mais foco, pra médicos, dentistas e clínicas que querem crescer com estratégia."
+    "titulo": "Temos uma história parecida com a sua.",
+    "legenda": "Marcelo & Luiza · fundadores",
+    "paragrafos": [
+      "A gente começou no campo de batalha do marketing tradicional. Atendeu grandes empresas, gerou resultado em campanhas de performance e aprendeu, na prática, o que funciona no mercado.",
+      "Foi atendendo profissionais de serviço, especialmente da saúde, que a gente entendeu o que realmente move o crescimento de uma clínica: clareza de posicionamento, controle comercial e um marketing que capta, ativa e fideliza.",
+      "Viemos de famílias com história em clínica. Foi isso que fez a gente escolher um foco. Hoje a Nold é uma operação dedicada a médicos, dentistas e clínicas que querem ser mais do que boas: querem ser a referência da sua região.",
+      "É pra isso que a Nold existe: transformar clínica em empresa, com faturamento previsível, crescimento real e autoridade de marca."
+    ]
   },
   "beats": [
     "O talento é seu. A presença, a gente constrói junto.",
