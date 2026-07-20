@@ -175,11 +175,16 @@ const serviceSchema = {
       </div>
     </section>
 
-    <!-- ===================== CRENÇAS ===================== -->
+    <!-- ================ POSICIONAMENTO / CRENÇAS ================ -->
     <section class="section container">
+      <header class="sec-head">
+        <p class="eyebrow">{deck.posicionamento.eyebrow}</p>
+        <h2 class="sec-head__title" set:html={deck.posicionamento.titulo}></h2>
+        <p class="sec-head__sub">{deck.posicionamento.sub}</p>
+      </header>
       <figure class="crencas-figure">
         <img src="/images/doutores/consultorio.jpg" width="2000" height="1116" loading="lazy" alt="Médico em consultório sob luz baixa" />
-        <figcaption>{deck.beats[1]}</figcaption>
+        <figcaption>{deck.posicionamento.caption}</figcaption>
       </figure>
       <div class="crencas">
         {deck.crencas.map((c) => (
@@ -194,7 +199,7 @@ const serviceSchema = {
     <!-- ================= MÉTODO (estúdio verde) ================= -->
     <section id="metodo">
       <div class="studio">
-        <p class="studio__statement">{deck.metodo.intro}</p>
+        <p class="studio__statement" set:html={deck.metodo.intro}></p>
 
         <div class="service">
           <span class="service__ghost" aria-hidden="true">branding</span>

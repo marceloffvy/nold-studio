@@ -15,35 +15,41 @@
     "linha2": "A gente cuida do seu crescimento.",
     "sub": "Para doutores que querem mais que posts. Querem resultado, sem precisar virar influenciador."
   },
+  "posicionamento": {
+    "eyebrow": "O verdadeiro gargalo",
+    "titulo": "Você domina a técnica. O que falta pra escalar é <em>posicionamento</em>.",
+    "sub": "Onde a sua clínica aparece, como ela comunica e pra quem. É isso que decide se o faturamento cresce ou empaca.",
+    "caption": "Escalar não é atender mais. É se posicionar melhor."
+  },
   "crencas": [
     {
-      "t": "Especialistas em saúde",
-      "d": "A gente não atende todo mundo. Só médico, dentista e clínica. É o que nos deixa afiados no seu mundo, na sua linguagem e nas suas regras."
+      "t": "Pra médicos e dentistas",
+      "d": "Nossa especialidade é a área médica e odontológica. A metodologia é feita pra atrair o paciente certo, o qualificado, que vira faturamento, sempre dentro das normas do CFM e do CFO."
     },
     {
       "t": "O seu tempo de volta",
-      "d": "Você não precisa aprender a editar vídeo nem virar influenciador. Cuida do paciente. A marca e a presença ficam com a gente."
+      "d": "Você cuida do paciente. A gente cuida do crescimento. Devolvemos ao doutor e ao gestor o tempo de fazer o que só eles fazem."
     },
     {
-      "t": "Agenda, não vaidade",
-      "d": "A métrica que importa é paciente na cadeira. Curtida é consequência, nunca o objetivo. A gente constrói para converter."
+      "t": "Agenda e faturamento",
+      "d": "A métrica que importa é agenda cheia e receita no fim do mês. Não ego, não vaidade. A gente constrói pra converter."
     }
   ],
   "entregas": [
     {
       "titulo": "Branding",
-      "linha": "Sua marca, em movimento.",
-      "detalhe": "Diagnóstico, identidade visual, narrativa e tom de voz. A base que sustenta todo o resto."
+      "linha": "Posicionamento ou reposicionamento da sua clínica, do conceito à experiência do paciente. A diferença entre ser a referência do seu segmento e ser só mais um consultório.",
+      "detalhe": "Estratégia · Identidade visual e verbal · Narrativa · Experiência do paciente"
     },
     {
       "titulo": "Conteúdo",
-      "linha": "Educação que vira autoridade.",
-      "detalhe": "Roteiro, captação e edição. Posts, vídeos e materiais que provam o que você já sabe fazer."
+      "linha": "Produção estratégica que posiciona e converte. Estética a serviço da percepção de valor e da autoridade, não da vaidade.",
+      "detalhe": "Direção de arte · Vídeo · Linha editorial · Material educativo · Campanhas"
     },
     {
       "titulo": "Performance",
-      "linha": "O paciente certo te encontra primeiro.",
-      "detalhe": "Campanhas segmentadas e tráfego qualificado. Presença que vira agenda, não vaidade."
+      "linha": "Captação ativa de pacientes pra sua clínica. Mídia e conteúdo que atraem faturamento de verdade, não só atenção, sempre dentro das normas do CFM e do CFO.",
+      "detalhe": "Aquisição · Mídia paga · Funis · Leitura de dados · Campanhas"
     }
   ],
   "fit": {
@@ -74,13 +80,13 @@
     ]
   },
   "metodo": {
-    "intro": "Três frentes. Avulsas ou juntas. Sempre no seu tom.",
+    "intro": "Escalar o seu faturamento tem <em>método</em>. E o método tem três frentes.",
     "frentes": [
       { "nome": "Branding", "promessa": "O paciente reconhece antes de te conhecer." },
       { "nome": "Conteúdo", "promessa": "Cada vídeo constrói confiança." },
       { "nome": "Performance", "promessa": "O paciente particular te encontra primeiro." }
     ],
-    "pacoteNote": "Três frentes integradas. Uma operação só."
+    "pacoteNote": "Nem sempre as três. A gente lê o momento da sua clínica no primeiro contato e monta a esteira certa."
   },
   "cases": [
     {
