@@ -91,19 +91,13 @@ const serviceSchema = {
     <!-- ============================ HERO ============================ -->
     <section class="lp-hero container">
       <p class="eyebrow">{deck.hero.eyebrow}</p>
-      <h1 class="lp-hero__title" set:html={heroTitle}></h1>
-      <p class="lp-hero__sub">{deck.hero.sub}</p>
+      <h1 class="lp-hero__title lp-hero__title--kaju" set:html={redlineTitle}></h1>
+      <p class="lp-hero__sub">{deck.redline.sub}</p>
       <p class="lp-hero__icp">{deck.hero.icp}</p>
       <div class="cta-duo lp-hero__cta">
         <a class="btn btn--primary btn--lg" href="#contato">Começar um projeto</a>
         <a class="btn btn--ghost btn--lg" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
       </div>
-    </section>
-
-    <!-- ===================== REDLINE (assinatura) ===================== -->
-    <section class="section container redline">
-      <p class="redline__line" set:html={redlineTitle}></p>
-      <p class="redline__sub">{deck.redline.sub}</p>
     </section>
 
     <!-- ============ COLAGEM DE ASSETS (asset-forward) ============ -->

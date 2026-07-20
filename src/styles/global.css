@@ -994,6 +994,9 @@ html { scroll-behavior: smooth; }
 .lp-hero .eyebrow { display: inline-flex; margin-bottom: 1.4rem; }
 .lp-hero__title { font-family: var(--font-title); font-weight: 400; font-size: clamp(2.7rem, 7.8vw, 6.8rem); line-height: 0.95; letter-spacing: -0.025em; margin-inline: auto; text-wrap: balance; }
 .lp-hero__title em { font-style: italic; }
+/* Variante Kaju — grotesca bold + 2ª linha em itálico Didone (assinatura) */
+.lp-hero__title--kaju { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 7.2vw, 6rem); line-height: 0.98; letter-spacing: -0.03em; }
+.lp-hero__title--kaju em { display: block; font-family: var(--font-title); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
 .lp-hero__sub { margin: clamp(1.4rem, 3vw, 2rem) auto 0; max-width: 62ch; font-family: var(--font-ui); font-size: clamp(1.02rem, 1.35vw, 1.2rem); line-height: 1.5; color: var(--muted); }
 .lp-hero__icp { margin: 1.2rem auto 0; max-width: 56ch; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
 .lp-hero__cta { justify-content: center; margin-top: clamp(2rem, 4vw, 3rem); }
