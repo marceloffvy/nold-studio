@@ -1,0 +1,665 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Mesmo conteúdo/dados da Home (index.astro) — a apresentação reaproveita
+// tudo, só muda o modo de navegação (slides horizontais em vez de scroll).
+const email = "marcelomelo.nold@gmail.com";
+const formEmail = email;
+const whatsapp = "5511996465055";
+const waText = encodeURIComponent(
+  "Olá! Vim pela apresentação da Nold e quero falar com um especialista sobre reposicionar e escalar minha marca.",
+);
+const waLink = `https://wa.me/${whatsapp}?text=${waText}`;
+const instagram = "https://instagram.com/nold.studio";
+
+const segmentos = [
+  "Odontologia", "Medicina", "Estética & Beleza", "Saúde",
+  "Advocacia", "Engenharia", "Construção civil", "Imobiliário & Incorporação",
+  "Startups", "Tecnologia", "Logística", "Consultoria",
+  "Infoproduto", "Educação", "Institutos", "Outro",
+];
+
+const clients = [
+  "MaxFocos", "Clínica LK", "Biliart", "Dela Bella", "Kaju",
+  "Biva", "Marcelo Tavares", "Roberto Simonetti", "Hospitalar", "Odontogon",
+];
+
+const services = [
+  {
+    ghost: "branding",
+    name: "Branding",
+    text: "Posicionamento ou reposicionamento de marca, do conceito à experiência digital do cliente. A diferença entre ser único no seu segmento e ser só mais um.",
+    tags: "Estratégia / Identidade visual e verbal / Experiência digital / Experiência física / Estratégia de comunicação",
+  },
+  {
+    ghost: "conteúdo",
+    name: "Conteúdo",
+    text: "Produção estratégica que posiciona e converte. Estética a serviço da percepção de valor, não de vaidade.",
+    tags: "Direção de arte / Vídeo / Linha editorial / Material gráfico / Campanhas",
+  },
+  {
+    ghost: "performance",
+    name: "Performance",
+    text: "Captação ativa de clientes pro seu negócio. Conteúdo e estética que atraem receita de verdade, não só atenção.",
+    tags: "Aquisição / Mídia paga / Funis / Leitura de dados / Campanhas / Automação",
+  },
+];
+
+const brandingWork = [
+  { name: "MaxFocos", meta: "Suplementos", video: "/videos/branding/maxfocos.mp4" },
+  { name: "Biliart", meta: "Odontologia estética", video: "/videos/branding/biliart.mp4" },
+  { name: "Biva", meta: "Arquitetura", video: "/videos/branding/biva.mp4" },
+  { name: "Dela Bella", meta: "Beleza", video: "/videos/branding/delabela.mp4" },
+  { name: "Kaju", meta: "Marca própria", video: "/videos/branding/kaju.mp4" },
+];
+
+const reels = [
+  { cat: "Odontologia", name: "As lentes que você deseja", file: "b27" },
+  { cat: "Bastidor", name: "Vlog · Dia de cirurgia", file: "b49" },
+  { cat: "Relato", name: "Cirurgia ortognática", file: "b50" },
+  { cat: "Educativo", name: "Queixo: pra frente ou pra trás?", file: "b65" },
+  { cat: "Depoimento", name: "Paciente", file: "depoimento" },
+  { cat: "Educativo", name: "Diferença do alinhador", file: "id32" },
+  { cat: "Educativo", name: "3 coisas antes da prótese", file: "lk18" },
+  { cat: "Educativo", name: "Se o siso pode matar", file: "m55" },
+  { cat: "Estética", name: "Lipo de papada", file: "m57" },
+  { cat: "Educativo", name: "Plano de 6 meses", file: "m76" },
+  { cat: "Depoimento", name: "Paciente", file: "mt06" },
+  { cat: "Depoimento", name: "Paciente", file: "mt10" },
+];
+
+const perf = [
+  { name: "MaxFocos", meta: "Lançamento", video: "/videos/campanhas/maxfocos.mp4" },
+  { name: "Clínica LK", meta: "Campanha", video: "/videos/campanhas/lk.mp4" },
+  { name: "Biva", meta: "Projeto", video: "/videos/campanhas/biva.mp4" },
+];
+
+const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
+
+// ---- Mapa dos slides (dirige contador, pontos e navegação interna) ----
+const slides = [
+  { id: "hero", label: "Abertura" },
+  { id: "trabalho", label: "O trabalho" },
+  { id: "clientes", label: "Clientes" },
+  { id: "estudio", label: "Como operamos" },
+  { id: "branding", label: "Branding" },
+  { id: "conteudo", label: "Conteúdo" },
+  { id: "performance", label: "Performance" },
+  { id: "autorais", label: "Experiências digitais" },
+  { id: "contato", label: "Contato" },
+];
+const idx = (id: string) => slides.findIndex((s) => s.id === id);
+---
+
+<Layout
+  title="Nold Studio — Apresentação"
+  description="Apresentação institucional da Nold Studio."
+  bodyClass="theme-v02 ppt-body"
+  noindex
+>
+  <div class="ppt-shell">
+    <!-- ============================ TOPBAR ============================ -->
+    <header class="topbar" data-topbar>
+      <div class="container topbar__inner">
+        <a href="/" class="logo-morph" aria-label="Nold — site">
+          <img class="logo-morph__word" src="/brand/wordmark-nold.png" width="320" height="167" alt="nold" />
+          <img class="logo-morph__icon" src="/brand/symbol-pixel.png" width="200" height="200" alt="" aria-hidden="true" />
+        </a>
+
+        <div class="meta" data-nav-meta>
+          <span class="meta__pair">São Paulo <b data-clock>--:--</b></span>
+          <button class="copy-btn" type="button" data-copy={email} aria-label="Copiar e-mail">
+            <span data-copy-label>{email}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="nav-wrap" data-nav>
+          <nav class="nav-pill" aria-label="Navegação da apresentação">
+            <a href="#" data-goto={idx("trabalho")}>Projetos</a>
+            <a href="#" data-goto={idx("conteudo")}>Conteúdo</a>
+            <a href={waLink} target="_blank" rel="noopener" class="hi">Olá! <span aria-hidden="true">💬</span></a>
+          </nav>
+          <button class="nav-burger" type="button" data-nav-toggle aria-label="Abrir menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================ DECK ============================ -->
+    <div class="deck-viewport" data-deck-viewport>
+      <div class="deck" data-deck>
+        <!-- 0 · HERO -->
+        <section class="slide slide--center" data-slide-panel>
+          <div class="hero container">
+            <h1 class="hero__display">
+              Seu negócio merece<br />
+              ser <em>inevitável</em>.
+            </h1>
+            <p class="hero__sub">
+              Construímos e escalamos marcas que não aceitam o genérico. Branding,
+              conteúdo e performance numa esteira só — entregue com tecnologia, bom
+              gosto e velocidade premium.
+            </p>
+            <div class="hero__actions">
+              <a href="#" data-goto={idx("estudio")} class="text-link">
+                Conheça o estúdio <span class="arw" aria-hidden="true">→</span>
+              </a>
+              <a href="#" data-goto={idx("trabalho")} class="text-link">
+                Veja o trabalho <span class="arw" aria-hidden="true">→</span>
+              </a>
+              <span class="ball" data-ball aria-hidden="true"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 1 · TRABALHO -->
+        <section class="slide" data-slide-panel>
+          <div class="collage-wrap">
+            <div class="collage">
+              <div class="mcol">
+                <article class="tile tile--sq">
+                  <video src="/videos/nold-entregas.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                  <span class="tile__tag">Nold · Entregas</span>
+                </article>
+                <div class="pair">
+                  <article class="tile tile--sq">
+                    <video src="/videos/branding/kaju.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                    <span class="tile__tag">Branding</span>
+                  </article>
+                  <article class="tile tile--sq">
+                    <video src="/videos/branding/biva.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                    <span class="tile__tag">Branding</span>
+                  </article>
+                </div>
+              </div>
+              <div class="mcol mcol--late">
+                <div class="pair">
+                  <article class="tile tile--sq">
+                    <video src="/videos/branding/maxfocos.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                    <span class="tile__tag">Branding</span>
+                  </article>
+                  <article class="tile tile--sq">
+                    <video src="/videos/campanhas/maxfocos-verde.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                    <span class="tile__tag">Performance</span>
+                  </article>
+                </div>
+                <div class="pair">
+                  <article class="tile tile--v">
+                    <video src="/videos/reels/b50.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                    <span class="tile__tag">Conteúdo</span>
+                  </article>
+                  <article class="tile tile--v">
+                    <video src="/videos/reels/m55.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                    <span class="tile__tag">Conteúdo</span>
+                  </article>
+                </div>
+              </div>
+            </div>
+
+            <div class="trio">
+              <article class="tile tile--sq">
+                <video src="/videos/campanhas/lk-verde.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                <span class="tile__tag">Performance</span>
+              </article>
+              <div class="brand-tile cta-box">
+                <a class="cta-box__item cta-box__item--wa" href={waLink} target="_blank" rel="noopener">
+                  <span class="cta-box__label">Falar com um especialista</span>
+                  <span class="cta-box__arw" aria-hidden="true">→</span>
+                </a>
+                <a class="cta-box__item cta-box__item--form" href="#" data-goto={idx("contato")}>
+                  <span class="cta-box__label">Começar um projeto</span>
+                  <span class="cta-box__arw" aria-hidden="true">↓</span>
+                </a>
+              </div>
+              <div class="trio-copy">
+                <p class="trio-copy__lead">
+                  Nosso trabalho é um só: fazer o seu negócio <em>gerar receita</em>.
+                  E a gente chega lá por três frentes.
+                </p>
+                <a class="trio-copy__link" href="#" data-goto={idx("estudio")}>
+                  Ver como funciona <span aria-hidden="true">↓</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2 · CLIENTES -->
+        <section class="slide slide--center" data-slide-panel>
+          <div class="section container clients">
+            <p class="eyebrow clients__label">Confiam na curadoria</p>
+            <div class="marquee" aria-label="Clientes">
+              <div class="marquee__track">
+                <div class="marquee__group">{clients.map((c) => <span class="client-ph">{c}</span>)}</div>
+                <div class="marquee__group" aria-hidden="true">{clients.map((c) => <span class="client-ph">{c}</span>)}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3 · ESTÚDIO (manifesto) -->
+        <section class="slide slide--center" data-slide-panel>
+          <div class="studio deck-studio-solo">
+            <p class="studio__statement">
+              Operamos numa esteira única — estratégia, <em>estética</em> e tecnologia
+              juntas para construir marcas que despertam <em>desejo</em> e escalam <em>receita</em> de verdade.
+            </p>
+          </div>
+        </section>
+
+        <!-- 4 · BRANDING -->
+        <section class="slide" data-slide-panel>
+          <div class="studio deck-studio-solo">
+            <div class="service" id="branding">
+              <span class="service__ghost" aria-hidden="true">{services[0].ghost}</span>
+              <div class="service__body">
+                <p class="service__text">
+                  <em class="service__name">{services[0].name}</em><span class="reveal"> — {services[0].text}</span>
+                </p>
+                <p class="service__tags">{services[0].tags}</p>
+                <div class="service__work service__work--b">
+                  {brandingWork.map((b) => (
+                    <article class="tile tile--sq">
+                      <video src={b.video} autoplay loop muted playsinline preload="metadata" />
+                      <span class="tile__tag">{b.name}</span>
+                    </article>
+                  ))}
+                </div>
+                <div class="cta-duo">
+                  <a class="btn btn--primary" href="#" data-goto={idx("contato")}>Começar um projeto</a>
+                  <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5 · CONTEÚDO -->
+        <section class="slide" data-slide-panel>
+          <div class="studio deck-studio-solo">
+            <div class="service" id="conteudo">
+              <span class="service__ghost" aria-hidden="true">{services[1].ghost}</span>
+              <div class="service__body">
+                <p class="service__text">
+                  <em class="service__name">{services[1].name}</em><span class="reveal"> — {services[1].text}</span>
+                </p>
+                <p class="service__tags">{services[1].tags}</p>
+                <p class="reels-hint">Arraste para o lado · clique para assistir com som →</p>
+                <div class="reels-strip reels-strip--in" data-reels>
+                  {reels.map((r) => (
+                    <button class="reel-card" data-reel={`/videos/reels/${r.file}.mp4`} aria-label={`Assistir: ${r.name}`}>
+                      <img class="reel-card__poster" src={`/videos/posters/${r.file}.jpg`} width="540" height="960" loading="lazy" alt="" />
+                      <span class="reel-card__play" aria-hidden="true">▶</span>
+                      <span class="tile__tag">{r.cat}</span>
+                    </button>
+                  ))}
+                </div>
+                <div class="cta-duo">
+                  <a class="btn btn--primary" href="#" data-goto={idx("contato")}>Começar um projeto</a>
+                  <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6 · PERFORMANCE -->
+        <section class="slide" data-slide-panel>
+          <div class="studio deck-studio-solo">
+            <div class="service" id="performance">
+              <span class="service__ghost" aria-hidden="true">{services[2].ghost}</span>
+              <div class="service__body">
+                <p class="service__text">
+                  <em class="service__name">{services[2].name}</em><span class="reveal"> — {services[2].text}</span>
+                </p>
+                <p class="service__tags">{services[2].tags}</p>
+                <div class="service__work service__work--p">
+                  {perf.map((p) => (
+                    <article class="tile tile--sq">
+                      <video src={p.video} autoplay loop muted playsinline preload="metadata" />
+                      <span class="tile__tag">{p.name}</span>
+                    </article>
+                  ))}
+                </div>
+                <div class="cta-duo">
+                  <a class="btn btn--primary" href="#" data-goto={idx("contato")}>Começar um projeto</a>
+                  <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7 · EXPERIÊNCIAS DIGITAIS -->
+        <section class="slide" data-slide-panel>
+          <div class="section">
+            <div class="container">
+              <h2 class="autoral__head">
+                Além das três frentes, criamos <em>experiências digitais</em> sob medida.
+              </h2>
+              <p class="autoral__sub">
+                Sistemas de gestão, ferramentas próprias e as páginas dos nossos clientes.
+                Software que vira vantagem competitiva. É o que está mais quente no estúdio.
+              </p>
+            </div>
+            <div class="collage-wrap">
+              <div class="exp-grid">
+                {experiencias.map((src, i) => (
+                  <div class="exp-tile">
+                    <img src={src} width="720" height="720" loading="lazy" alt={`Experiência digital ${i + 1}`} />
+                  </div>
+                ))}
+              </div>
+              <div class="banner">
+                <video src="/videos/anacronico.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8 · CONTATO -->
+        <section class="slide" data-slide-panel>
+          <div class="section container cta">
+            <h2 class="cta__title">Sua marca merece<br />ser <em>inevitável</em>.</h2>
+            <p class="cta__lead">
+              Para empresas que faturam <strong>acima de R$ 100 mil por mês</strong> e
+              querem escalar seus resultados financeiros.
+            </p>
+
+            <form class="lead-form" data-lead data-email={formEmail} action={`https://formsubmit.co/${formEmail}`} method="POST">
+              <input type="hidden" name="_subject" value="Novo lead — apresentação Nold 🚀" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="text" name="_honey" class="lead-form__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+              <div class="lead-form__grid">
+                <label class="field"><span>Nome</span><input type="text" name="Nome" required placeholder="Seu nome" /></label>
+                <label class="field"><span>Empresa</span><input type="text" name="Empresa" required placeholder="Nome da empresa" /></label>
+                <label class="field"><span>Instagram</span><input type="text" name="Instagram" placeholder="@suaempresa" /></label>
+                <label class="field"><span>WhatsApp</span><input type="tel" name="WhatsApp" required placeholder="(11) 99999-9999" /></label>
+                <label class="field"><span>E-mail</span><input type="email" name="E-mail" required placeholder="voce@empresa.com" /></label>
+                <label class="field">
+                  <span>Segmento</span>
+                  <select name="Segmento" required>
+                    <option value="" disabled selected>Selecione</option>
+                    {segmentos.map((s) => <option value={s}>{s}</option>)}
+                  </select>
+                </label>
+                <label class="field field--full">
+                  <span>Onde está o problema e o que você deseja?</span>
+                  <textarea name="Mensagem" rows="4" required placeholder="Conte rapidamente o seu momento e o seu objetivo."></textarea>
+                </label>
+              </div>
+
+              <div class="lead-form__foot">
+                <button type="submit" class="btn btn--primary btn--lg">Quero ser inevitável →</button>
+                <p class="lead-form__status" data-lead-status aria-live="polite"></p>
+              </div>
+            </form>
+          </div>
+
+          <footer class="site-footer">
+            <div class="container">
+              <div class="footer__top">
+                <div class="footer__brand">
+                  <img class="footer__logo" src="/brand/wordmark-lockup.png" width="600" height="395" alt="nold — studio criativo" />
+                </div>
+                <div class="footer__col">
+                  <h4>Navegação</h4>
+                  <ul>
+                    <li><a href="#" data-goto={idx("trabalho")}>Trabalho</a></li>
+                    <li><a href="#" data-goto={idx("branding")}>Branding</a></li>
+                    <li><a href="#" data-goto={idx("conteudo")}>Conteúdo</a></li>
+                    <li><a href="#" data-goto={idx("performance")}>Performance</a></li>
+                  </ul>
+                </div>
+                <div class="footer__col">
+                  <h4>Social</h4>
+                  <ul><li><a href={instagram} target="_blank" rel="noopener">Instagram ↗</a></li></ul>
+                </div>
+              </div>
+              <div class="footer__bottom">
+                <span>© 2026 Nold Studio</span>
+                <span>Beleza estratégica</span>
+              </div>
+            </div>
+          </footer>
+        </section>
+      </div>
+    </div>
+
+    <!-- ===================== CONTROLES DO DECK ===================== -->
+    <div class="deck-controls" data-deck-controls>
+      <button class="deck-nav deck-nav--prev" type="button" data-deck-prev aria-label="Slide anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5 8 12l7 7" /></svg>
+      </button>
+      <span class="deck-counter"><b data-deck-current>01</b><i>/</i>{String(slides.length).padStart(2, "0")}</span>
+      <button class="deck-nav deck-nav--next" type="button" data-deck-next aria-label="Próximo slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+      </button>
+    </div>
+    <div class="deck-dots" data-deck-dots aria-label="Ir para o slide">
+      {slides.map((s, i) => (
+        <button class="deck-dot" type="button" data-goto={i} aria-label={s.label}></button>
+      ))}
+    </div>
+  </div>
+
+  <!-- ========================= LIGHTBOX ========================= -->
+  <div class="lightbox" data-lightbox hidden>
+    <button class="lightbox__close" data-lb-close aria-label="Fechar">✕</button>
+    <video class="lightbox__video" data-lb-video controls playsinline></video>
+  </div>
+
+  <!-- ===================== CURSOR (bolinha) ===================== -->
+  <div class="cursor" data-cursor aria-hidden="true"></div>
+</Layout>
+
+<script>
+  // Relógio de São Paulo
+  const fmt = new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
+  function tick() { document.querySelectorAll("[data-clock]").forEach((el) => (el.textContent = fmt.format(new Date()))); }
+  tick(); setInterval(tick, 15000);
+
+  // Copiar e-mail
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(btn.getAttribute("data-copy"));
+        const label = btn.querySelector("[data-copy-label]") || btn;
+        const old = label.textContent; label.textContent = "copiado ✓";
+        setTimeout(() => (label.textContent = old), 1400);
+      } catch (e) {}
+    });
+  });
+
+  // Formulário → FormSubmit (AJAX)
+  const leadForm = document.querySelector("[data-lead]");
+  if (leadForm) {
+    const status = leadForm.querySelector("[data-lead-status]");
+    const btn = leadForm.querySelector('button[type="submit"]');
+    leadForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (leadForm.querySelector('[name="_honey"]').value) return;
+      const original = btn.textContent; btn.disabled = true; btn.textContent = "Enviando…";
+      status.classList.remove("is-error"); status.textContent = "";
+      try {
+        const res = await fetch("https://formsubmit.co/ajax/" + leadForm.dataset.email, {
+          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(Object.fromEntries(new FormData(leadForm))),
+        });
+        const data = await res.json();
+        if (String(data.success) === "true") { leadForm.reset(); status.textContent = "Recebido! A gente te retorna em breve. 🚀"; }
+        else throw new Error();
+      } catch (err) { status.classList.add("is-error"); status.textContent = "Não deu pra enviar agora — tenta pelo WhatsApp?"; }
+      finally { btn.disabled = false; btn.textContent = original; }
+    });
+  }
+
+  // Lightbox dos reels
+  const lb = document.querySelector("[data-lightbox]");
+  const lbVideo = document.querySelector("[data-lb-video]");
+  function openLB(src) { if (!lb || !lbVideo) return; lbVideo.src = src; lb.hidden = false; lbVideo.play().catch(() => {}); }
+  function closeLB() { if (!lb || !lbVideo) return; lbVideo.pause(); lbVideo.removeAttribute("src"); lbVideo.load(); lb.hidden = true; }
+  document.querySelectorAll("[data-reel]").forEach((b) => b.addEventListener("click", () => openLB(b.getAttribute("data-reel"))));
+  document.querySelector("[data-lb-close]")?.addEventListener("click", closeLB);
+  lb?.addEventListener("click", (e) => { if (e.target === lb) closeLB(); });
+
+  // Cursor bolinha
+  const cursor = document.querySelector("[data-cursor]");
+  if (cursor && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.documentElement.classList.add("has-cursor");
+    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y;
+    addEventListener("pointermove", (e) => { x = e.clientX; y = e.clientY; }, { passive: true });
+    (function loop() { cx += (x - cx) * 0.22; cy += (y - cy) * 0.22; cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; requestAnimationFrame(loop); })();
+    document.querySelectorAll("a, button, .tile, .reel-card, input, [data-ball]").forEach((el) => {
+      el.addEventListener("pointerenter", () => cursor.classList.add("is-hover"));
+      el.addEventListener("pointerleave", () => cursor.classList.remove("is-hover"));
+    });
+  }
+
+  // Tilt 3D (mesmo comportamento da Home)
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const MAX = 9;
+    document.querySelectorAll("#trabalho .tile, #trabalho .brand-tile, .exp-tile, .service .tile").forEach((card) => {
+      card.addEventListener("pointerenter", () => (card.style.transition = "transform 0.12s linear, box-shadow 0.3s var(--ease)"));
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateX(${(-py * MAX).toFixed(2)}deg) rotateY(${(px * MAX).toFixed(2)}deg) scale(1.02)`;
+        card.style.setProperty("--mx", `${((px + 0.5) * 100).toFixed(1)}%`);
+        card.style.setProperty("--my", `${((py + 0.5) * 100).toFixed(1)}%`);
+        card.classList.add("is-tilting");
+      });
+      card.addEventListener("pointerleave", () => { card.style.transition = "transform 0.55s var(--ease), box-shadow 0.55s var(--ease)"; card.style.transform = ""; card.classList.remove("is-tilting"); });
+    });
+  }
+
+  // Bolinha arrastável
+  document.querySelectorAll("[data-ball]").forEach((ball) => {
+    let dragging = false, sx = 0, sy = 0, x = 0, y = 0;
+    ball.addEventListener("pointerdown", (e) => { dragging = true; sx = e.clientX - x; sy = e.clientY - y; ball.setPointerCapture(e.pointerId); });
+    ball.addEventListener("pointermove", (e) => { if (!dragging) return; x = e.clientX - sx; y = e.clientY - sy; ball.style.transform = `translate(${x}px, ${y}px)`; });
+    ball.addEventListener("pointerup", () => { dragging = false; ball.style.transition = "transform .6s cubic-bezier(.22,1,.36,1)"; ball.style.transform = "translate(0,0)"; x = 0; y = 0; setTimeout(() => (ball.style.transition = ""), 600); });
+  });
+
+  // ===================== NAVEGAÇÃO DO DECK (slides horizontais) =====================
+  const deck = document.querySelector("[data-deck]");
+  const panels = Array.from(document.querySelectorAll("[data-slide-panel]"));
+  const total = panels.length;
+  const counterEl = document.querySelector("[data-deck-current]");
+  const prevBtn = document.querySelector("[data-deck-prev]");
+  const nextBtn = document.querySelector("[data-deck-next]");
+  const dots = Array.from(document.querySelectorAll(".deck-dot"));
+  let current = 0;
+
+  function revealSlide(i) {
+    const panel = panels[i];
+    if (!panel) return;
+    panel.querySelectorAll(".reveal").forEach((el) => {
+      if (el.dataset.r) return;
+      const text = el.textContent;
+      el.textContent = "";
+      text.split(/(\s+)/).forEach((tok) => {
+        if (tok.trim() === "") el.appendChild(document.createTextNode(tok));
+        else { const s = document.createElement("span"); s.className = "w"; s.textContent = tok; el.appendChild(s); }
+      });
+      el.dataset.r = "1";
+      el.classList.add("is-ready");
+      const words = el.querySelectorAll(".w");
+      words.forEach((w, wi) => setTimeout(() => w.classList.add("on"), 18 * wi));
+    });
+  }
+
+  function goTo(i) {
+    current = Math.max(0, Math.min(total - 1, i));
+    if (deck) deck.style.transform = `translateX(-${current * 100}vw)`;
+    if (counterEl) counterEl.textContent = String(current + 1).padStart(2, "0");
+    if (prevBtn) prevBtn.toggleAttribute("disabled", current === 0);
+    if (nextBtn) nextBtn.toggleAttribute("disabled", current === total - 1);
+    dots.forEach((d, di) => d.classList.toggle("is-active", di === current));
+    revealSlide(current);
+    panels[current]?.scrollTo?.(0, 0);
+  }
+
+  prevBtn?.addEventListener("click", () => goTo(current - 1));
+  nextBtn?.addEventListener("click", () => goTo(current + 1));
+  document.querySelectorAll("[data-goto]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      goTo(parseInt(el.getAttribute("data-goto") || "0", 10));
+    });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    const tag = (document.activeElement && document.activeElement.tagName) || "";
+    if (["INPUT", "TEXTAREA", "SELECT"].includes(tag)) return;
+    if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); goTo(current + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); goTo(current - 1); }
+    else if (e.key === "Home") { e.preventDefault(); goTo(0); }
+    else if (e.key === "End") { e.preventDefault(); goTo(total - 1); }
+  });
+
+  goTo(0);
+</script>
+
+<style>
+  /* Shell: topbar fixo no fluxo normal (não sticky) + deck ocupando o resto
+     da viewport. Nada de scroll vertical na página — só dentro de cada slide,
+     como rede de segurança se o conteúdo passar da tela. */
+  .ppt-shell { display: flex; flex-direction: column; height: 100svh; overflow: hidden; }
+  body.ppt-body .topbar { position: static; flex: 0 0 auto; }
+
+  .deck-viewport { flex: 1 1 auto; min-height: 0; overflow: hidden; position: relative; }
+  .deck { display: flex; height: 100%; width: max-content; transition: transform 0.7s var(--ease); will-change: transform; }
+  .slide {
+    width: 100vw; height: 100%; flex: 0 0 100vw;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .slide--center { display: flex; flex-direction: column; justify-content: center; }
+  .slide .studio { margin-inline: var(--gutter); }
+  .deck-studio-solo { display: flex; flex-direction: column; justify-content: center; min-height: calc(100% - 2 * var(--gutter)); }
+
+  /* ---------- Controles flutuantes ---------- */
+  .deck-controls {
+    position: fixed; right: clamp(1rem, 3vw, 2rem); bottom: clamp(1rem, 3vw, 2rem); z-index: 200;
+    display: flex; align-items: center; gap: 0.7rem;
+    background: var(--ink); color: var(--cru);
+    padding: 0.5rem 0.6rem; border-radius: 999px;
+    box-shadow: 0 14px 34px -16px rgba(0,0,0,0.5);
+  }
+  .deck-nav {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 50%;
+    background: transparent; color: var(--cru); border: none; cursor: pointer;
+    transition: background 0.25s var(--ease), opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .deck-nav svg { width: 18px; height: 18px; }
+  .deck-nav:hover:not(:disabled) { background: var(--coral); transform: translateY(-1px); }
+  .deck-nav:disabled { opacity: 0.3; cursor: default; }
+  .deck-counter { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; display: inline-flex; gap: 0.25em; padding-inline: 0.2rem; }
+  .deck-counter i { font-style: normal; opacity: 0.5; }
+
+  .deck-dots {
+    position: fixed; left: clamp(1rem, 3vw, 2rem); bottom: clamp(1rem, 3vw, 2rem); z-index: 200;
+    display: flex; gap: 0.5rem;
+    background: var(--ink); padding: 0.6rem 0.75rem; border-radius: 999px;
+    box-shadow: 0 14px 34px -16px rgba(0,0,0,0.5);
+  }
+  .deck-dot {
+    width: 7px; height: 7px; border-radius: 50%; border: none; padding: 0;
+    background: rgba(246, 246, 246, 0.3); cursor: pointer;
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .deck-dot:hover { background: rgba(246, 246, 246, 0.6); }
+  .deck-dot.is-active { background: var(--coral); transform: scale(1.35); }
+
+  @media (max-width: 720px) {
+    .deck-dots { display: none; } /* muitos pontos não cabem confortavelmente em telas estreitas */
+  }
+</style>
