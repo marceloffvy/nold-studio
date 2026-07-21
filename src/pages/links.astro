@@ -17,6 +17,13 @@ const pages = [
     title: "Marketing para doutores",
     desc: "Marca, conteúdo e captação para médicos, dentistas e clínicas.",
   },
+  {
+    id: "bio",
+    href: "/bio",
+    tag: "Redes sociais",
+    title: "Link na bio",
+    desc: "Cartão de contato rápido pra Instagram e pras redes.",
+  },
 ];
 
 // ---- Grafo: hub central (marca) + um nó por página (topologia estrela) ----
@@ -24,10 +31,12 @@ const graphNodes = [
   { id: "hub", label: "Nold", url: "#", isCenter: true, x: 400, y: 300 },
   { id: "home", label: "Home", url: "/", x: 250, y: 205 },
   { id: "doutores", label: "Doutores", url: "/marketing-para-doutores", x: 560, y: 395 },
+  { id: "bio", label: "Bio", url: "/bio", x: 320, y: 445 },
 ];
 const graphEdges = [
   { source: "hub", target: "home" },
   { source: "hub", target: "doutores" },
+  { source: "hub", target: "bio" },
 ];
 ---
 

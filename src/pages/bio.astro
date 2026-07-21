@@ -26,7 +26,7 @@ const secundarios = [
 <Layout
   title="Nold Studio — Link na bio"
   description="Branding, conteúdo e performance movidos por estratégia. Fale com a Nold."
-  bodyClass="bio-body"
+  bodyClass="theme-v02 bio-body"
 >
   <main class="bio">
     <header class="bio-head">
@@ -90,22 +90,15 @@ const secundarios = [
 </Layout>
 
 <style is:global>
+  /* Fundo off-white + texto verde-marca (theme-v02) + acento coral — mesma
+     combinação usada na Home, sem paleta nova. */
   body.bio-body {
-    --bio-bg: #04231b;
-    --bio-card: #0a4132;
-    --bio-border: rgba(246, 246, 246, 0.14);
-    --bio-yellow: #fdca40;
-    --bio-white: #f6f6f6;
-    --bio-gray: rgba(246, 246, 246, 0.58);
-    --bio-title: "DtHebrinks", Georgia, "Times New Roman", serif;
-    --bio-mono: "IBMPlexMono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-    --bio-ui: "Aeonik", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     margin: 0;
-    background: var(--bio-bg);
-    background-image: radial-gradient(rgba(246, 246, 246, 0.05) 1.2px, transparent 1.3px);
+    background: var(--cru);
+    background-image: radial-gradient(rgba(5, 50, 37, 0.06) 1.2px, transparent 1.3px);
     background-size: 26px 26px;
-    color: var(--bio-white);
-    font-family: var(--bio-ui);
+    color: var(--text);
+    font-family: var(--font-ui);
     -webkit-font-smoothing: antialiased;
   }
 
@@ -117,70 +110,70 @@ const secundarios = [
   .bio > * { width: 100%; max-width: 420px; }
 
   .bio-head { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; text-align: center; }
-  .bio-logo { width: 96px; height: auto; filter: brightness(0) invert(1); }
-  .bio-tagline { margin: 0; display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--bio-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bio-gray); }
-  .bio-tagline .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--bio-yellow); flex: 0 0 auto; }
+  .bio-logo { width: 96px; height: auto; }
+  .bio-tagline { margin: 0; display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .bio-tagline .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex: 0 0 auto; }
 
   .bio-social { display: flex; justify-content: center; gap: 0.9rem; margin-top: 1.6rem; }
   .bio-social a {
     display: flex; align-items: center; justify-content: center;
     width: 42px; height: 42px; border-radius: 50%;
-    border: 1px solid var(--bio-border); color: var(--bio-white);
-    transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    box-shadow: inset 0 0 0 1px var(--line-2); color: var(--text);
+    transition: box-shadow 0.25s ease, color 0.25s ease, transform 0.25s ease, background 0.25s ease;
   }
   .bio-social a svg { width: 19px; height: 19px; }
-  .bio-social a:hover { border-color: var(--bio-yellow); color: var(--bio-yellow); transform: translateY(-2px); }
+  .bio-social a:hover { box-shadow: inset 0 0 0 1.5px var(--coral); color: var(--coral); transform: translateY(-2px); }
 
   .bio-highlight {
     position: relative; overflow: hidden; display: block; margin-top: 1.8rem;
     padding: clamp(1.3rem, 4vw, 1.7rem);
-    border-radius: 20px;
-    background: linear-gradient(180deg, #0d4a39, var(--bio-card));
-    border: 1px solid var(--bio-border);
-    text-decoration: none; color: var(--bio-white);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    border-radius: var(--r-lg);
+    background: var(--cru);
+    box-shadow: 0 0 0 1px var(--line);
+    text-decoration: none; color: var(--text);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .bio-highlight::before {
-    content: ""; position: absolute; top: -60%; left: -20%; width: 140%; height: 140%;
-    background: radial-gradient(circle, rgba(253, 202, 64, 0.16), transparent 60%);
+    content: ""; position: absolute; top: -70%; right: -25%; width: 140%; height: 140%;
+    background: radial-gradient(circle, rgba(254, 95, 85, 0.14), transparent 60%);
     pointer-events: none;
   }
-  .bio-highlight:hover { transform: translateY(-3px); border-color: rgba(253, 202, 64, 0.5); }
-  .bio-highlight__kicker { position: relative; display: flex; align-items: center; gap: 0.45rem; font-family: var(--bio-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bio-yellow); }
-  .bio-highlight__title { position: relative; display: block; margin-top: 0.5rem; font-family: var(--bio-title); font-size: clamp(1.8rem, 6vw, 2.2rem); line-height: 1.05; }
+  .bio-highlight:hover { transform: translateY(-3px); box-shadow: 0 0 0 1.5px var(--coral); }
+  .bio-highlight__kicker { position: relative; display: flex; align-items: center; gap: 0.45rem; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); }
+  .bio-highlight__title { position: relative; display: block; margin-top: 0.5rem; font-family: var(--font-title); font-size: clamp(1.8rem, 6vw, 2.2rem); line-height: 1.05; color: var(--text); }
   .bio-highlight__foot { position: relative; margin-top: 0.9rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
-  .bio-highlight__foot span:first-child { color: var(--bio-gray); font-size: 0.92rem; line-height: 1.4; max-width: 26ch; }
+  .bio-highlight__foot span:first-child { color: var(--muted); font-size: 0.92rem; line-height: 1.4; max-width: 26ch; }
 
   .bio-arw {
     flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
-    width: 34px; height: 34px; border-radius: 50%; background: var(--bio-yellow); color: #04231b;
+    width: 34px; height: 34px; border-radius: 50%; background: var(--coral); color: var(--cru);
     font-size: 1rem;
   }
-  .bio-arw--sm { width: 26px; height: 26px; background: transparent; border: 1px solid var(--bio-border); color: var(--bio-white); font-size: 0.85rem; }
+  .bio-arw--sm { width: 26px; height: 26px; background: transparent; box-shadow: inset 0 0 0 1px var(--line-2); color: var(--text); font-size: 0.85rem; }
 
   .bio-grid { margin-top: 0.85rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.85rem; }
   .bio-card {
     display: flex; flex-direction: column; gap: 0.5rem; justify-content: space-between;
     padding: 1.05rem 1.1rem; min-height: 96px;
-    border-radius: 16px; background: var(--bio-card); border: 1px solid var(--bio-border);
-    text-decoration: none; color: var(--bio-white);
-    transition: transform 0.25s ease, border-color 0.25s ease;
+    border-radius: 16px; background: var(--cru); box-shadow: 0 0 0 1px var(--line);
+    text-decoration: none; color: var(--text);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .bio-card:hover { transform: translateY(-2px); border-color: rgba(253, 202, 64, 0.45); }
+  .bio-card:hover { transform: translateY(-2px); box-shadow: 0 0 0 1.5px var(--coral); }
   .bio-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.6rem; }
-  .bio-card__name { font-family: var(--bio-title); font-size: 1.15rem; line-height: 1.15; }
-  .bio-card__desc { color: var(--bio-gray); font-size: 0.82rem; line-height: 1.4; }
+  .bio-card__name { font-family: var(--font-title); font-size: 1.15rem; line-height: 1.15; }
+  .bio-card__desc { color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
 
   .bio-cta {
     margin-top: 1.4rem; display: flex; align-items: center; justify-content: center; gap: 0.6rem;
     padding: 1rem 1.2rem; border-radius: 999px;
-    background: var(--bio-yellow); color: #04231b;
-    font-family: var(--bio-ui); font-weight: 600; font-size: 0.98rem;
+    background: var(--coral); color: var(--cru);
+    font-family: var(--font-ui); font-weight: 600; font-size: 0.98rem;
     text-decoration: none;
     transition: transform 0.25s ease, filter 0.25s ease;
   }
   .bio-cta svg { width: 19px; height: 19px; }
   .bio-cta:hover { transform: translateY(-2px); filter: brightness(1.06); }
 
-  .bio-foot { margin-top: 1.6rem; text-align: center; font-family: var(--bio-mono); font-size: 0.68rem; letter-spacing: 0.04em; color: var(--bio-gray); }
+  .bio-foot { margin-top: 1.6rem; text-align: center; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em; color: var(--faint); }
 </style>
