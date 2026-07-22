@@ -24,6 +24,13 @@ const pages = [
     title: "Link na bio",
     desc: "Cartão de contato rápido pra Instagram e pras redes.",
   },
+  {
+    id: "ppt",
+    href: "/ppt",
+    tag: "Apresentação · privada",
+    title: "Apresentação da empresa",
+    desc: "O site em slides horizontais, com o estudo de caso completo.",
+  },
 ];
 
 // ---- Grafo: hub central (marca) + um nó por página (topologia estrela) ----
@@ -31,12 +38,14 @@ const graphNodes = [
   { id: "hub", label: "Nold", url: "#", isCenter: true, x: 400, y: 300 },
   { id: "home", label: "Home", url: "/", x: 250, y: 205 },
   { id: "doutores", label: "Doutores", url: "/marketing-para-doutores", x: 560, y: 395 },
-  { id: "bio", label: "Bio", url: "/bio", x: 320, y: 445 },
+  { id: "bio", label: "Bio", url: "/bio", x: 300, y: 445 },
+  { id: "ppt", label: "Apresentação", url: "/ppt", x: 585, y: 200 },
 ];
 const graphEdges = [
   { source: "hub", target: "home" },
   { source: "hub", target: "doutores" },
   { source: "hub", target: "bio" },
+  { source: "hub", target: "ppt" },
 ];
 ---
 
