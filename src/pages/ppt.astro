@@ -76,7 +76,31 @@ const perf = [
 
 const experiencias = Array.from({ length: 14 }, (_, i) => `/exp/${i + 1}.jpg`);
 
-// ---- Mapa dos slides (dirige contador, pontos e navegação interna) ----
+// ===== ESTUDO DE CASO — MaxFocos (assets em /images/case + /videos/case) =====
+const caseEstrategia = Array.from({ length: 7 }, (_, i) => `/images/case/estrategia/${i + 1}.jpg`);
+const caseIdentidade = Array.from({ length: 12 }, (_, i) => `/images/case/identidade/${i + 1}.jpg`);
+const caseComunicacao = Array.from({ length: 2 }, (_, i) => `/images/case/comunicacao/${i + 1}.jpg`);
+const caseReels = ["m55", "m57", "m76"]; // reaproveita reels já otimizados
+const caseVideo = {
+  identidadeMotion: "/videos/case/identidade-motion.mp4",
+  exp1: "/videos/case/experiencia-1.mp4",
+  exp2: "/videos/case/experiencia-2.mp4",
+  resultado: "/videos/campanhas/maxfocos-verde.mp4",
+};
+const caseCrm = "/images/case/perf-crm.jpg";
+
+// Passos da timeline do case (cada um = um slide)
+const caseSteps = [
+  { label: "Contexto", phase: "MaxFocos" },
+  { label: "Estratégia", phase: "Branding" },
+  { label: "Identidade", phase: "Branding" },
+  { label: "Comunicação", phase: "Branding" },
+  { label: "Experiência", phase: "Branding" },
+  { label: "Conteúdo", phase: "Conteúdo" },
+  { label: "Performance", phase: "Performance" },
+];
+
+// ---- Mapa dos slides (dirige contador, pontos, timeline e navegação interna) ----
 const slides = [
   { id: "hero", label: "Abertura" },
   { id: "trabalho", label: "O trabalho" },
@@ -86,9 +110,18 @@ const slides = [
   { id: "conteudo", label: "Conteúdo" },
   { id: "performance", label: "Performance" },
   { id: "autorais", label: "Experiências digitais" },
+  { id: "case-contexto", label: "Case · MaxFocos", caseStep: 0 },
+  { id: "case-estrategia", label: "Case · Estratégia", caseStep: 1 },
+  { id: "case-identidade", label: "Case · Identidade", caseStep: 2 },
+  { id: "case-comunicacao", label: "Case · Comunicação", caseStep: 3 },
+  { id: "case-experiencia", label: "Case · Experiência", caseStep: 4 },
+  { id: "case-conteudo", label: "Case · Conteúdo", caseStep: 5 },
+  { id: "case-performance", label: "Case · Performance", caseStep: 6 },
   { id: "contato", label: "Contato" },
 ];
 const idx = (id: string) => slides.findIndex((s) => s.id === id);
+// mapa slide -> passo do case (null quando não é case) — passado ao client
+const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.caseStep : null));
 ---
 
 <Layout
@@ -269,10 +302,6 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
                     </article>
                   ))}
                 </div>
-                <div class="cta-duo">
-                  <a class="btn btn--primary" href="#" data-goto={idx("contato")}>Começar um projeto</a>
-                  <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
-                </div>
               </div>
             </div>
           </div>
@@ -298,10 +327,6 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
                     </button>
                   ))}
                 </div>
-                <div class="cta-duo">
-                  <a class="btn btn--primary" href="#" data-goto={idx("contato")}>Começar um projeto</a>
-                  <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
-                </div>
               </div>
             </div>
           </div>
@@ -324,10 +349,6 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
                       <span class="tile__tag">{p.name}</span>
                     </article>
                   ))}
-                </div>
-                <div class="cta-duo">
-                  <a class="btn btn--primary" href="#" data-goto={idx("contato")}>Começar um projeto</a>
-                  <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Falar com um especialista</a>
                 </div>
               </div>
             </div>
@@ -361,7 +382,139 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
           </div>
         </section>
 
-        <!-- 8 · CONTATO -->
+        <!-- ============ ESTUDO DE CASO — MaxFocos (timeline) ============ -->
+        <!-- C0 · Contexto -->
+        <section class="slide slide--case" data-slide-panel>
+          <div class="case case--intro">
+            <div class="case-intro__text">
+              <span class="case-kicker">Estudo de caso</span>
+              <h2 class="case-intro__title">MaxFocos</h2>
+              <p class="case-intro__lead">
+                Dois cirurgiões que queriam ir além de atender pacientes: queriam
+                formar outros dentistas em cirurgia. O talento existia. Faltava
+                atrair o público certo e uma presença à altura do serviço. O
+                objetivo era claro: <em>se destacar e escalar faturamento</em>.
+              </p>
+            </div>
+            <div class="case-before">
+              <figure class="case-before__slot">
+                <span class="case-before__tag">Antes · conteúdo</span>
+                <span class="case-before__ph" aria-hidden="true">imagem a inserir</span>
+              </figure>
+              <figure class="case-before__slot">
+                <span class="case-before__tag">Antes · identidade e site</span>
+                <span class="case-before__ph" aria-hidden="true">imagem a inserir</span>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <!-- C1 · Branding · Estratégia -->
+        <section class="slide slide--case" data-slide-panel>
+          <div class="case">
+            <header class="case-head">
+              <span class="case-kicker">Branding · 01</span>
+              <h2 class="case-title">Estratégia</h2>
+            </header>
+            <div class="case-mosaic case-mosaic--feat">
+              {caseEstrategia.map((src) => (
+                <figure class="case-tile"><img src={src} loading="lazy" alt="" /></figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- C2 · Branding · Identidade -->
+        <section class="slide slide--case" data-slide-panel>
+          <div class="case">
+            <header class="case-head">
+              <span class="case-kicker">Branding · 02</span>
+              <h2 class="case-title">Identidade</h2>
+            </header>
+            <div class="case-mosaic case-mosaic--dense">
+              <figure class="case-tile case-tile--video">
+                <video src={caseVideo.identidadeMotion} autoplay loop muted playsinline preload="metadata"></video>
+              </figure>
+              {caseIdentidade.map((src) => (
+                <figure class="case-tile"><img src={src} loading="lazy" alt="" /></figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- C3 · Branding · Comunicação -->
+        <section class="slide slide--case" data-slide-panel>
+          <div class="case">
+            <header class="case-head">
+              <span class="case-kicker">Branding · 03</span>
+              <h2 class="case-title">Comunicação</h2>
+            </header>
+            <div class="case-duo">
+              {caseComunicacao.map((src) => (
+                <figure class="case-tile"><img src={src} loading="lazy" alt="" /></figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- C4 · Branding · Experiência -->
+        <section class="slide slide--case" data-slide-panel>
+          <div class="case">
+            <header class="case-head">
+              <span class="case-kicker">Branding · 04</span>
+              <h2 class="case-title">Experiência</h2>
+            </header>
+            <div class="case-duo">
+              <figure class="case-tile case-tile--video">
+                <video src={caseVideo.exp1} autoplay loop muted playsinline preload="metadata"></video>
+              </figure>
+              <figure class="case-tile case-tile--video">
+                <video src={caseVideo.exp2} autoplay loop muted playsinline preload="metadata"></video>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <!-- C5 · Conteúdo -->
+        <section class="slide slide--case" data-slide-panel>
+          <div class="case">
+            <header class="case-head">
+              <span class="case-kicker">A entrega · Conteúdo</span>
+              <h2 class="case-title">Conteúdo</h2>
+            </header>
+            <div class="case-reels">
+              {caseReels.map((f) => (
+                <figure class="case-reel">
+                  <video src={`/videos/reels/${f}.mp4`} autoplay loop muted playsinline preload="metadata"></video>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- C6 · Performance -->
+        <section class="slide slide--case" data-slide-panel>
+          <div class="case">
+            <header class="case-head">
+              <span class="case-kicker">A entrega · Performance</span>
+              <h2 class="case-title">Performance</h2>
+            </header>
+            <div class="case-perf">
+              <figure class="case-tile case-perf__crm">
+                <img src={caseCrm} loading="lazy" alt="Pipeline de leads captados no CRM da MaxFocos" />
+                <figcaption>Pipeline real de leads captados · dados pessoais ocultados</figcaption>
+              </figure>
+              <figure class="case-reel case-perf__reel">
+                <video src="/videos/reels/m76.mp4" autoplay loop muted playsinline preload="metadata"></video>
+              </figure>
+              <figure class="case-tile case-perf__result">
+                <video src={caseVideo.resultado} autoplay loop muted playsinline preload="metadata"></video>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTATO -->
         <section class="slide" data-slide-panel>
           <div class="section container cta">
             <h2 class="cta__title">Sua marca merece<br />ser <em>inevitável</em>.</h2>
@@ -430,6 +583,29 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
           </footer>
         </section>
       </div>
+
+      <!-- Timeline do estudo de caso (overlay; aparece só nos slides do case) -->
+      <div class="case-rail" data-case-rail aria-hidden="true">
+        <div class="case-rail__inner">
+          <p class="case-rail__phase" data-case-phase></p>
+          <div class="case-rail__track">
+            <span class="case-rail__line"></span>
+            <span class="case-rail__fill" data-case-fill></span>
+            {caseSteps.map((s, i) => (
+              <button
+                class="case-rail__node"
+                type="button"
+                data-case-node={i}
+                aria-label={s.label}
+                style={`left:${caseSteps.length > 1 ? (i / (caseSteps.length - 1)) * 100 : 0}%`}
+              >
+                <span class="nd"></span>
+                <span class="lbl">{s.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ===================== CONTROLES DO DECK ===================== -->
@@ -459,7 +635,7 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
   <div class="cursor" data-cursor aria-hidden="true"></div>
 </Layout>
 
-<script>
+<script define:vars={{ caseStepOfSlide, caseStepsData: caseSteps }}>
   // Relógio de São Paulo
   const fmt = new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
   function tick() { document.querySelectorAll("[data-clock]").forEach((el) => (el.textContent = fmt.format(new Date()))); }
@@ -555,7 +731,26 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
   const prevBtn = document.querySelector("[data-deck-prev]");
   const nextBtn = document.querySelector("[data-deck-next]");
   const dots = Array.from(document.querySelectorAll(".deck-dot"));
+  const caseRail = document.querySelector("[data-case-rail]");
+  const caseFill = document.querySelector("[data-case-fill]");
+  const casePhase = document.querySelector("[data-case-phase]");
+  const caseNodes = Array.from(document.querySelectorAll(".case-rail__node"));
+  const caseStepsN = caseStepsData.length;
   let current = 0;
+
+  // Timeline do case: mostra/esconde o trilho e anima o preenchimento até o nó atual
+  function updateRail(slideIndex) {
+    const step = caseStepOfSlide[slideIndex];
+    if (step == null) { caseRail && caseRail.classList.remove("is-on"); return; }
+    caseRail && caseRail.classList.add("is-on");
+    const frac = caseStepsN > 1 ? step / (caseStepsN - 1) : 0;
+    if (caseFill) caseFill.style.width = (frac * 100).toFixed(2) + "%";
+    if (casePhase) casePhase.textContent = caseStepsData[step].phase;
+    caseNodes.forEach((n, i) => {
+      n.classList.toggle("is-active", i === step);
+      n.classList.toggle("is-done", i < step);
+    });
+  }
 
   function revealSlide(i) {
     const panel = panels[i];
@@ -582,6 +777,7 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
     if (prevBtn) prevBtn.toggleAttribute("disabled", current === 0);
     if (nextBtn) nextBtn.toggleAttribute("disabled", current === total - 1);
     dots.forEach((d, di) => d.classList.toggle("is-active", di === current));
+    updateRail(current);
     revealSlide(current);
     panels[current]?.scrollTo?.(0, 0);
   }
@@ -592,6 +788,14 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
     el.addEventListener("click", (e) => {
       e.preventDefault();
       goTo(parseInt(el.getAttribute("data-goto") || "0", 10));
+    });
+  });
+  // Nós da timeline do case → pulam pro slide correspondente
+  caseNodes.forEach((node) => {
+    node.addEventListener("click", () => {
+      const step = parseInt(node.getAttribute("data-case-node") || "0", 10);
+      const slideIndex = caseStepOfSlide.indexOf(step);
+      if (slideIndex >= 0) goTo(slideIndex);
     });
   });
 
@@ -661,5 +865,112 @@ const idx = (id: string) => slides.findIndex((s) => s.id === id);
 
   @media (max-width: 720px) {
     .deck-dots { display: none; } /* muitos pontos não cabem confortavelmente em telas estreitas */
+  }
+
+  /* =================================================================
+     ESTUDO DE CASO — fundo claro e minimalista + timeline + mosaicos
+     ================================================================= */
+  .slide--case { background: var(--cru); }
+  .slide--case .case {
+    max-width: 1480px; margin-inline: auto;
+    padding: clamp(6.5rem, 13vh, 9rem) var(--gutter) clamp(1.6rem, 4vh, 3rem);
+    min-height: 100%;
+    display: flex; flex-direction: column;
+  }
+
+  .case-head { flex: 0 0 auto; margin-bottom: clamp(1rem, 2.6vh, 1.9rem); text-align: center; }
+  .case-kicker { display: block; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); }
+  .case-head .case-kicker { margin-bottom: 0.45rem; }
+  .case-title { font-family: var(--font-title); font-weight: 400; font-size: clamp(1.9rem, 4.2vw, 3.2rem); line-height: 1; letter-spacing: -0.02em; color: var(--text); }
+
+  .case-tile { position: relative; overflow: hidden; border-radius: var(--r-lg); background: #e9e8e0; box-shadow: 0 22px 46px -30px rgba(5,50,37,0.5), inset 0 0 0 1px rgba(5,50,37,0.05); }
+  .case-tile img, .case-tile video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Mosaico — flex-wrap, centraliza linhas incompletas, mantém 16:9 */
+  .case-mosaic { flex: 1 1 auto; min-height: 0; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: clamp(9px, 1vw, 15px); }
+  .case-mosaic .case-tile { aspect-ratio: 16 / 9; flex: 0 0 calc(25% - 12px); }
+  .case-mosaic--dense .case-tile { flex: 0 0 calc(20% - 12px); }
+  @media (max-width: 900px) {
+    .case-mosaic .case-tile { flex-basis: calc(33.333% - 10px); }
+    .case-mosaic--dense .case-tile { flex-basis: calc(25% - 12px); }
+  }
+
+  /* Duo — comunicação / experiência (2 x 16:9 grandes) */
+  .case-duo { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 1.8vw, 24px); }
+  .case-duo .case-tile { flex: 1 1 0; max-width: 760px; aspect-ratio: 16 / 9; }
+
+  /* Reels — 9:16 */
+  .case-reels { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; gap: clamp(14px, 2.4vw, 30px); }
+  .case-reel { position: relative; overflow: hidden; border-radius: var(--r-lg); background: #111; aspect-ratio: 9 / 16; height: min(100%, 60vh); box-shadow: 0 24px 50px -28px rgba(5,50,37,0.5); }
+  .case-reel video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Performance — CRM + reel + resultado */
+  .case-perf { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; gap: clamp(14px, 2vw, 28px); }
+  .case-perf figure { position: relative; overflow: hidden; border-radius: var(--r-lg); box-shadow: 0 24px 50px -30px rgba(5,50,37,0.5), inset 0 0 0 1px rgba(5,50,37,0.05); height: min(52vh, 30vw); }
+  .case-perf figure img, .case-perf figure video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .case-perf__crm { aspect-ratio: 3 / 2; background: #fff; }
+  .case-perf__reel { aspect-ratio: 9 / 16; background: #111; }
+  .case-perf__result { aspect-ratio: 1 / 1; background: var(--green); }
+  .case-perf__crm figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 0.9rem 0.9rem 0.55rem;
+    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(246,246,246,0.92); background: linear-gradient(to top, rgba(5,30,22,0.75), transparent);
+  }
+  @media (max-width: 900px) {
+    .case-perf { flex-wrap: wrap; }
+    .case-perf figure { height: min(38vh, 44vw); }
+  }
+
+  /* Contexto / intro */
+  .case--intro { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+  .case-intro__title { font-family: var(--font-title); font-weight: 400; font-size: clamp(2.6rem, 6vw, 5rem); line-height: 0.98; letter-spacing: -0.025em; color: var(--text); margin: 0.35rem 0 1.2rem; }
+  .case-intro__lead { font-family: var(--font-ui); font-size: clamp(1.02rem, 1.4vw, 1.22rem); line-height: 1.6; color: var(--muted); max-width: 44ch; }
+  .case-intro__lead em { font-style: italic; color: var(--text); }
+  .case-before { display: flex; flex-direction: column; gap: clamp(12px, 1.5vw, 18px); }
+  .case-before__slot {
+    position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-lg);
+    box-shadow: inset 0 0 0 1.5px var(--line-2);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem;
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 11px, rgba(5,50,37,0.035) 11px, rgba(5,50,37,0.035) 22px);
+  }
+  .case-before__tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .case-before__ph { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+  @media (max-width: 860px) { .case--intro { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+  /* Timeline (case-rail) — overlay que aparece só nos slides do case */
+  .case-rail {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 40;
+    padding: clamp(0.9rem, 2vh, 1.4rem) var(--gutter) 1.1rem;
+    background: linear-gradient(to bottom, var(--cru) 70%, rgba(246,246,246,0));
+    opacity: 0; transform: translateY(-10px); pointer-events: none;
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+  }
+  .case-rail.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .case-rail__inner { max-width: 1040px; margin-inline: auto; }
+  .case-rail__phase { text-align: center; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.95rem; min-height: 0.8em; }
+  .case-rail__track { position: relative; height: 42px; }
+  .case-rail__line, .case-rail__fill { position: absolute; top: 5px; height: 2px; border-radius: 2px; }
+  .case-rail__line { left: 0; right: 0; background: var(--line-2); }
+  .case-rail__fill { left: 0; width: 0; background: var(--coral); transition: width 0.6s var(--ease); }
+  .case-rail__node {
+    position: absolute; top: 0; transform: translateX(-50%);
+    background: none; border: none; padding: 0; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
+  }
+  .case-rail__node .nd {
+    width: 12px; height: 12px; border-radius: 50%; background: var(--cru);
+    box-shadow: inset 0 0 0 2px var(--line-2);
+    transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .case-rail__node.is-done .nd { background: var(--coral); box-shadow: inset 0 0 0 2px var(--coral); }
+  .case-rail__node.is-active .nd { background: var(--coral); box-shadow: 0 0 0 4px rgba(254,95,85,0.18), inset 0 0 0 2px var(--coral); transform: scale(1.12); }
+  .case-rail__node .lbl { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--faint); white-space: nowrap; transition: color 0.3s var(--ease); }
+  .case-rail__node.is-done .lbl { color: var(--muted); }
+  .case-rail__node.is-active .lbl { color: var(--text); }
+
+  @media (max-width: 720px) {
+    .case-rail__node .lbl { display: none; }
+    .case-rail__track { height: 16px; }
+    .slide--case .case { padding-top: clamp(4.5rem, 11vh, 6rem); }
   }
 </style>
