@@ -433,7 +433,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
             </header>
             <div class="case-mosaic case-mosaic--dense">
               <figure class="case-tile case-tile--video">
-                <video src={caseVideo.identidadeMotion} autoplay loop muted playsinline preload="metadata"></video>
+                <video src={caseVideo.identidadeMotion} poster="/images/case/posters/identidade-motion.jpg" autoplay loop muted playsinline preload="metadata"></video>
               </figure>
               {caseIdentidade.map((src) => (
                 <figure class="case-tile"><img src={src} alt="" /></figure>
@@ -466,10 +466,10 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
             </header>
             <div class="case-duo">
               <figure class="case-tile case-tile--video">
-                <video src={caseVideo.exp1} autoplay loop muted playsinline preload="metadata"></video>
+                <video src={caseVideo.exp1} poster="/images/case/posters/exp1.jpg" autoplay loop muted playsinline preload="metadata"></video>
               </figure>
               <figure class="case-tile case-tile--video">
-                <video src={caseVideo.exp2} autoplay loop muted playsinline preload="metadata"></video>
+                <video src={caseVideo.exp2} poster="/images/case/posters/exp2.jpg" autoplay loop muted playsinline preload="metadata"></video>
               </figure>
             </div>
           </div>
@@ -485,7 +485,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
             <div class="case-reels">
               {caseReels.map((f) => (
                 <figure class="case-reel">
-                  <video src={`/videos/reels/${f}.mp4`} autoplay loop muted playsinline preload="metadata"></video>
+                  <video src={`/videos/reels/${f}.mp4`} poster={`/videos/posters/${f}.jpg`} autoplay loop muted playsinline preload="metadata"></video>
                 </figure>
               ))}
             </div>
@@ -505,10 +505,10 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
                 <figcaption>Pipeline real de leads captados · dados pessoais ocultados</figcaption>
               </figure>
               <figure class="case-reel case-perf__reel">
-                <video src="/videos/reels/m76.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                <video src="/videos/reels/m76.mp4" poster="/videos/posters/m76.jpg" autoplay loop muted playsinline preload="metadata"></video>
               </figure>
               <figure class="case-tile case-perf__result">
-                <video src={caseVideo.resultado} autoplay loop muted playsinline preload="metadata"></video>
+                <video src={caseVideo.resultado} poster="/images/case/posters/result.jpg" autoplay loop muted playsinline preload="metadata"></video>
               </figure>
             </div>
           </div>
