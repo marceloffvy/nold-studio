@@ -398,12 +398,16 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
             </div>
             <div class="case-before">
               <figure class="case-before__slot">
+                <svg class="case-before__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+                  <rect x="3" y="4.5" width="18" height="15" rx="2" /><circle cx="8.5" cy="10" r="1.6" /><path d="m4 18 5-5 4 4 3-3 4 4" />
+                </svg>
                 <span class="case-before__tag">Antes · conteúdo</span>
-                <span class="case-before__ph" aria-hidden="true">imagem a inserir</span>
               </figure>
               <figure class="case-before__slot">
+                <svg class="case-before__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+                  <rect x="3" y="4.5" width="18" height="15" rx="2" /><circle cx="8.5" cy="10" r="1.6" /><path d="m4 18 5-5 4 4 3-3 4 4" />
+                </svg>
                 <span class="case-before__tag">Antes · identidade e site</span>
-                <span class="case-before__ph" aria-hidden="true">imagem a inserir</span>
               </figure>
             </div>
           </div>
@@ -416,7 +420,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
               <span class="case-kicker">Branding · 01</span>
               <h2 class="case-title">Estratégia</h2>
             </header>
-            <div class="case-mosaic case-mosaic--feat">
+            <div class="case-mosaic">
               {caseEstrategia.map((src) => (
                 <figure class="case-tile"><img src={src} alt="" /></figure>
               ))}
@@ -603,6 +607,10 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
                 <span class="lbl">{s.label}</span>
               </button>
             ))}
+            <span
+              class="case-rail__scope"
+              style={`left:${(1 / (caseSteps.length - 1)) * 100}%; width:${(3 / (caseSteps.length - 1)) * 100}%`}
+            ><span class="case-rail__scope-lbl">Branding</span></span>
           </div>
         </div>
       </div>
@@ -701,7 +709,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   // Tilt 3D (mesmo comportamento da Home)
   if (matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const MAX = 9;
-    document.querySelectorAll("#trabalho .tile, #trabalho .brand-tile, .exp-tile, .service .tile").forEach((card) => {
+    document.querySelectorAll(".collage .tile, .trio .tile, .trio .brand-tile, .exp-tile, .service .tile").forEach((card) => {
       card.addEventListener("pointerenter", () => (card.style.transition = "transform 0.12s linear, box-shadow 0.3s var(--ease)"));
       card.addEventListener("pointermove", (e) => {
         const r = card.getBoundingClientRect();
@@ -741,8 +749,8 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   // Timeline do case: mostra/esconde o trilho e anima o preenchimento até o nó atual
   function updateRail(slideIndex) {
     const step = caseStepOfSlide[slideIndex];
-    if (step == null) { caseRail && caseRail.classList.remove("is-on"); return; }
-    caseRail && caseRail.classList.add("is-on");
+    if (step == null) { if (caseRail) { caseRail.classList.remove("is-on"); caseRail.setAttribute("aria-hidden", "true"); } return; }
+    if (caseRail) { caseRail.classList.add("is-on"); caseRail.setAttribute("aria-hidden", "false"); }
     const frac = caseStepsN > 1 ? step / (caseStepsN - 1) : 0;
     if (caseFill) caseFill.style.width = (frac * 100).toFixed(2) + "%";
     if (casePhase) casePhase.textContent = caseStepsData[step].phase;
@@ -880,9 +888,18 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   .slide--case { background: var(--cru); }
   .slide--case .case {
     max-width: 1480px; margin-inline: auto;
-    padding: clamp(6.5rem, 13vh, 9rem) var(--gutter) clamp(1.6rem, 4vh, 3rem);
+    padding: clamp(7rem, 13vh, 9rem) var(--gutter) clamp(1.4rem, 4vh, 3rem);
     min-height: 100%;
     display: flex; flex-direction: column;
+  }
+  /* Telas baixas (laptops ~720px): comprime cabeçalho/trilho pra o mosaico denso caber sem scroll */
+  @media (max-height: 800px) {
+    .case-rail__track { height: 52px; }
+    .case-rail__scope { top: 32px; }
+    .slide--case .case { padding-top: clamp(6.5rem, 12vh, 7.5rem); }
+    .case-head { margin-bottom: 0.7rem; }
+    .case-title { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+    .case-intro__title { font-size: clamp(2.2rem, 5vw, 3.6rem); }
   }
 
   .case-head { flex: 0 0 auto; margin-bottom: clamp(1rem, 2.6vh, 1.9rem); text-align: center; }
@@ -936,12 +953,11 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   .case-before { display: flex; flex-direction: column; gap: clamp(12px, 1.5vw, 18px); }
   .case-before__slot {
     position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-lg);
-    box-shadow: inset 0 0 0 1.5px var(--line-2);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem;
-    background-image: repeating-linear-gradient(-45deg, transparent, transparent 11px, rgba(5,50,37,0.035) 11px, rgba(5,50,37,0.035) 22px);
+    background: rgba(5, 50, 37, 0.025); box-shadow: inset 0 0 0 1px var(--line);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.55rem;
   }
-  .case-before__tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-  .case-before__ph { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+  .case-before__ico { width: 26px; height: 26px; color: var(--faint); }
+  .case-before__tag { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
   @media (max-width: 860px) { .slide--case .case.case--intro { grid-template-columns: 1fr; gap: 1.5rem; } }
 
   /* Timeline (case-rail) — overlay que aparece só nos slides do case */
@@ -949,13 +965,16 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
     position: absolute; top: 0; left: 0; right: 0; z-index: 40;
     padding: clamp(0.9rem, 2vh, 1.4rem) var(--gutter) 1.1rem;
     background: linear-gradient(to bottom, var(--cru) 70%, rgba(246,246,246,0));
-    opacity: 0; transform: translateY(-10px); pointer-events: none;
-    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+    opacity: 0; transform: translateY(-10px); pointer-events: none; visibility: hidden;
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), visibility 0s 0.45s;
   }
-  .case-rail.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .case-rail.is-on { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), visibility 0s 0s; }
   .case-rail__inner { max-width: 1040px; margin-inline: auto; }
   .case-rail__phase { text-align: center; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.95rem; min-height: 0.8em; }
-  .case-rail__track { position: relative; height: 42px; }
+  .case-rail__track { position: relative; height: 60px; }
+  /* Colchete do escopo "Branding" agrupando os 4 sub-passos */
+  .case-rail__scope { position: absolute; top: 38px; height: 6px; border: 1px solid var(--line-2); border-bottom: none; pointer-events: none; }
+  .case-rail__scope-lbl { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
   .case-rail__line, .case-rail__fill { position: absolute; top: 5px; height: 2px; border-radius: 2px; }
   .case-rail__line { left: 0; right: 0; background: var(--line-2); }
   .case-rail__fill { left: 0; width: 0; background: var(--coral); transition: width 0.6s var(--ease); }
