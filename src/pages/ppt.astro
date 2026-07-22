@@ -418,7 +418,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
             </header>
             <div class="case-mosaic case-mosaic--feat">
               {caseEstrategia.map((src) => (
-                <figure class="case-tile"><img src={src} loading="lazy" alt="" /></figure>
+                <figure class="case-tile"><img src={src} alt="" /></figure>
               ))}
             </div>
           </div>
@@ -436,7 +436,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
                 <video src={caseVideo.identidadeMotion} autoplay loop muted playsinline preload="metadata"></video>
               </figure>
               {caseIdentidade.map((src) => (
-                <figure class="case-tile"><img src={src} loading="lazy" alt="" /></figure>
+                <figure class="case-tile"><img src={src} alt="" /></figure>
               ))}
             </div>
           </div>
@@ -451,7 +451,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
             </header>
             <div class="case-duo">
               {caseComunicacao.map((src) => (
-                <figure class="case-tile"><img src={src} loading="lazy" alt="" /></figure>
+                <figure class="case-tile"><img src={src} alt="" /></figure>
               ))}
             </div>
           </div>
@@ -501,7 +501,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
             </header>
             <div class="case-perf">
               <figure class="case-tile case-perf__crm">
-                <img src={caseCrm} loading="lazy" alt="Pipeline de leads captados no CRM da MaxFocos" />
+                <img src={caseCrm} alt="Pipeline de leads captados no CRM da MaxFocos" />
                 <figcaption>Pipeline real de leads captados · dados pessoais ocultados</figcaption>
               </figure>
               <figure class="case-reel case-perf__reel">
@@ -780,6 +780,13 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
     updateRail(current);
     revealSlide(current);
     panels[current]?.scrollTo?.(0, 0);
+    // Vídeos: garante que o slide ativo toca e pausa os demais (autoplay + economia)
+    panels.forEach((p, pi) => {
+      p.querySelectorAll("video").forEach((v) => {
+        if (pi === current) { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
+        else if (!v.paused) { try { v.pause(); } catch (e) {} }
+      });
+    });
   }
 
   prevBtn?.addEventListener("click", () => goTo(current - 1));
@@ -922,7 +929,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   }
 
   /* Contexto / intro */
-  .case--intro { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+  .slide--case .case.case--intro { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
   .case-intro__title { font-family: var(--font-title); font-weight: 400; font-size: clamp(2.6rem, 6vw, 5rem); line-height: 0.98; letter-spacing: -0.025em; color: var(--text); margin: 0.35rem 0 1.2rem; }
   .case-intro__lead { font-family: var(--font-ui); font-size: clamp(1.02rem, 1.4vw, 1.22rem); line-height: 1.6; color: var(--muted); max-width: 44ch; }
   .case-intro__lead em { font-style: italic; color: var(--text); }
@@ -935,7 +942,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   }
   .case-before__tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
   .case-before__ph { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
-  @media (max-width: 860px) { .case--intro { grid-template-columns: 1fr; gap: 1.5rem; } }
+  @media (max-width: 860px) { .slide--case .case.case--intro { grid-template-columns: 1fr; gap: 1.5rem; } }
 
   /* Timeline (case-rail) — overlay que aparece só nos slides do case */
   .case-rail {
