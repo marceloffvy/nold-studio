@@ -398,16 +398,12 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
             </div>
             <div class="case-before">
               <figure class="case-before__slot">
-                <svg class="case-before__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
-                  <rect x="3" y="4.5" width="18" height="15" rx="2" /><circle cx="8.5" cy="10" r="1.6" /><path d="m4 18 5-5 4 4 3-3 4 4" />
-                </svg>
-                <span class="case-before__tag">Antes · conteúdo</span>
+                <video class="case-before__media" src="/videos/case/max-antes-conteudo.mp4" poster="/images/case/max-antes-conteudo.jpg" autoplay loop muted playsinline preload="metadata"></video>
+                <figcaption class="case-before__tag">Antes · conteúdo</figcaption>
               </figure>
               <figure class="case-before__slot">
-                <svg class="case-before__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
-                  <rect x="3" y="4.5" width="18" height="15" rx="2" /><circle cx="8.5" cy="10" r="1.6" /><path d="m4 18 5-5 4 4 3-3 4 4" />
-                </svg>
-                <span class="case-before__tag">Antes · identidade e site</span>
+                <img class="case-before__media" src="/images/case/max-antes-identidade.jpg" width="1200" height="1200" loading="lazy" alt="Identidade visual antiga da MaxFocos" />
+                <figcaption class="case-before__tag">Antes · identidade e site</figcaption>
               </figure>
             </div>
           </div>
@@ -950,14 +946,17 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   .case-intro__title { font-family: var(--font-title); font-weight: 400; font-size: clamp(2.6rem, 6vw, 5rem); line-height: 0.98; letter-spacing: -0.025em; color: var(--text); margin: 0.35rem 0 1.2rem; }
   .case-intro__lead { font-family: var(--font-ui); font-size: clamp(1.02rem, 1.4vw, 1.22rem); line-height: 1.6; color: var(--muted); max-width: 44ch; }
   .case-intro__lead em { font-style: italic; color: var(--text); }
-  .case-before { display: flex; flex-direction: column; gap: clamp(12px, 1.5vw, 18px); }
+  .case-before { display: flex; gap: clamp(10px, 1.2vw, 16px); align-items: stretch; }
   .case-before__slot {
-    position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-lg);
-    background: rgba(5, 50, 37, 0.025); box-shadow: inset 0 0 0 1px var(--line);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.55rem;
+    flex: 1 1 0; position: relative; aspect-ratio: 4 / 5; border-radius: var(--r-lg);
+    overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px var(--line);
   }
-  .case-before__ico { width: 26px; height: 26px; color: var(--faint); }
-  .case-before__tag { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .case-before__media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .case-before__tag {
+    position: absolute; left: 8px; bottom: 8px; margin: 0; padding: 3px 9px; border-radius: 7px;
+    background: rgba(246, 246, 246, 0.92); font-family: var(--font-mono); font-size: 0.56rem;
+    letter-spacing: 0.09em; text-transform: uppercase; color: var(--green);
+  }
   @media (max-width: 860px) { .slide--case .case.case--intro { grid-template-columns: 1fr; gap: 1.5rem; } }
 
   /* Timeline (case-rail) — overlay que aparece só nos slides do case */
