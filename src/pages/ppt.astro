@@ -97,6 +97,7 @@ const caseSteps = [
   { label: "Comunicação", phase: "Branding" },
   { label: "Experiência", phase: "Branding" },
   { label: "Conteúdo", phase: "Conteúdo" },
+  { label: "Antes/Depois", phase: "Branding + Conteúdo" },
   { label: "Performance", phase: "Performance" },
 ];
 
@@ -116,7 +117,8 @@ const slides = [
   { id: "case-comunicacao", label: "Case · Comunicação", caseStep: 3 },
   { id: "case-experiencia", label: "Case · Experiência", caseStep: 4 },
   { id: "case-conteudo", label: "Case · Conteúdo", caseStep: 5 },
-  { id: "case-performance", label: "Case · Performance", caseStep: 6 },
+  { id: "case-antesdepois", label: "Case · Antes e depois", caseStep: 6 },
+  { id: "case-performance", label: "Case · Performance", caseStep: 7 },
   { id: "contato", label: "Contato" },
 ];
 const idx = (id: string) => slides.findIndex((s) => s.id === id);
@@ -488,6 +490,36 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
                   <video src={`/videos/reels/${f}.mp4`} poster={`/videos/posters/${f}.jpg`} autoplay loop muted playsinline preload="metadata"></video>
                 </figure>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- C5b · Antes e depois (a soma branding + conteúdo) -->
+        <section class="slide slide--case" data-slide-panel>
+          <div class="case case--cmp">
+            <header class="case-head">
+              <span class="case-kicker">Branding + Conteúdo</span>
+              <h2 class="case-title">Antes e depois</h2>
+            </header>
+            <div class="cmp-cols">
+              <div class="cmp-col">
+                <span class="cmp-col__label"><i></i>Antes</span>
+                <figure class="cmp-logo">
+                  <img src="/images/case/max-logo-velha.jpg" width="1600" height="900" loading="lazy" alt="Logo antiga da MaxFocos" />
+                </figure>
+                <figure class="cmp-media">
+                  <video src="/videos/case/max-antes-conteudo.mp4" poster="/images/case/max-antes-conteudo.jpg" autoplay loop muted playsinline preload="metadata"></video>
+                </figure>
+              </div>
+              <div class="cmp-col cmp-col--depois">
+                <span class="cmp-col__label"><i></i>Depois</span>
+                <figure class="cmp-logo">
+                  <img src="/images/case/max-logo-nova.jpg" width="1600" height="900" loading="lazy" alt="Logo nova da MaxFocos" />
+                </figure>
+                <figure class="cmp-media">
+                  <video src="/videos/reels/m55.mp4" poster="/videos/posters/m55.jpg" autoplay loop muted playsinline preload="metadata"></video>
+                </figure>
+              </div>
             </div>
           </div>
         </section>
@@ -958,6 +990,20 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
     letter-spacing: 0.09em; text-transform: uppercase; color: var(--green);
   }
   @media (max-width: 860px) { .slide--case .case.case--intro { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+  /* Antes e depois (comparação branding + conteúdo) */
+  .slide--case .case.case--cmp { display: flex; flex-direction: column; justify-content: center; gap: clamp(1rem, 2.6vh, 2rem); }
+  .cmp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 5vw, 4.5rem); align-items: start; }
+  .cmp-col { display: flex; flex-direction: column; gap: clamp(8px, 1.3vh, 14px); min-width: 0; }
+  .cmp-col__label { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .cmp-col__label i { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
+  .cmp-col--depois .cmp-col__label { color: var(--text); }
+  .cmp-col--depois .cmp-col__label i { background: var(--coral); }
+  .cmp-logo { align-self: center; margin: 0; height: clamp(120px, 20vh, 210px); aspect-ratio: 16 / 9; border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px var(--line); }
+  .cmp-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cmp-media { align-self: center; margin: 0; position: relative; height: clamp(190px, 32vh, 320px); aspect-ratio: 4 / 5; border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px var(--line); }
+  .cmp-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 860px) { .cmp-media { height: clamp(150px, 26vh, 240px); } .cmp-logo { height: clamp(90px, 15vh, 150px); } }
 
   /* Timeline (case-rail) — overlay que aparece só nos slides do case */
   .case-rail {
