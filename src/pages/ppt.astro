@@ -577,11 +577,24 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
           <div class="synthesis">
             <span class="synthesis__kicker">Em síntese</span>
             <h2 class="synthesis__lead">Marca não é o que <em>você</em> diz que ela é.<br />É o que os <em>outros</em> dizem que ela é.</h2>
-            <div class="synthesis__cols">
-              <p class="synthesis__def"><b>Marketing</b> são todas as ações pra vender melhor, pras pessoas certas. Gestão e geração de valor em cima de uma empresa, produto ou serviço.</p>
-              <p class="synthesis__def"><b>Branding</b> é a fusão das duas: gerir a marca pra vender pra mais gente, por mais tempo e por um preço mais alto.</p>
+            <div class="bm">
+              <div class="bm__row">
+                <div class="bm__term">
+                  <span class="bm__label">Marketing</span>
+                  <p>Todas as ações que a gente toma pra vender mais um produto ou serviço.</p>
+                </div>
+                <span class="bm__op" aria-hidden="true">+</span>
+                <div class="bm__term">
+                  <span class="bm__label">Branding</span>
+                  <p>O esforço da empresa em criar valor agregado, satisfazendo o cliente.</p>
+                </div>
+              </div>
+              <span class="bm__eq" aria-hidden="true">=</span>
+              <div class="bm__fusion">
+                <span class="bm__fusion-name">Brandmarketing</span>
+                <p>Geração de receita, satisfazendo clientes para que <b>mais pessoas comprem mais coisas, por mais anos e por um preço mais alto</b>.</p>
+              </div>
             </div>
-            <p class="synthesis__close">É esse o nosso papel.</p>
           </div>
         </section>
 
@@ -1058,15 +1071,24 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   .intro__data { font-family: var(--font-ui); font-size: clamp(1.02rem, 1.5vw, 1.32rem); line-height: 1.55; color: rgba(242,244,242,0.72); max-width: 48ch; margin: 0; }
   .intro__data strong { color: #fbfcfb; font-weight: 500; }
   .intro__note { font-family: var(--font-ui); font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.5; color: rgba(242,244,242,0.92); max-width: 42ch; margin: 0; }
-  .synthesis { display: flex; flex-direction: column; gap: clamp(1.1rem, 3vh, 2.2rem); }
+  .synthesis { display: flex; flex-direction: column; gap: clamp(0.9rem, 2.4vh, 1.7rem); }
   .synthesis__kicker { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); }
-  .synthesis__lead { font-family: var(--font-title); font-weight: 400; font-size: clamp(2rem, 4.4vw, 3.7rem); line-height: 1.07; letter-spacing: -0.02em; color: var(--text); margin: 0; }
+  .synthesis__lead { font-family: var(--font-title); font-weight: 400; font-size: clamp(1.7rem, 3.6vw, 3rem); line-height: 1.08; letter-spacing: -0.02em; color: var(--text); margin: 0; }
   .synthesis__lead em { font-style: italic; color: var(--coral); }
-  .synthesis__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); margin-top: 0.4rem; }
-  .synthesis__def { font-family: var(--font-ui); font-size: clamp(1rem, 1.4vw, 1.22rem); line-height: 1.55; color: var(--muted); margin: 0; }
-  .synthesis__def b { color: var(--text); font-weight: 600; }
-  .synthesis__close { font-family: var(--font-title); font-style: italic; font-size: clamp(1.3rem, 2.2vw, 1.9rem); color: var(--text); margin: 0; }
-  @media (max-width: 860px) { .synthesis__cols { grid-template-columns: 1fr; } }
+  /* infográfico Brandmarketing (Marketing + Branding = Brandmarketing) */
+  .bm { display: flex; flex-direction: column; gap: clamp(0.5rem, 1.3vh, 0.95rem); }
+  .bm__row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: clamp(1rem, 3vw, 2.6rem); }
+  .bm__term { display: flex; flex-direction: column; gap: 0.35rem; }
+  .bm__label { font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); }
+  .bm__term p { font-family: var(--font-ui); font-size: clamp(0.92rem, 1.25vw, 1.12rem); line-height: 1.48; color: var(--muted); margin: 0; }
+  .bm__op, .bm__eq { align-self: center; font-family: var(--font-title); color: var(--coral); line-height: 1; }
+  .bm__op { font-size: clamp(1.6rem, 3vw, 2.6rem); padding-top: 0.4rem; }
+  .bm__eq { font-size: clamp(1.4rem, 2.4vw, 2rem); }
+  .bm__fusion { background: rgba(254,95,85,0.07); border-radius: var(--r-lg); padding: clamp(0.85rem, 2vh, 1.35rem) clamp(1rem, 2.4vw, 1.8rem); display: flex; flex-direction: column; gap: 0.3rem; }
+  .bm__fusion-name { font-family: var(--font-title); font-style: italic; font-size: clamp(1.3rem, 2.4vw, 2rem); color: var(--coral); }
+  .bm__fusion p { font-family: var(--font-ui); font-size: clamp(1rem, 1.45vw, 1.26rem); line-height: 1.5; color: var(--muted); margin: 0; max-width: 66ch; }
+  .bm__fusion p b { color: var(--text); font-weight: 600; }
+  @media (max-width: 860px) { .bm__row { grid-template-columns: 1fr; gap: 0.7rem; } .bm__op { display: none; } }
   /* modo escuro: fundo 100% escuro e sem a barra de navegação */
   .ppt-shell.is-dark { background: #06140f; }
   .ppt-shell.is-dark .topbar { visibility: hidden; }
