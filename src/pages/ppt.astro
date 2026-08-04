@@ -103,6 +103,7 @@ const caseSteps = [
 
 // ---- Mapa dos slides (dirige contador, pontos, timeline e navegação interna) ----
 const slides = [
+  { id: "intro", label: "Introdução" },
   { id: "hero", label: "Abertura" },
   { id: "trabalho", label: "O trabalho" },
   { id: "clientes", label: "Clientes" },
@@ -119,6 +120,7 @@ const slides = [
   { id: "case-conteudo", label: "Case · Conteúdo", caseStep: 5 },
   { id: "case-antesdepois", label: "Case · Antes e depois", caseStep: 6 },
   { id: "case-performance", label: "Case · Performance", caseStep: 7 },
+  { id: "sintese", label: "Síntese" },
   { id: "contato", label: "Contato" },
 ];
 const idx = (id: string) => slides.findIndex((s) => s.id === id);
@@ -167,6 +169,18 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
     <!-- ============================ DECK ============================ -->
     <div class="deck-viewport" data-deck-viewport>
       <div class="deck" data-deck>
+
+        <!-- INTRO (escura) — provocação + dado · base Zag / Marty Neumeier -->
+        <section class="slide slide--center slide--dark slide--intro" data-slide-panel>
+          <div class="intro">
+            <span class="intro__kicker">A poluição do marketing</span>
+            <h1 class="intro__q">Todo mercado virou barulho.<br /><em>Por que lembrariam de você?</em></h1>
+            <p class="intro__data">
+              Estima-se que uma pessoa seja exposta a <strong>milhares de mensagens de marca</strong> por dia. Poluição de propaganda, de identidade, de marca. E poluição distrai: quase tudo é esquecido em segundos.
+            </p>
+            <p class="intro__note">O que resiste ao ruído não é quem fala mais alto. É marca.</p>
+          </div>
+        </section>
         <!-- 0 · HERO -->
         <section class="slide slide--center" data-slide-panel>
           <div class="hero container">
@@ -546,6 +560,19 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
           </div>
         </section>
 
+        <!-- SÍNTESE (antes do formulário) -->
+        <section class="slide slide--center slide--synthesis" data-slide-panel>
+          <div class="synthesis">
+            <span class="synthesis__kicker">Em síntese</span>
+            <h2 class="synthesis__lead">Marca não é o que <em>você</em> diz que ela é.<br />É o que os <em>outros</em> dizem que ela é.</h2>
+            <div class="synthesis__cols">
+              <p class="synthesis__def"><b>Marketing</b> é o esforço de gerar valor agregado e satisfazer o cliente.</p>
+              <p class="synthesis__def"><b>Branding</b> é satisfazer clientes para que mais pessoas comprem mais coisas, por mais anos e por um preço mais alto.</p>
+            </div>
+            <p class="synthesis__close">É esse o nosso papel.</p>
+          </div>
+        </section>
+
         <!-- CONTATO -->
         <section class="slide" data-slide-panel>
           <div class="section container cta">
@@ -813,6 +840,8 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
     if (prevBtn) prevBtn.toggleAttribute("disabled", current === 0);
     if (nextBtn) nextBtn.toggleAttribute("disabled", current === total - 1);
     dots.forEach((d, di) => d.classList.toggle("is-active", di === current));
+    const shell = document.querySelector(".ppt-shell");
+    if (shell) shell.classList.toggle("is-dark", !!panels[current]?.classList.contains("slide--dark"));
     updateRail(current);
     revealSlide(current);
     panels[current]?.scrollTo?.(0, 0);
@@ -991,19 +1020,43 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   }
   @media (max-width: 860px) { .slide--case .case.case--intro { grid-template-columns: 1fr; gap: 1.5rem; } }
 
-  /* Antes e depois (comparação branding + conteúdo) */
-  .slide--case .case.case--cmp { display: flex; flex-direction: column; justify-content: center; gap: clamp(1rem, 2.6vh, 2rem); }
-  .cmp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 5vw, 4.5rem); align-items: start; }
-  .cmp-col { display: flex; flex-direction: column; gap: clamp(8px, 1.3vh, 14px); min-width: 0; }
+  /* Antes e depois (comparação branding + conteúdo) — logos quadradas + conteúdo vertical 100% */
+  .slide--case .case.case--cmp { display: flex; flex-direction: column; justify-content: center; gap: clamp(1rem, 2.6vh, 2rem); --cmp-h: clamp(220px, 40vh, 400px); }
+  .cmp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 6vw, 5rem); align-items: start; }
+  .cmp-col { display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1.4vh, 16px); min-width: 0; }
   .cmp-col__label { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
   .cmp-col__label i { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
   .cmp-col--depois .cmp-col__label { color: var(--text); }
   .cmp-col--depois .cmp-col__label i { background: var(--coral); }
-  .cmp-logo { align-self: center; margin: 0; height: clamp(120px, 20vh, 210px); aspect-ratio: 16 / 9; border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px var(--line); }
+  .cmp-logo { margin: 0; width: calc(var(--cmp-h) * 9 / 16); aspect-ratio: 1 / 1; border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px var(--line); }
   .cmp-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .cmp-media { align-self: center; margin: 0; position: relative; height: clamp(190px, 32vh, 320px); aspect-ratio: 4 / 5; border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px var(--line); }
+  .cmp-media { margin: 0; position: relative; height: var(--cmp-h); aspect-ratio: 9 / 16; border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px var(--line); }
   .cmp-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  @media (max-width: 860px) { .cmp-media { height: clamp(150px, 26vh, 240px); } .cmp-logo { height: clamp(90px, 15vh, 150px); } }
+  @media (max-width: 860px) { .slide--case .case.case--cmp { --cmp-h: clamp(190px, 34vh, 300px); } }
+
+  /* Intro escura (Zag / poluição) + Síntese final */
+  .slide--dark { background: #06140f; color: #f2f4f2; }
+  .slide--intro, .slide--synthesis { padding: 0 clamp(1.5rem, 7vw, 7rem); }
+  .intro, .synthesis { width: 100%; max-width: 60rem; margin: 0 auto; }
+  .intro { display: flex; flex-direction: column; gap: clamp(1rem, 2.6vh, 1.9rem); }
+  .intro__kicker { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); }
+  .intro__q { font-family: var(--font-title); font-weight: 400; font-size: clamp(2.3rem, 5.2vw, 4.7rem); line-height: 1.03; letter-spacing: -0.02em; color: #fbfcfb; margin: 0; }
+  .intro__q em { font-style: italic; color: var(--coral); }
+  .intro__data { font-family: var(--font-ui); font-size: clamp(1.02rem, 1.5vw, 1.32rem); line-height: 1.55; color: rgba(242,244,242,0.72); max-width: 48ch; margin: 0; }
+  .intro__data strong { color: #fbfcfb; font-weight: 500; }
+  .intro__note { font-family: var(--font-ui); font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.5; color: rgba(242,244,242,0.92); max-width: 42ch; margin: 0; }
+  .synthesis { display: flex; flex-direction: column; gap: clamp(1.1rem, 3vh, 2.2rem); }
+  .synthesis__kicker { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); }
+  .synthesis__lead { font-family: var(--font-title); font-weight: 400; font-size: clamp(2rem, 4.4vw, 3.7rem); line-height: 1.07; letter-spacing: -0.02em; color: var(--text); margin: 0; }
+  .synthesis__lead em { font-style: italic; color: var(--coral); }
+  .synthesis__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); margin-top: 0.4rem; }
+  .synthesis__def { font-family: var(--font-ui); font-size: clamp(1rem, 1.4vw, 1.22rem); line-height: 1.55; color: var(--muted); margin: 0; }
+  .synthesis__def b { color: var(--text); font-weight: 600; }
+  .synthesis__close { font-family: var(--font-title); font-style: italic; font-size: clamp(1.3rem, 2.2vw, 1.9rem); color: var(--text); margin: 0; }
+  @media (max-width: 860px) { .synthesis__cols { grid-template-columns: 1fr; } }
+  /* topbar adaptada no modo escuro */
+  .ppt-shell.is-dark .logo-morph__word { filter: brightness(0) invert(1); opacity: 0.95; }
+  .ppt-shell.is-dark .meta, .ppt-shell.is-dark .meta__pair, .ppt-shell.is-dark .copy-btn, .ppt-shell.is-dark .copy-btn svg { color: rgba(242,244,242,0.82); }
 
   /* Timeline (case-rail) — overlay que aparece só nos slides do case */
   .case-rail {
@@ -1018,8 +1071,8 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   .case-rail__phase { text-align: center; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.95rem; min-height: 0.8em; }
   .case-rail__track { position: relative; height: 60px; }
   /* Colchete do escopo "Branding" agrupando os 4 sub-passos */
-  .case-rail__scope { position: absolute; top: 38px; height: 6px; border: 1px solid var(--line-2); border-bottom: none; pointer-events: none; }
-  .case-rail__scope-lbl { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .case-rail__scope { position: absolute; top: 40px; height: 7px; border: 1px solid var(--line-2); border-top: none; pointer-events: none; }
+  .case-rail__scope-lbl { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
   .case-rail__line, .case-rail__fill { position: absolute; top: 5px; height: 2px; border-radius: 2px; }
   .case-rail__line { left: 0; right: 0; background: var(--line-2); }
   .case-rail__fill { left: 0; width: 0; background: var(--coral); transition: width 0.6s var(--ease); }
