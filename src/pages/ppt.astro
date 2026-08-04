@@ -104,6 +104,7 @@ const caseSteps = [
 // ---- Mapa dos slides (dirige contador, pontos, timeline e navegação interna) ----
 const slides = [
   { id: "intro", label: "Introdução" },
+  { id: "stat", label: "A disputa por atenção" },
   { id: "hero", label: "Abertura" },
   { id: "trabalho", label: "O trabalho" },
   { id: "clientes", label: "Clientes" },
@@ -175,10 +176,21 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
           <div class="intro">
             <span class="intro__kicker">A poluição do marketing</span>
             <h1 class="intro__q">Todo mercado virou barulho.<br /><em>Por que lembrariam de você?</em></h1>
-            <p class="intro__data">
-              Estima-se que uma pessoa seja exposta a <strong>milhares de mensagens de marca</strong> por dia. Poluição de propaganda, de identidade, de marca. E poluição distrai: quase tudo é esquecido em segundos.
-            </p>
-            <p class="intro__note">O que resiste ao ruído não é quem fala mais alto. É marca.</p>
+            <figure class="intro__quote">
+              <blockquote>A mente humana lida com o excesso de informação da melhor forma que consegue: bloqueando. O que sobra, o que parece útil ou interessante, vai parar em <em>caixinhas mentais invisíveis</em>.</blockquote>
+              <figcaption>Marty Neumeier · <cite>Zag</cite></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- INTRO 2 (escura) — estatística: dificuldade de se destacar -->
+        <section class="slide slide--center slide--dark slide--intro" data-slide-panel>
+          <div class="intro">
+            <span class="intro__kicker">A disputa por atenção</span>
+            <p class="intro__stat"><strong>2 a 4%</strong></p>
+            <p class="intro__data">é o alcance orgânico médio de um post no Instagram hoje. Uma queda de mais de <strong>75% desde 2020</strong>, enquanto mais de <strong>16 mil vídeos</strong> são publicados no TikTok a cada minuto.</p>
+            <p class="intro__note">Todo mundo tenta a mesma fórmula. Postar mais parou de destacar. O que destaca é marca.</p>
+            <p class="intro__src">Fontes: dados de mercado de alcance orgânico e volume de conteúdo, 2024–2025</p>
           </div>
         </section>
         <!-- 0 · HERO -->
@@ -566,8 +578,8 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
             <span class="synthesis__kicker">Em síntese</span>
             <h2 class="synthesis__lead">Marca não é o que <em>você</em> diz que ela é.<br />É o que os <em>outros</em> dizem que ela é.</h2>
             <div class="synthesis__cols">
-              <p class="synthesis__def"><b>Marketing</b> é o esforço de gerar valor agregado e satisfazer o cliente.</p>
-              <p class="synthesis__def"><b>Branding</b> é satisfazer clientes para que mais pessoas comprem mais coisas, por mais anos e por um preço mais alto.</p>
+              <p class="synthesis__def"><b>Marketing</b> são todas as ações pra vender melhor, pras pessoas certas. Gestão e geração de valor em cima de uma empresa, produto ou serviço.</p>
+              <p class="synthesis__def"><b>Branding</b> é a fusão das duas: gerir a marca pra vender pra mais gente, por mais tempo e por um preço mais alto.</p>
             </div>
             <p class="synthesis__close">É esse o nosso papel.</p>
           </div>
@@ -1055,9 +1067,19 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   .synthesis__def b { color: var(--text); font-weight: 600; }
   .synthesis__close { font-family: var(--font-title); font-style: italic; font-size: clamp(1.3rem, 2.2vw, 1.9rem); color: var(--text); margin: 0; }
   @media (max-width: 860px) { .synthesis__cols { grid-template-columns: 1fr; } }
-  /* topbar adaptada no modo escuro */
-  .ppt-shell.is-dark .logo-morph__word { filter: brightness(0) invert(1); opacity: 0.95; }
-  .ppt-shell.is-dark .meta, .ppt-shell.is-dark .meta * { color: rgba(242,244,242,0.82) !important; }
+  /* modo escuro: fundo 100% escuro e sem a barra de navegação */
+  .ppt-shell.is-dark { background: #06140f; }
+  .ppt-shell.is-dark .topbar { visibility: hidden; }
+  /* citação (Zag) na intro */
+  .intro__quote { margin: 0; display: flex; flex-direction: column; gap: 0.7rem; padding-left: clamp(0.9rem, 1.4vw, 1.4rem); border-left: 2px solid var(--coral); }
+  .intro__quote blockquote { margin: 0; font-family: var(--font-title); font-weight: 400; font-size: clamp(1.25rem, 2.1vw, 1.95rem); line-height: 1.34; color: rgba(242,244,242,0.9); max-width: 42ch; }
+  .intro__quote blockquote em { font-style: italic; color: var(--coral); }
+  .intro__quote figcaption { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(242,244,242,0.55); }
+  .intro__quote figcaption cite { font-style: normal; }
+  /* estatística */
+  .intro__stat { margin: 0; font-family: var(--font-title); line-height: 0.92; }
+  .intro__stat strong { font-weight: 400; font-size: clamp(4.5rem, 13vw, 11rem); color: var(--coral); letter-spacing: -0.03em; }
+  .intro__src { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,244,242,0.4); margin: 0.4rem 0 0; }
 
   /* Timeline (case-rail) — overlay que aparece só nos slides do case */
   .case-rail {
