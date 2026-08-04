@@ -519,7 +519,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
               <div class="cmp-col">
                 <span class="cmp-col__label"><i></i>Antes</span>
                 <figure class="cmp-logo">
-                  <img src="/images/case/max-logo-velha.jpg" width="1600" height="900" loading="lazy" alt="Logo antiga da MaxFocos" />
+                  <img src="/images/case/max-logo-velha.jpg" width="1080" height="1080" alt="Logo antiga da MaxFocos" />
                 </figure>
                 <figure class="cmp-media">
                   <video src="/videos/case/max-antes-conteudo.mp4" poster="/images/case/max-antes-conteudo.jpg" autoplay loop muted playsinline preload="metadata"></video>
@@ -528,7 +528,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
               <div class="cmp-col cmp-col--depois">
                 <span class="cmp-col__label"><i></i>Depois</span>
                 <figure class="cmp-logo">
-                  <img src="/images/case/max-logo-nova.jpg" width="1600" height="900" loading="lazy" alt="Logo nova da MaxFocos" />
+                  <img src="/images/case/max-logo-nova.jpg" width="1080" height="1080" alt="Logo nova da MaxFocos" />
                 </figure>
                 <figure class="cmp-media">
                   <video src="/videos/reels/m55.mp4" poster="/videos/posters/m55.jpg" autoplay loop muted playsinline preload="metadata"></video>
@@ -1021,7 +1021,8 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   @media (max-width: 860px) { .slide--case .case.case--intro { grid-template-columns: 1fr; gap: 1.5rem; } }
 
   /* Antes e depois (comparação branding + conteúdo) — logos quadradas + conteúdo vertical 100% */
-  .slide--case .case.case--cmp { display: flex; flex-direction: column; justify-content: center; gap: clamp(1rem, 2.6vh, 2rem); --cmp-h: clamp(220px, 40vh, 400px); }
+  .slide--case .case.case--cmp { display: flex; flex-direction: column; justify-content: center; gap: clamp(0.7rem, 1.8vh, 1.3rem); --cmp-h: clamp(160px, 30vh, 330px); }
+  .case--cmp .case-title { font-size: clamp(1.7rem, 3.8vw, 3.1rem); }
   .cmp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 6vw, 5rem); align-items: start; }
   .cmp-col { display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1.4vh, 16px); min-width: 0; }
   .cmp-col__label { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
@@ -1056,7 +1057,7 @@ const caseStepOfSlide = slides.map((s) => (typeof s.caseStep === "number" ? s.ca
   @media (max-width: 860px) { .synthesis__cols { grid-template-columns: 1fr; } }
   /* topbar adaptada no modo escuro */
   .ppt-shell.is-dark .logo-morph__word { filter: brightness(0) invert(1); opacity: 0.95; }
-  .ppt-shell.is-dark .meta, .ppt-shell.is-dark .meta__pair, .ppt-shell.is-dark .copy-btn, .ppt-shell.is-dark .copy-btn svg { color: rgba(242,244,242,0.82); }
+  .ppt-shell.is-dark .meta, .ppt-shell.is-dark .meta * { color: rgba(242,244,242,0.82) !important; }
 
   /* Timeline (case-rail) — overlay que aparece só nos slides do case */
   .case-rail {
